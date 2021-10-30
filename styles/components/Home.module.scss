@@ -1,3 +1,4 @@
+@import "../abstracts/variables.scss";
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -34,7 +35,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: $Primary;
   text-decoration: none;
 }
 
