@@ -1,0 +1,19 @@
+.announceContainer {
+  width: 100%;
+  text-align: center;
+  background-color: $PrimaryGreen;
+  color: $PrimaryWhite;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0;
+    padding-top: 2px;
+    font-size: 1rem;
+  }
+  @media screen and (min-width: $md) {
+    display: none;
+  }
+}

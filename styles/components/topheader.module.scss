@@ -1,0 +1,47 @@
+.topHeaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  border-bottom: 1.5px solid #ececec;
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+  h6 {
+    color: $PrimaryGrey;
+    font: {
+      family: $secondaryFont;
+      size: 0.8rem;
+      weight: 800;
+    }
+  }
+  .borderStyle {
+    &:before {
+      content: "";
+      background-color: #cecece;
+      position: absolute;
+      height: 10px;
+      width: 2px;
+      transform: translateY(4px);
+      transform: translateX(-6px) translateY(4px);
+    }
+  }
+  .leftSide {
+    display: flex;
+    margin-left: 1em;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 0 10px;
+  }
+  .rightSide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0 10px;
+    span {
+      color: $PrimaryGreen;
+    }
+  }
+}

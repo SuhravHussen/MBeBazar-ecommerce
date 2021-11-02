@@ -1,10 +1,12 @@
-import LandingPage from '../components/home/LandingPage';
-import styles from '../styles/components/Home.module.scss';
+import dynamic from 'next/dynamic';
+import Layout from '../components/Layout/Layout';
 
+const LandingPage = dynamic(() => import('../components/home/LandingPage'), {
+    loading: () => <p>loading</p>,
+});
 const Home = () => (
-    // const hello = 34;
-    <div className={styles.container}>
+    <Layout>
         <LandingPage />
-    </div>
+    </Layout>
 );
 export default Home;

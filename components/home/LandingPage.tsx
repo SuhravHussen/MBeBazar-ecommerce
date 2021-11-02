@@ -1,3 +1,7 @@
-const LandingPage = () => <div>Landing Page...</div>;
+const LandingPage = () => (
+    <>
+        <h1>Home</h1>
+    </>
+);
 
 export default LandingPage;
