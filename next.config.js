@@ -7,4 +7,7 @@ module.exports = {
         includePaths: [path.join(__dirname, 'styles')],
         prependData: `@import "abstracts/variables.scss";`,
     },
+    images: {
+        domains: ['res.cloudinary.com'],
+    },
 };

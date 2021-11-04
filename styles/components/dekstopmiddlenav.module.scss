@@ -1,0 +1,36 @@
+.dekstopNavContainer {
+  width: 100%;
+
+  .appBar {
+    background-color: $PrimaryGreen !important;
+    height: 5rem !important;
+    @media screen and (max-width: $md) {
+      display: flex;
+      justify-content: center;
+      height: 4rem !important;
+    }
+    .toolbar {
+      display: flex !important;
+      justify-content: space-between !important;
+      .searchContainer {
+        width: 50%;
+        margin-left: 0;
+        .searchInput {
+          width: 100%;
+        }
+      }
+      .logo {
+        @media screen and (max-width: $md) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.notificationMenu {
+  position: relative !important;
+  top: 50px !important;
+}
+.MuiTooltip-tooltip.MuiTooltip-tooltipArrow.MuiTooltip-tooltipPlacementBottom.css-1k51tf5-MuiTooltip-tooltip {
+  background-color: blueviolet !important;
+}
