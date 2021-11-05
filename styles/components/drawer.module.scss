@@ -1,5 +1,9 @@
 .drawerContainer {
   width: 360px;
+
+  @media screen and (max-width: $xss) {
+    width: 100vw;
+  }
   .header {
     display: flex;
     justify-content: space-between;
@@ -9,5 +13,17 @@
       background-color: $SecondaryGreen !important;
       border-radius: 50%;
     }
+  }
+  .followText {
+    padding-left: 35px;
+    position: absolute;
+    bottom: 30px;
+    color: $PrimaryGreen;
+  }
+  .socialIcons {
+    position: absolute;
+    bottom: 10px;
+    padding-left: 33px;
+    color: $PrimaryGreen;
   }
 }

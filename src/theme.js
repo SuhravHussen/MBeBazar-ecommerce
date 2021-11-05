@@ -13,9 +13,10 @@ const theme = createTheme({
         error: {
             main: red.A400,
         },
-    },
-    appBar: {
-        primary: '#556cd6',
+        myColor: {
+            main: '#3bb77e',
+            grey: '#7e7e7e',
+        },
     },
 });
 
