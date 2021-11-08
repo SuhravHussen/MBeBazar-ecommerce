@@ -18,6 +18,12 @@ const theme = createTheme({
             grey: '#7e7e7e',
         },
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            md: 960,
+        },
+    },
 });
 
 export default theme;

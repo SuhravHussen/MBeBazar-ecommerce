@@ -3,7 +3,8 @@
   display: flex;
   justify-content: space-between;
   height: 40px;
-  border-bottom: 1.5px solid #ececec;
+  max-width: 1600px;
+  margin: 0 auto;
   @media screen and (max-width: $md) {
     display: none;
   }

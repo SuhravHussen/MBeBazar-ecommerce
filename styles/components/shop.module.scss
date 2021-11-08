@@ -1,0 +1,22 @@
+.shopsMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.shopList {
+  width: 300px;
+  padding: 10px;
+}
+.shop {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin: 0 auto;
+  width: 100%;
+  p {
+    width: 60%;
+    font-size: 15px;
+  }
+}

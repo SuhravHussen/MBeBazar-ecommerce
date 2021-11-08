@@ -1,13 +1,15 @@
 .dekstopNavContainer {
+  max-width: 1600px;
   width: 100%;
-
+  margin: 0 auto;
   .appBar {
-    background-color: $PrimaryGreen !important;
-    height: 5rem !important;
+    background-color: $PrimaryWhite !important;
+
     @media screen and (max-width: $md) {
       display: flex;
       justify-content: center;
       height: 4rem !important;
+      background-color: $PrimaryGreen !important;
     }
     .toolbar {
       display: flex !important;
@@ -15,6 +17,13 @@
       .searchContainer {
         width: 50%;
         margin-left: 0;
+        @media screen and (max-width: $sm) {
+          width: 70%;
+        }
+        @media screen and (max-width: $md) {
+          width: 70%;
+          height: 50px;
+        }
         .searchInput {
           width: 100%;
         }
@@ -24,6 +33,9 @@
           display: none;
         }
       }
+    }
+    .icons {
+      color: $PrimaryGreen !important;
     }
   }
 }

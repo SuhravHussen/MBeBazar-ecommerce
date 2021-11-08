@@ -5,6 +5,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
+import { Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
@@ -25,10 +26,12 @@ import styles from '../../../styles/components/dekstopmiddlenav.module.scss';
 import MyDrawer from './Drawer';
 import Notifications from './Notifications';
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styled('div')(({ theme }: any) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
+    border: '1px solid',
+    borderColor: theme.palette.myColor.main,
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -39,9 +42,12 @@ const Search = styled('div')(({ theme }) => ({
         marginLeft: theme.spacing(3),
         width: 'auto',
     },
+    height: '60px',
+    display: 'flex',
+    alignItems: 'center',
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({ theme }: any) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -49,10 +55,13 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+        color: theme.palette.myColor.main,
+    },
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
+    color: 'white',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
@@ -62,6 +71,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         [theme.breakpoints.up('md')]: {
             width: '20ch',
         },
+    },
+    [theme.breakpoints.up('md')]: {
+        color: 'black',
     },
 }));
 
@@ -233,7 +245,7 @@ export default function PrimarySearchAppBar() {
         <>
             <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
             <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1 }}>
-                <AppBar className={styles.appBar} position="static">
+                <AppBar className={styles.appBar} position="static" elevation={0}>
                     <Toolbar className={styles.toolbar}>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -261,8 +273,8 @@ export default function PrimarySearchAppBar() {
                         </Box>
                         <span className={styles.logo}>
                             <Image
-                                src="https://res.cloudinary.com/doircnueq/image/upload/v1635915421/MBeCommerece/logos/logo_ebkuif.svg"
-                                width={100}
+                                src="https://res.cloudinary.com/doircnueq/image/upload/v1636035369/MBeCommerece/logos/logo_nbh5ke_hwub6l.svg"
+                                width={180}
                                 height={100}
                             />
                         </span>
@@ -281,7 +293,7 @@ export default function PrimarySearchAppBar() {
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
-                                    <MailIcon />
+                                    <MailIcon className={styles.icons} />
                                 </Badge>
                             </IconButton>
                             <IconButton
@@ -306,7 +318,10 @@ export default function PrimarySearchAppBar() {
                                         className={styles.tooltip}
                                     >
                                         <Badge badgeContent={17} color="error">
-                                            <NotificationsIcon onClick={handleTooltipOpen} />
+                                            <NotificationsIcon
+                                                className={styles.icons}
+                                                onClick={handleTooltipOpen}
+                                            />
                                         </Badge>
                                     </Tooltip>
                                 </ClickAwayListener>
@@ -321,7 +336,7 @@ export default function PrimarySearchAppBar() {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                <AccountCircle className={styles.icons} />
                             </IconButton>
                         </Box>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -343,6 +358,7 @@ export default function PrimarySearchAppBar() {
                 {renderNotification}
                 {renderMobileMenu}
             </Box>
+            <Divider />
         </>
     );
 }

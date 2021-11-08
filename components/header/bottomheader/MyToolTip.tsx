@@ -1,7 +1,6 @@
 import BorderAllRoundedIcon from '@mui/icons-material/BorderAllRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import { Box } from '@mui/system';
 import { useState } from 'react';
 import { Arrow, useLayer } from 'react-laag';
 import styles from '../../../styles/components/allcategories.module.scss';
@@ -31,16 +30,10 @@ export default function MyToolTip() {
 
     return (
         <>
-            <Box
-                sx={{
-                    width: '20%',
-                    padding: '10px',
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                    backgroundColor: 'myColor.main',
-                    borderRadius: 2,
-                }}
+            <div
+                className={styles.Label}
+                role="button"
+                tabIndex={0}
                 onClick={() => setIsOpen(true)}
                 {...triggerProps}
             >
@@ -60,7 +53,7 @@ export default function MyToolTip() {
                             />
                         </div>
                     )}
-            </Box>
+            </div>
         </>
     );
 }

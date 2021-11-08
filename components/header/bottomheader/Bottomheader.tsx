@@ -3,35 +3,89 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import dynamic from 'next/dynamic';
+import { BsHeadset } from 'react-icons/bs';
+import Blogs from './Blog';
+import MegaMenu from './MegaMenu';
+import Shops from './Shops';
 
-const MyToolTip = dynamic(() => import('./MyCategories'));
+const MyToolTip = dynamic(() => import('./MyToolTip'));
 export default function Bottomheader() {
     return (
-        <AppBar
-            position="relative"
-            sx={{
-                height: '90px',
-                background: 'transparent',
-            }}
-            elevation={0}
-        >
-            <Toolbar
+        <>
+            <AppBar
+                position="relative"
                 sx={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100%',
-                    display: 'flex',
+                    height: '70px',
+                    background: 'transparent',
+                    maxWidth: '1600px',
+                    margin: '0 auto',
+                    display: { xs: 'none', md: 'block' },
                 }}
+                elevation={0}
             >
-                <MyToolTip />
-                <Box sx={{ display: 'flex', width: '60%' }}>
-                    <h3>Home</h3>
-                    <h3>Home</h3>
-                    <h3>Home</h3>
-                </Box>
-                <Box sx={{ width: '20%' }}>Contact</Box>
-            </Toolbar>
+                <Toolbar
+                    sx={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '100%',
+                        display: 'flex',
+                    }}
+                >
+                    <MyToolTip />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            width: '60%',
+                            color: 'black',
+                            justifyContent: 'space-around',
+                        }}
+                    >
+                        <Shops />
+                        <MegaMenu />
+                        <Blogs />
+                    </Box>
+                    <Box
+                        sx={{
+                            width: '20%',
+                            color: 'black',
+                            display: 'flex',
+                            justifyContent: 'space-evenly',
+                            alignItems: 'center',
+
+                            height: '100%',
+                        }}
+                    >
+                        <BsHeadset size={30} />
+                        <Box
+                            sx={{
+                                height: '100%',
+                            }}
+                        >
+                            <h2
+                                style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    color: '#3bb77e',
+                                }}
+                            >
+                                1900 - 888
+                            </h2>
+                            <p
+                                style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    fontSize: '15px',
+                                    textAlign: 'center',
+                                    color: 'grey',
+                                }}
+                            >
+                                24/7 support
+                            </p>
+                        </Box>
+                    </Box>
+                </Toolbar>
+            </AppBar>
             <Divider />
-        </AppBar>
+        </>
     );
 }
