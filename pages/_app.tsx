@@ -9,6 +9,7 @@ import * as React from 'react';
 // import Loader from '../components/loader/Loader';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
+import '../styles/globals.scss';
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

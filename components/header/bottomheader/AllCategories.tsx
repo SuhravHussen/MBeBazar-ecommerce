@@ -3,65 +3,65 @@ import Collapse from '@mui/material/Collapse';
 import Image from 'next/image';
 import { useState } from 'react';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
-import style from '../../../styles/components/allcategories.module.scss';
+import style from '../../../styles/components/bottomNav/allcategories.module.scss';
 
 export default function AllCategories({ layerProps }: any) {
     const categories = [
         {
             name: 'Milks and Dairies',
-            image: '/images/category-1.svg',
+            image: '/images/categories/category-1.svg',
         },
         {
             name: 'Clothing & Beauty',
-            image: '/images/category-3.svg',
+            image: '/images/categories/category-3.svg',
         },
         {
             name: 'Pet Foods',
-            image: '/images/category-4.svg',
+            image: '/images/categories/category-4.svg',
         },
         {
             name: 'Baking Material',
-            image: '/images/category-2.svg',
+            image: '/images/categories/category-2.svg',
         },
         {
             name: 'Chocolates',
-            image: '/images/category-5.svg',
+            image: '/images/categories/category-5.svg',
         },
         {
             name: 'Drinks',
-            image: '/images/category-6.svg',
+            image: '/images/categories/category-6.svg',
         },
         {
             name: 'Fruits',
-            image: '/images/category-7.svg',
+            image: '/images/categories/category-7.svg',
         },
         {
             name: 'Fast Foods',
-            image: '/images/category-9.svg',
+            image: '/images/categories/category-9.svg',
         },
         {
             name: 'Vegetables',
-            image: '/images/category-8.svg',
+            image: '/images/categories/category-8.svg',
         },
         {
             name: 'Sea Foods',
-            image: '/images/category-10.svg',
+            image: '/images/categories/category-10.svg',
         },
         {
             name: 'On Sale',
-            image: '/images/icon-1.svg',
+            image: '/images/categories/icon-1.svg',
         },
         {
             name: 'On Sale',
-            image: '/images/icon-1.svg',
+            image: '/images/categories/icon-1.svg',
         },
         {
             name: 'On Sale',
-            image: '/images/icon-1.svg',
+            image: '/images/categories/icon-1.svg',
         },
         {
             name: 'On Sale',
-            image: '/images/icon-1.svg',
+            image: '/images/categories/icon-1.svg',
         },
     ];
 

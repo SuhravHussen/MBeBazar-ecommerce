@@ -1,4 +1,4 @@
-import styles from '../../../styles/components/notifications.module.scss';
+import styles from '../../../styles/components/middleNav/notifications.module.scss';
 
 export default function Notifications() {
     return (

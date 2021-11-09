@@ -14,7 +14,7 @@ import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import * as React from 'react';
 import { GiBlender, GiElectric, GiForkKnifeSpoon, GiKitchenKnives, GiTomato } from 'react-icons/gi';
-import styles from '../../../styles/components/drawer.module.scss';
+import styles from '../../../styles/components/middleNav/drawer.module.scss';
 import {
     DrawerInfoBox,
     MyListItemButton,

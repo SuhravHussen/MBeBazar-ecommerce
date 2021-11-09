@@ -1,5 +1,6 @@
+import { Divider } from '@mui/material';
 import Image from 'next/image';
-import styles from '../../../styles/components/shop.module.scss';
+import styles from '../../../styles/components/bottomNav/shop.module.scss';
 
 export default function ShopList() {
     return (
@@ -12,6 +13,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -20,6 +22,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -28,6 +31,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -36,6 +40,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -44,6 +49,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -52,6 +58,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
@@ -60,22 +67,7 @@ export default function ShopList() {
                 />
                 <p>Nature Food</p>
             </div>
-            <div className={styles.shop}>
-                <Image
-                    src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
-                    height={40}
-                    width={50}
-                />
-                <p>Nature Food</p>
-            </div>
-            <div className={styles.shop}>
-                <Image
-                    src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"
-                    height={40}
-                    width={50}
-                />
-                <p>Nature Food</p>
-            </div>
+            <Divider />
             <div className={styles.shop}>
                 <Image
                     src="https://res.cloudinary.com/doircnueq/image/upload/v1636348961/MBeCommerece/Vendors/vendor-1_cm8djx.png"

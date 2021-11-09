@@ -22,7 +22,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import * as React from 'react';
-import styles from '../../../styles/components/dekstopmiddlenav.module.scss';
+import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
 import MyDrawer from './Drawer';
 import Notifications from './Notifications';
 

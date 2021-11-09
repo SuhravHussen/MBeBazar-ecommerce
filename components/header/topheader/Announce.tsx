@@ -1,5 +1,5 @@
 import Marquee from 'react-fast-marquee';
-import styles from '../../../styles/components/announcement.module.scss';
+import styles from '../../../styles/components/announcement/announcement.module.scss';
 
 const Announce = () => (
     <div className={styles.announceContainer}>

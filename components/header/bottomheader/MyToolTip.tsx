@@ -3,7 +3,7 @@ import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { useState } from 'react';
 import { Arrow, useLayer } from 'react-laag';
-import styles from '../../../styles/components/allcategories.module.scss';
+import styles from '../../../styles/components/bottomNav/allcategories.module.scss';
 import AllCategories from './AllCategories';
 
 export default function MyToolTip() {

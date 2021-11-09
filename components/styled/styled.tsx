@@ -62,6 +62,10 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
         color: 'rgba(0, 0, 0, 0.87)',
         boxShadow: theme.shadows[1],
         fontSize: 11,
+        borderRadius: '10px',
+        margin: 0,
+        padding: 0,
+        maxWidth: '1600px',
     },
     [`& .${tooltipClasses.arrow}`]: {
         color: 'grey',

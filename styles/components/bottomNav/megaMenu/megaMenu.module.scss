@@ -1,0 +1,141 @@
+.megaListContainer {
+  max-width: 1600px;
+  width: 1500px;
+  height: 400px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 1500px) {
+    width: 100vw;
+    height: 300px;
+  }
+  .colum {
+    width: 15%;
+
+    .categoryHeader {
+      color: $PrimaryGreen;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+      font-family: $PrimaryFont;
+      @media screen and (max-width: 1500px) {
+        font-size: 1rem;
+      }
+    }
+    .categories {
+      margin-top: 10px;
+      p {
+        font-family: $PrimaryFont;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $PrimaryGrey;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        &:hover {
+          color: $PrimaryGreen;
+        }
+        @media screen and (max-width: 1500px) {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    @media screen and (max-width: 1500px) {
+      width: 20%;
+    }
+  }
+  .bannerBox {
+    width: 35%;
+    display: flex;
+
+    align-items: center;
+    @media screen and (max-width: 1500px) {
+      position: relative;
+      right: 50px;
+      width: 28%;
+      padding-right: 10px;
+    }
+    .banner {
+      background-image: url("/images/categories/megaMenuBanner.png");
+      background-position: center;
+      background-color: aquamarine;
+      background-repeat: no-repeat;
+      width: 100%;
+      border-radius: 15px;
+      display: flex;
+      height: 350px;
+      justify-content: space-evenly;
+      align-items: center;
+      font-family: $PrimaryFont;
+      background-size: cover;
+      @media screen and (max-width: 1500px) {
+        height: 200px;
+        width: 350px;
+      }
+      .leftSide {
+        padding: 20px;
+        width: 30%;
+        position: relative;
+        right: 50px;
+        @media screen and (max-width: 1500px) {
+          width: 50%;
+          right: 0;
+        }
+        h3 {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-bottom: 10px;
+          @media screen and (max-width: 1500px) {
+            font-size: 0.9rem;
+          }
+        }
+        h2 {
+          font-size: 1.5rem;
+
+          margin-bottom: 10px;
+          @media screen and (max-width: 1500px) {
+            font-size: 0.9rem;
+          }
+        }
+        button {
+          background-color: $PrimaryGreen;
+          color: $PrimaryWhite;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.5s;
+          &:hover {
+            background-color: orangered;
+          }
+          @media screen and (max-width: 1500px) {
+            font-size: 0.9rem;
+          }
+        }
+      }
+      .rightSide {
+        width: 70%;
+        background-color: yellow;
+        padding: 15px;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        bottom: 110px;
+        left: 30px;
+        @media screen and (max-width: 1500px) {
+          bottom: 50px;
+          left: 10px;
+          height: 60px;
+          width: 60px;
+        }
+      }
+    }
+  }
+}

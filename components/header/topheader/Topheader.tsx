@@ -1,6 +1,6 @@
 import { Divider } from '@mui/material';
 import Link from 'next/link';
-import styles from '../../../styles/components/topheader.module.scss';
+import styles from '../../../styles/components/topNav/topheader.module.scss';
 
 export default function Topheader() {
     return (
