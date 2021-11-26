@@ -55,13 +55,12 @@ const SearchIconWrapper = styled('div')(({ theme }: any) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    [theme.breakpoints.up('md')]: {
-        color: theme.palette.myColor.main,
-    },
+
+    color: theme.palette.myColor.main,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'white',
+    color: 'black',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
@@ -251,9 +250,8 @@ export default function PrimarySearchAppBar() {
                             <IconButton
                                 size="large"
                                 edge="start"
-                                color="inherit"
                                 aria-label="open drawer"
-                                sx={{ mr: 2 }}
+                                sx={{ mr: 2, color: 'myColor.main' }}
                             >
                                 <Hamburger
                                     size={28}
@@ -348,7 +346,7 @@ export default function PrimarySearchAppBar() {
                                 onClick={handleMobileMenuOpen}
                                 color="inherit"
                             >
-                                <MoreHorizRoundedIcon />
+                                <MoreHorizRoundedIcon sx={{ color: 'myColor.main' }} />
                             </IconButton>
                         </Box>
                     </Toolbar>
@@ -358,7 +356,14 @@ export default function PrimarySearchAppBar() {
                 {renderNotification}
                 {renderMobileMenu}
             </Box>
-            <Divider />
+            <Divider
+                sx={{
+                    display: {
+                        md: 'block',
+                        xs: 'none',
+                    },
+                }}
+            />
         </>
     );
 }

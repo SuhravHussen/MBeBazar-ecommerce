@@ -69,18 +69,14 @@ export default function AllCategories({ layerProps }: any) {
     console.log(`categories length is ${categories.length} and show more is ${showMore}`);
     return (
         <div {...layerProps} className={style.allCategories}>
-            {categories?.map(
-                (cat: { name: string; image: string }, i) => (
-                    // i < showMore && (
-                    <Collapse orientation="vertical" in={i < showMore} timeout={500}>
-                        <div className={style.singleCategory}>
-                            <Image src={cat.image} width="25%" height={30} />
-                            <p>{cat.name}</p>
-                        </div>
-                    </Collapse>
-                )
-                // )
-            )}
+            {categories?.map((cat: { name: string; image: string }, i) => (
+                <Collapse orientation="vertical" in={i < showMore} timeout={500}>
+                    <div className={style.singleCategory}>
+                        <Image src={cat.image} width="25%" height={30} />
+                        <p>{cat.name}</p>
+                    </div>
+                </Collapse>
+            ))}
 
             {categories.length <= showMore ? (
                 <button

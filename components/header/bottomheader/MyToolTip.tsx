@@ -30,15 +30,13 @@ export default function MyToolTip() {
 
     return (
         <>
-            <div
-                className={styles.Label}
-                role="button"
-                tabIndex={0}
-                onClick={() => setIsOpen(true)}
-                {...triggerProps}
-            >
+            <div className={styles.Label} role="button" tabIndex={0} {...triggerProps}>
                 <BorderAllRoundedIcon /> All Categories{' '}
-                {isOpen ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+                {isOpen ? (
+                    <ExpandLessRoundedIcon onClick={() => setIsOpen(!isOpen)} />
+                ) : (
+                    <ExpandMoreRoundedIcon onClick={() => setIsOpen(!isOpen)} />
+                )}
                 {isOpen &&
                     renderLayer(
                         <div {...layerProps} className={styles.AllCategoriesContainer}>

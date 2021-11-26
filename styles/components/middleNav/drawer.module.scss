@@ -17,7 +17,7 @@
   .followText {
     padding-left: 35px;
     position: absolute;
-    bottom: 30px;
+    bottom: 45px;
     color: $PrimaryGreen;
   }
   .socialIcons {
@@ -25,5 +25,6 @@
     bottom: 10px;
     padding-left: 33px;
     color: $PrimaryGreen;
+    cursor: pointer;
   }
 }
