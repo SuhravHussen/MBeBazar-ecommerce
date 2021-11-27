@@ -1,13 +1,8 @@
-import Link from 'next/link';
+import HeroCarousel from './HeroCarousel/HeroCarousel';
 
 const LandingPage = () => (
     <>
-        <Link href="/new">
-            <h1>Home</h1>
-        </Link>
-        <Link href="/new">
-            <h3>hedllo</h3>
-        </Link>
+        <HeroCarousel />
     </>
 );
 

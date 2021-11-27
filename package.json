@@ -17,6 +17,7 @@
     "@mui/core": "^5.0.0-alpha.53",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
+    "@mui/styles": "^5.2.1",
     "@mui/system": "^5.0.6",
     "@types/next": "^9.0.0",
     "create-emotion-server": "^11.0.0",
@@ -28,12 +29,15 @@
     "react-fast-marquee": "^1.2.1",
     "react-icons": "^4.3.1",
     "react-laag": "^2.0.3",
+    "react-slick": "^0.28.1",
     "react-tooltip": "^4.2.21",
     "sass": "^1.43.3",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "17.0.32",
+    "@types/react-slick": "^0.23.7",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "babel-eslint": "^10.1.0",

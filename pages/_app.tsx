@@ -10,6 +10,7 @@ import * as React from 'react';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
 import '../styles/globals.scss';
+import '../styles/overRides.scss';
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

@@ -1,0 +1,9 @@
+// hero carousel
+.slick-dots li button:before {
+  font-size: 15px !important;
+  transition: all 0.4s;
+}
+.slick-dots li.slick-active button:before {
+  font-size: 20px !important;
+  color: $PrimaryGreen !important;
+}

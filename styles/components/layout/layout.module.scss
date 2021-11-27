@@ -2,7 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1600px;
+  max-width: $xl;
   margin: 0 auto;
   flex-direction: column;
+  @media screen and (max-width: $xl) {
+    width: 90%;
+  }
+  @media screen and (max-width: $sm) {
+    width: 100%;
+  }
 }
