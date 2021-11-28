@@ -6,9 +6,6 @@
   @media screen and (min-width: $md) {
     height: 400px;
   }
-  @media screen and (max-width: $sm) {
-    width: 95%;
-  }
   .carouselItem {
     height: 350px;
     border-radius: 30px;
@@ -77,6 +74,8 @@
           color: white;
           font-size: 1rem;
           font-weight: 700;
+          cursor: pointer;
+
           @media screen and (max-width: $sm) {
             font-size: 0.7rem;
           }
@@ -90,4 +89,13 @@
   .item2 {
     background-image: url("https://res.cloudinary.com/doircnueq/image/upload/v1635662387/MBeCommerece/slider/slider-2_xdmbhi.png");
   }
+}
+
+.heroDots li button:before {
+  font-size: 15px !important;
+  transition: all 0.4s;
+}
+.heroDots li.slick-active button:before {
+  font-size: 20px !important;
+  color: $PrimaryGreen !important;
 }

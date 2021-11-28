@@ -1,6 +1,6 @@
 import { SiMinutemailer } from 'react-icons/si';
-import Slider from 'react-slick';
 import styles from '../../../styles/components/Home/heroCarousel.module.scss';
+import Carousel from '../../Common/Carousel';
 // eslint-disable-next-line import/no-absolute-path
 import '/node_modules/slick-carousel/slick/slick-theme.css';
 // eslint-disable-next-line import/no-absolute-path
@@ -14,10 +14,14 @@ export default function HeroCarousel() {
         slidesToShow: 1,
         slidesToScroll: 1,
         fade: true,
+        dotsClass: 'heroDots slick-dots',
+        autoplay: true,
+        autoplaySpeed: 8000,
+        arrows: false,
     };
     return (
         <div className={styles.carouselContainer}>
-            <Slider {...settings}>
+            <Carousel {...settings}>
                 <div className={`${styles.carouselItem} ${styles.item1}`}>
                     <div className={styles.Item}>
                         <h1>Don&apos;t miss amazing grocery deals</h1>
@@ -40,7 +44,7 @@ export default function HeroCarousel() {
                         </div>
                     </div>
                 </div>
-            </Slider>
+            </Carousel>
         </div>
     );
 }

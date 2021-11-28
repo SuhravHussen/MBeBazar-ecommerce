@@ -5,10 +5,8 @@
   max-width: $xl;
   margin: 0 auto;
   flex-direction: column;
+  height: auto;
   @media screen and (max-width: $xl) {
     width: 90%;
-  }
-  @media screen and (max-width: $sm) {
-    width: 100%;
   }
 }

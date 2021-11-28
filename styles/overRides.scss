@@ -1,9 +1,15 @@
 // hero carousel
-.slick-dots li button:before {
+.heroDots li button:before {
   font-size: 15px !important;
   transition: all 0.4s;
 }
-.slick-dots li.slick-active button:before {
+.heroDots li.slick-active button:before {
   font-size: 20px !important;
   color: $PrimaryGreen !important;
 }
+
+// featured carousel div
+// .singleSlide .slick-slide + div {
+//   border-radius: 20px;
+
+// }

@@ -1,0 +1,17 @@
+@mixin PrimaryButton($padding, $size, $hoverColor) {
+  color: $PrimaryGreen;
+  background-color: $SecondaryGreen;
+  border: none;
+  padding: $padding;
+  font-size: $size;
+  transition: 0.4s;
+  //   width: $width;
+  border-radius: 6px;
+  font-weight: 600;
+  &:hover {
+    background-color: $hoverColor;
+    color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: translateY(-6px);
+  }
+}

@@ -5,7 +5,9 @@ module.exports = {
     reactStrictMode: true,
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
-        prependData: `@import "abstracts/variables.scss";`,
+        prependData: `@import "abstracts/variables.scss";
+        @import "abstracts/mixins.scss";
+        `,
     },
     images: {
         domains: ['res.cloudinary.com'],
