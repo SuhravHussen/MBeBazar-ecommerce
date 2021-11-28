@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import styles from '../../../styles/components/Home/featured.module.scss';
 import Carousel from '../../Common/Carousel';
@@ -99,10 +99,8 @@ export default function Featured() {
         },
     ];
 
-    useEffect(() => {
-        console.log(slider);
-    }, [slider]);
-
+    const bgColors = ['#f2fce4', '#fff3ff', '#fffceb', '#ecffec', '#feefea', '#fff3eb'];
+    console.log(Math.floor(Math.random() * bgColors.length + 1));
     return (
         <div className={styles.featuredContainer}>
             <div className={styles.heading}>
@@ -121,10 +119,21 @@ export default function Featured() {
             <div className={styles.carousel}>
                 <Carousel myref={slider} {...settings}>
                     {categories.map((c, i) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <div key={i} className={styles.singleItem}>
-                            <Image src={c.image} height={100} width={100} />
-                            <p>hello</p>
+                        <div // eslint-disable-next-line react/no-array-index-key
+                            key={i}
+                            className={styles.outerSingleItem}
+                        >
+                            <div
+                                style={{
+                                    backgroundColor:
+                                        bgColors[Math.floor(Math.random() * bgColors.length)],
+                                }}
+                                className={styles.singleItem}
+                            >
+                                <Image src={c.image} height={100} width={100} />
+                                <h4>{c.name}</h4>
+                                <p>30 items</p>
+                            </div>
                         </div>
                     ))}
                 </Carousel>

@@ -26,12 +26,11 @@
       }
     }
   }
+
   .carousel {
     .singleItem {
-      //   min-height: 150px;
       width: 90% !important;
-      max-height: 140px;
-      background-color: $SecondaryGreen;
+      min-height: 200px;
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
@@ -39,8 +38,15 @@
       gap: 5px;
       border-radius: 20px;
       padding: 20px;
+      h4 {
+        color: $PrimaryBlack;
+        overflow: hidden;
+        white-space: nowrap;
+      }
       p {
-        font-size: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $PrimaryGrey;
       }
     }
   }
@@ -71,15 +77,20 @@
           font-size: 1.2rem;
           height: 120px;
         }
+
         @media screen and (max-width: $sm) {
           height: 90px;
           font-size: 1.5rem;
+        }
+        @media screen and (max-width: $xss) {
+          font-size: 1.3rem;
+          height: 90px;
         }
       }
       button {
         @include PrimaryButton(9px, 1rem, $PrimaryGreen);
         @media screen and (max-width: $sm) {
-          font-size: 1.3rem;
+          font-size: 1rem;
         }
       }
     }
