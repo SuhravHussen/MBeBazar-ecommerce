@@ -38,6 +38,21 @@
       gap: 5px;
       border-radius: 20px;
       padding: 20px;
+      cursor: pointer;
+      border: none;
+      &:hover {
+        transition: all 0.6s;
+        box-shadow: 5px 5px 15px rgb(0 0 0 / 5%);
+        border: 1px solid #bce3c9;
+      }
+      &:hover h4 {
+        transition: all 0.6s;
+        overflow: hidden;
+        white-space: nowrap;
+        transform: scale(1.1);
+
+        color: $PrimaryGreen;
+      }
       h4 {
         color: $PrimaryBlack;
         overflow: hidden;

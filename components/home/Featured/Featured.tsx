@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import FeaturedSk from '../../../skeletons/FeaturedSk';
 import styles from '../../../styles/components/Home/featured.module.scss';
 import Carousel from '../../Common/Carousel';
 
@@ -100,7 +101,7 @@ export default function Featured() {
     ];
 
     const bgColors = ['#f2fce4', '#fff3ff', '#fffceb', '#ecffec', '#feefea', '#fff3eb'];
-    console.log(Math.floor(Math.random() * bgColors.length + 1));
+
     return (
         <div className={styles.featuredContainer}>
             <div className={styles.heading}>
@@ -118,24 +119,36 @@ export default function Featured() {
             </div>
             <div className={styles.carousel}>
                 <Carousel myref={slider} {...settings}>
-                    {categories.map((c, i) => (
-                        <div // eslint-disable-next-line react/no-array-index-key
-                            key={i}
-                            className={styles.outerSingleItem}
-                        >
-                            <div
-                                style={{
-                                    backgroundColor:
-                                        bgColors[Math.floor(Math.random() * bgColors.length)],
-                                }}
-                                className={styles.singleItem}
-                            >
-                                <Image src={c.image} height={100} width={100} />
-                                <h4>{c.name}</h4>
-                                <p>30 items</p>
-                            </div>
-                        </div>
-                    ))}
+                    {categories.length > 0
+                        ? categories.map((c, i) => (
+                              <div // eslint-disable-next-line react/no-array-index-key
+                                  key={i}
+                                  className={styles.outerSingleItem}
+                              >
+                                  <div
+                                      style={{
+                                          backgroundColor:
+                                              bgColors[Math.floor(Math.random() * bgColors.length)],
+                                      }}
+                                      className={styles.singleItem}
+                                  >
+                                      <Image
+                                          src={c.image}
+                                          height={100}
+                                          width={100}
+                                          alt="category image"
+                                          quality={50}
+                                          placeholder="blur"
+                                          blurDataURL="/images/loading-min.jpg"
+                                      />
+                                      <h4>{c.name}</h4>
+                                      <p>30 items</p>
+                                  </div>
+                              </div>
+                          ))
+                        : Array(8)
+                              .fill(null)
+                              .map((i) => <FeaturedSk key={i} />)}
                 </Carousel>
             </div>
             <div className={styles.cards}>
