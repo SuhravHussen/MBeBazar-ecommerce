@@ -9,7 +9,7 @@ const MegaList = dynamic(() => import('./MegaList'), {
 
 export default function MegaMenu() {
     return (
-        <LightTooltip title={<MegaList />} arrow>
+        <LightTooltip title={<MegaList />} arrow placement="bottom">
             <p className={styles.shopsMenu}>
                 Mega Menu <ExpandMore />
             </p>

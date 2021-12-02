@@ -8,8 +8,33 @@
   color: $PrimaryGreen !important;
 }
 
-// featured carousel div
-// .singleSlide .slick-slide + div {
-//   border-radius: 20px;
-
-// }
+// popular products quick view
+.quickViewLeftSlide .slick-arrow {
+  display: none;
+  z-index: 2;
+  &::before {
+    color: $PrimaryGreen !important;
+    opacity: 1 !important;
+    font-size: 30px !important;
+  }
+}
+.quickViewLeftSlide .slick-prev {
+  left: -16px !important;
+}
+.quickViewLeftSlide .slick-next {
+  right: -20px !important;
+}
+.quickViewLeftSlide .slick-current {
+  border: 1px solid $PrimaryGreen !important;
+}
+.quickViewLeftSlide .slick-slide {
+  margin-right: 20px;
+  border-radius: 20px;
+  width: 100px !important;
+}
+.quickViewLeftSlide .slick-slider:hover .slick-arrow {
+  display: block;
+}
+.quickViewLeftSlide {
+  width: 100%;
+}

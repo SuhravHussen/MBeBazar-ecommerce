@@ -20,9 +20,9 @@ import { alpha, styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import { Sling as Hamburger } from 'hamburger-react';
-import Image from 'next/image';
 import * as React from 'react';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
+import { Image } from '../../../utils/commonImports';
 import MyDrawer from './Drawer';
 import Notifications from './Notifications';
 
@@ -243,8 +243,8 @@ export default function PrimarySearchAppBar() {
     return (
         <>
             <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
-            <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1 }}>
-                <AppBar className={styles.appBar} position="static" elevation={0}>
+            <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1, position: 'sticky' }}>
+                <AppBar className={styles.appBar} position="sticky" elevation={0}>
                     <Toolbar className={styles.toolbar}>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton

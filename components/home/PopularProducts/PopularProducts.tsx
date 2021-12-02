@@ -1,26 +1,15 @@
-import Rating from '@mui/material/Rating';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { FiShoppingCart } from 'react-icons/fi';
 import data from '../../../FakeData/Data';
 import PopularSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
+import { dynamic, useEffect, useState } from '../../../utils/commonImports';
+import { PopularProductsSchema } from './schema';
+import SingleProduct from './SingleProduct';
 
+const QuickView = dynamic(() => import('./QuickView'));
 export default function PopularProducts() {
-    type iProducts = {
-        title: string;
-        onSale: boolean;
-        vendorName: string;
-        actualPrice: number;
-        offerPrice: number;
-        id: string;
-        ratings: number;
-        image: string;
-        category: string;
-    };
-
-    const [products, setProducts] = useState<iProducts[]>([]);
-
+    const [products, setProducts] = useState<PopularProductsSchema[]>([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [quickViewDetails, setQuickViewDetails] = useState(0);
     useEffect(() => {
         const filteredProducts = data.filter((d) => {
             if (d.featured.indexOf('popular') === -1) {
@@ -37,7 +26,7 @@ export default function PopularProducts() {
                 offerPrice: p.offerPrice,
                 id: p.id,
                 ratings: 4.5,
-                image: p.images[0],
+                image: p.images,
                 category: p.category,
             };
             return modified;
@@ -48,6 +37,11 @@ export default function PopularProducts() {
 
     return (
         <div className={styles.popularProductsContainer}>
+            <QuickView
+                open={modalOpen}
+                setOpen={setModalOpen}
+                details={products[quickViewDetails]}
+            />
             <div className={styles.heading}>
                 <h1>Popular Products</h1>
                 <div className={styles.subCategories}>
@@ -62,27 +56,14 @@ export default function PopularProducts() {
             </div>
             <div className={styles.allProducts}>
                 {products.length > 0
-                    ? products.map((p) => (
-                          <div className={styles.singleProduct} key={p.id + Math.random()}>
-                              <span className={styles.onSale}>On Sale</span>
-                              <div className={styles.image}>
-                                  <Image src={p.image} width={244} height={244} />
-                              </div>
-                              <small className={styles.category}>{p.category}</small>
-                              <h3 className={styles.title}>{p.title}</h3>
-                              <Rating name="read-only" value={p.ratings} precision={0.1} readOnly />
-                              <p>
-                                  By <span>{p.vendorName}</span>
-                              </p>
-                              <div className={styles.bottom}>
-                                  <h2>${p.offerPrice}</h2>
-                                  <del>${p.actualPrice}</del>
-
-                                  <button type="button" className={styles.button}>
-                                      <FiShoppingCart /> Add
-                                  </button>
-                              </div>
-                          </div>
+                    ? products.map((p, i) => (
+                          <SingleProduct
+                              key={p.id}
+                              product={p}
+                              index={i}
+                              setQuickViewDetails={setQuickViewDetails}
+                              setModalOpen={setModalOpen}
+                          />
                       ))
                     : Array(5)
                           .fill(null)

@@ -28,7 +28,9 @@
     "react-dom": "^17.0.2",
     "react-fast-marquee": "^1.2.1",
     "react-icons": "^4.3.1",
+    "react-image-magnify": "^2.7.4",
     "react-laag": "^2.0.3",
+    "react-qty-picker": "^1.0.6",
     "react-slick": "^0.28.1",
     "react-tooltip": "^4.2.21",
     "sass": "^1.43.3",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@types/react": "17.0.32",
+    "@types/react-image-magnify": "^2.7.1",
     "@types/react-slick": "^0.23.7",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",

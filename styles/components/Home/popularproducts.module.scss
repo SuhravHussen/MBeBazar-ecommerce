@@ -5,12 +5,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: $md) {
+      flex-direction: column;
+      align-items: stretch;
+      margin-bottom: 20px;
+      h1 {
+        margin-bottom: 10px;
+      }
+    }
     .subCategories {
       display: flex;
       gap: 15px;
+      flex-wrap: wrap;
+      @media screen and (max-width: $md) {
+      }
       p {
         font-size: 0.9rem;
         font-weight: 600;
+        cursor: pointer;
+        @media screen and (max-width: $md) {
+        }
       }
     }
   }
@@ -19,6 +33,15 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-evenly;
+    @media screen and (max-width: $md) {
+      gap: 10px;
+    }
+    @media screen and (max-width: $sm) {
+      gap: 5px;
+    }
+    @media screen and (max-width: $xss) {
+      gap: 0px;
+    }
     .singleProduct {
       border: 1px solid #ececec;
       height: 465px;
@@ -26,12 +49,23 @@
       margin-bottom: 30px;
       border-radius: 15px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       //   align-items: center;
       flex-direction: column;
       overflow: hidden;
       position: relative;
       padding: 20px;
+      animation: fadeIn;
+      animation-duration: 3.5s;
+      @media screen and (max-width: $md) {
+        width: 35%;
+      }
+      @media screen and (max-width: $sm) {
+        width: 95%;
+      }
+      @media screen and (max-width: $xss) {
+        width: 100%;
+      }
       .onSale {
         position: absolute;
         top: 0px;
@@ -46,15 +80,37 @@
       }
       .image {
         text-align: center;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        &:hover > span {
+          transition: 0.3s;
+          transform: scale(1.2);
+        }
       }
       .category {
         font-size: 12px;
         font-weight: 500;
         font-family: $secondaryFont;
         color: $PrimaryGrey;
+        overflow: hidden;
+        z-index: 2;
       }
       .title {
         font-size: 16px;
+      }
+      .reviewsNumber {
+        font-size: 0.8rem;
+        align-self: center;
+        margin-left: 3px;
+        color: $PrimaryGrey;
+        margin-top: 2px;
+        font-weight: 600;
       }
       p {
         font-size: 14px;
@@ -62,8 +118,10 @@
         color: $PrimaryGrey;
         span {
           color: $PrimaryGreen;
+          cursor: pointer;
         }
       }
+
       .bottom {
         display: flex;
         justify-content: space-between;
@@ -83,8 +141,50 @@
         button {
           flex-grow: 2;
           @include PrimaryButton(5px, 14px, $PrimaryGreen);
+          cursor: pointer;
         }
       }
+      &:hover {
+        box-shadow: 5px 5px 15px rgb(0 0 0 / 5%);
+        border: 1px solid #bce3c9;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
+        .hover {
+          visibility: visible !important;
+          transition: 0.3s;
+        }
+      }
+      .hover {
+        border: 1px solid #bce3c9;
+        width: 40%;
+        padding: 5px 20px;
+        position: absolute;
+        top: 90px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+        z-index: 999;
+        display: flex;
+        gap: 10px;
+        visibility: hidden;
+        justify-content: space-evenly;
+        border-radius: 8px;
+        .hoverIcon {
+          color: $PrimaryGreen;
+          :hover {
+            color: goldenrod;
+          }
+        }
+      }
+      // :hover >
     }
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

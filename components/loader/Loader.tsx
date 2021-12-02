@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { Image } from '../../utils/commonImports';
 
 interface props {
     children: React.ReactNode;

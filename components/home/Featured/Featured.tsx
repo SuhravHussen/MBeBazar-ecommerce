@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import FeaturedSk from '../../../skeletons/FeaturedSk';
 import styles from '../../../styles/components/Home/featured.module.scss';
+import { Image } from '../../../utils/commonImports';
 import Carousel from '../../Common/Carousel';
 
 export default function Featured() {
@@ -18,6 +18,7 @@ export default function Featured() {
         autoplaySpeed: 8000,
         arrows: false,
         className: 'singleSlide',
+        lazyLoad: 'ondemand',
         responsive: [
             {
                 breakpoint: 960,
