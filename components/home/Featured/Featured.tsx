@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import FeaturedSk from '../../../skeletons/FeaturedSk';
 import styles from '../../../styles/components/Home/featured.module.scss';
-import { Image } from '../../../utils/commonImports';
+import { Fade, Image } from '../../../utils/commonImports';
 import Carousel from '../../Common/Carousel';
 
 export default function Featured() {
@@ -118,7 +118,7 @@ export default function Featured() {
                     />
                 </div>
             </div>
-            <div className={styles.carousel}>
+            <Fade className={styles.carousel}>
                 <Carousel myref={slider} {...settings}>
                     {categories.length > 0
                         ? categories.map((c, i) => (
@@ -151,27 +151,29 @@ export default function Featured() {
                               .fill(null)
                               .map((i) => <FeaturedSk key={i} />)}
                 </Carousel>
-            </div>
-            <div className={styles.cards}>
-                <div className={`${styles.card} ${styles.card1}`}>
-                    <h1>Every Fresh &apos; Clean with Our Products</h1>
-                    <button type="button" className={styles.button}>
-                        Shop Now
-                    </button>
+            </Fade>
+            <Fade>
+                <div className={styles.cards}>
+                    <div className={`${styles.card} ${styles.card1}`}>
+                        <h1>Every Fresh &apos; Clean with Our Products</h1>
+                        <button type="button" className={styles.button}>
+                            Shop Now
+                        </button>
+                    </div>
+                    <div className={`${styles.card} ${styles.card2}`}>
+                        <h1>Make your Breakfast Healthy and Easy</h1>
+                        <button type="button" className={styles.button}>
+                            Shop Now
+                        </button>
+                    </div>
+                    <div className={`${styles.card} ${styles.card3}`}>
+                        <h1>The best Organic Products Online</h1>
+                        <button type="button" className={styles.button}>
+                            Shop Now
+                        </button>
+                    </div>
                 </div>
-                <div className={`${styles.card} ${styles.card2}`}>
-                    <h1>Make your Breakfast Healthy and Easy</h1>
-                    <button type="button" className={styles.button}>
-                        Shop Now
-                    </button>
-                </div>
-                <div className={`${styles.card} ${styles.card3}`}>
-                    <h1>The best Organic Products Online</h1>
-                    <button type="button" className={styles.button}>
-                        Shop Now
-                    </button>
-                </div>
-            </div>
+            </Fade>
         </div>
     );
 }

@@ -55,8 +55,6 @@
       overflow: hidden;
       position: relative;
       padding: 20px;
-      animation: fadeIn;
-      animation-duration: 3.5s;
       @media screen and (max-width: $md) {
         width: 35%;
       }
@@ -178,13 +176,5 @@
       }
       // :hover >
     }
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

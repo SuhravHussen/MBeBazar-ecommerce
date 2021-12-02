@@ -17,7 +17,7 @@ export default function SingleProduct({
     setModalOpen,
 }: iProps) {
     return (
-        <div className={styles.singleProduct}>
+        <div>
             {product?.onSale && <span className={styles.onSale}>On Sale</span>}
             <div className={styles.image}>
                 <HoverIcons

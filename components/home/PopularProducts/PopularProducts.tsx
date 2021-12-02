@@ -1,7 +1,7 @@
 import data from '../../../FakeData/Data';
 import PopularSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
-import { dynamic, useEffect, useState } from '../../../utils/commonImports';
+import { dynamic, Fade, useEffect, useState } from '../../../utils/commonImports';
 import { PopularProductsSchema } from './schema';
 import SingleProduct from './SingleProduct';
 
@@ -57,13 +57,15 @@ export default function PopularProducts() {
             <div className={styles.allProducts}>
                 {products.length > 0
                     ? products.map((p, i) => (
-                          <SingleProduct
-                              key={p.id}
-                              product={p}
-                              index={i}
-                              setQuickViewDetails={setQuickViewDetails}
-                              setModalOpen={setModalOpen}
-                          />
+                          <Fade className={styles.singleProduct} cascade>
+                              <SingleProduct
+                                  key={p.id}
+                                  product={p}
+                                  index={i}
+                                  setQuickViewDetails={setQuickViewDetails}
+                                  setModalOpen={setModalOpen}
+                              />
+                          </Fade>
                       ))
                     : Array(5)
                           .fill(null)

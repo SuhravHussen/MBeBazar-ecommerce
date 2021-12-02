@@ -3,7 +3,9 @@ import styles from '../../../styles/components/announcement/announcement.module.
 
 const Announce = () => (
     <div className={styles.announceContainer}>
-        <Marquee gradient={false}> Grand opening, up to 15% off all items, Only 3 days left. </Marquee>
+        <Marquee gradient={false}>
+            Grand opening, up to 15% off all items, Only 3 days left.
+        </Marquee>
     </div>
 );
 
