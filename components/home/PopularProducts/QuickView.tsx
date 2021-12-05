@@ -3,15 +3,15 @@ import ReactImageMagnify from 'react-image-magnify';
 import styles from '../../../styles/components/Home/quickview.module.scss';
 import { getPercentage } from '../../../utils/calculations';
 import {
+    Carousel,
     FiShoppingCart,
     Image,
+    MyModal,
     QuantityPicker,
     Rating,
     // eslint-disable-next-line prettier/prettier
     useState
 } from '../../../utils/commonImports';
-import Carousel from '../../Common/Carousel';
-import MyModal from '../../Common/MyModal';
 import { PopularProductsSchema } from './schema';
 
 type iProps = {
@@ -33,7 +33,7 @@ export default function QuickView({ open, setOpen, details }: iProps) {
         arrows: false,
         asNavFor: nav2,
         className: 'singleQuickViewFirstSlide',
-        lazyLoad: 'ondemand',
+        lazyLoad: 'progressive',
     };
 
     function NextArrow(props: any) {
@@ -59,7 +59,7 @@ export default function QuickView({ open, setOpen, details }: iProps) {
         centerMode: true,
         nextArrow: <NextArrow className={styles.arrow} />,
         prevArrow: <PrevArrow className={styles.arrow} />,
-        lazyLoad: 'ondemand',
+        lazyLoad: 'progressive',
         responsive: [
             {
                 breakpoint: 580,

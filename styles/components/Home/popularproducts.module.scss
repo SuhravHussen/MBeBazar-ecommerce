@@ -17,6 +17,9 @@
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
+      p.active {
+        color: $PrimaryGreen !important;
+      }
       @media screen and (max-width: $md) {
       }
       p {
@@ -175,6 +178,17 @@
         }
       }
       // :hover >
+    }
+    .notFound {
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        background: lighten($color: red, $amount: 48);
+        padding: 20px;
+        border-radius: 8px;
+      }
     }
   }
 }

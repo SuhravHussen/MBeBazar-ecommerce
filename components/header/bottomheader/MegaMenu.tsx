@@ -1,10 +1,11 @@
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import dynamic from 'next/dynamic';
+import MegaMenuSk from '../../../skeletons/megaMenu/MegaMenuSk';
 import styles from '../../../styles/components/bottomNav/shop.module.scss';
 import { LightTooltip } from '../../styled/styled';
 
 const MegaList = dynamic(() => import('./MegaList'), {
-    loading: () => <p>loading</p>,
+    loading: () => <MegaMenuSk />,
 });
 
 export default function MegaMenu() {

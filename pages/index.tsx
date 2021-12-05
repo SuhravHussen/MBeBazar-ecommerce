@@ -1,9 +1,6 @@
-import dynamic from 'next/dynamic';
+import LandingPage from '../components/home/LandingPage';
 import Layout from '../components/Layout/Layout';
 
-const LandingPage = dynamic(() => import('../components/home/LandingPage'), {
-    loading: () => <p>loading</p>,
-});
 const Home = () => (
     <Layout>
         <LandingPage />

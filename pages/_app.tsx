@@ -6,6 +6,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+// eslint-disable-next-line import/no-absolute-path
+import 'slick-carousel/slick/slick-theme.css';
+// eslint-disable-next-line import/no-absolute-path
+import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';

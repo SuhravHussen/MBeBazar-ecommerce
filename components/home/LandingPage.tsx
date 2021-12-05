@@ -1,8 +1,7 @@
-import { dynamic } from '../../utils/commonImports';
+import Featured from './Featured/Featured';
+import HeroCarousel from './HeroCarousel/HeroCarousel';
+import PopularProducts from './PopularProducts/PopularProducts';
 
-const Featured = dynamic(() => import('./Featured/Featured'));
-const HeroCarousel = dynamic(() => import('./HeroCarousel/HeroCarousel'));
-const PopularProducts = dynamic(() => import('./PopularProducts/PopularProducts'));
 const LandingPage = () => (
     <>
         <HeroCarousel />

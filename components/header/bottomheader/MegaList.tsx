@@ -36,6 +36,7 @@ export default function MegaList() {
                     <p className={styles.category}>Crab and shellfish</p>
                 </div>
             </div>
+
             <div className={styles.bannerBox}>
                 <div className={styles.banner}>
                     <div className={styles.leftSide}>

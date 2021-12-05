@@ -1,8 +1,8 @@
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
-import { dynamic, FiShoppingCart, Image, Rating } from '../../../utils/commonImports';
+import { FiShoppingCart, Image, Rating } from '../../../utils/commonImports';
+import HoverIcons from './HoverIcons';
 import { PopularProductsSchema } from './schema';
 
-const HoverIcons = dynamic(() => import('./HoverIcons'));
 type iProps = {
     product: PopularProductsSchema;
     index: number;
