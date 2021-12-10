@@ -64,7 +64,7 @@ const products = [
             'https://res.cloudinary.com/doircnueq/image/upload/v1635596231/MBeCommerece/Products/Angie_sBoomchickapop_esi0om.jpg',
         ],
         vendorId: 243243445,
-        featured: ['popular'],
+        featured: ['popular', 'dealOfTheDay'],
         category: 'snack',
     },
     {
@@ -130,7 +130,7 @@ const products = [
             'https://res.cloudinary.com/doircnueq/image/upload/v1635596230/MBeCommerece/Products/ChobaniVanillaGreek_b1vrk2.jpg',
         ],
         vendorId: 243243443,
-        featured: ['popular'],
+        featured: ['popular', 'dealOfTheDay'],
         category: 'Hodo Foods',
     },
     {
@@ -174,7 +174,7 @@ const products = [
             'https://res.cloudinary.com/doircnueq/image/upload/v1635596230/MBeCommerece/Products/EncoreSeafoods_hlgbkg.jpg',
         ],
         vendorId: 243243443,
-        featured: ['popular'],
+        featured: ['popular', 'dealOfTheDay'],
         category: 'Oil',
     },
     {

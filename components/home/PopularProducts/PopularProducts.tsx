@@ -1,7 +1,7 @@
 import data from '../../../FakeData/Data';
 import PopularSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
-import { dynamic, Fade, useEffect, useState } from '../../../utils/commonImports';
+import { dynamic, Fade, SectionHeader, useEffect, useState } from '../../../utils/commonImports';
 import { PopularProductsSchema } from './schema';
 import SingleProduct from './SingleProduct';
 
@@ -61,7 +61,7 @@ export default function PopularProducts() {
                     details={products[quickViewDetails]}
                 />
             )}
-            <div className={styles.heading}>
+            <SectionHeader>
                 <h1>Popular Products</h1>
                 <div className={styles.subCategories}>
                     <p
@@ -114,13 +114,12 @@ export default function PopularProducts() {
                         Fruits
                     </p>
                 </div>
-            </div>
+            </SectionHeader>
             <div className={styles.allProducts}>
                 {products.length > 0 && !loading ? (
                     products.map((p, i) => (
-                        <Fade className={styles.singleProduct} cascade>
+                        <Fade className={styles.singleProduct} key={p.title} cascade>
                             <SingleProduct
-                                key={p.id}
                                 product={p}
                                 index={i}
                                 setQuickViewDetails={setQuickViewDetails}

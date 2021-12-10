@@ -2,28 +2,23 @@
   width: 100%;
   margin-top: 5rem;
   margin-bottom: 2rem;
-  .heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    h1 {
-      color: $PrimaryBlack;
-      @media screen and (max-width: $sm) {
-        font-size: 1.5rem;
-      }
+
+  h1 {
+    color: $PrimaryBlack;
+    @media screen and (max-width: $sm) {
+      font-size: 1.5rem;
     }
-    .icons {
-      margin-right: 1rem;
-      display: flex;
-      gap: 15px;
-      .icon {
-        background-color: $SecondaryGrey;
-        font-size: 40px;
-        padding: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-      }
+  }
+  .icons {
+    margin-right: 1rem;
+    display: flex;
+    gap: 15px;
+    .icon {
+      background-color: $SecondaryGrey;
+      font-size: 40px;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
     }
   }
 

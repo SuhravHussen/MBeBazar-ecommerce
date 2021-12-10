@@ -1,0 +1,153 @@
+.dealsContainer {
+  width: 100%;
+  padding-bottom: 150px;
+  h3 {
+    display: flex;
+    align-items: center;
+    color: $PrimaryGrey;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  .arrowIcon {
+    font-size: 1.1rem;
+    margin-left: 10px;
+  }
+  .deals {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 70px;
+    @media screen and (max-width: $xl) {
+      flex-wrap: wrap;
+      row-gap: 150px;
+    }
+    @media screen and (max-width: $sm) {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 100px;
+    }
+    .singleDealFade {
+      width: 33.3%;
+      // border: 1px solid red;
+      @media screen and (max-width: $sm) {
+        width: 90%;
+      }
+      .singleDeal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+
+        .image {
+          width: 335px;
+          border-radius: 20px;
+          overflow: hidden;
+          position: relative;
+          height: 270px;
+
+          @media screen and (max-width: $xl) {
+            width: 300px;
+            height: 270px;
+          }
+          @media screen and (max-width: $md) {
+            width: 250px;
+          }
+          .countDownDiv {
+            display: flex;
+            position: absolute;
+            top: 110px;
+            left: 70px;
+            @media screen and (max-width: $md) {
+              left: 30px;
+            }
+            @media screen and (max-width: $sm) {
+              left: 25px;
+            }
+            p {
+              display: flex;
+              flex-direction: column;
+              text-align: center;
+              padding: 8px 5px;
+              background: white;
+              margin-right: 5px;
+              border-radius: 8px;
+              color: $PrimaryGreen;
+              span {
+                color: $PrimaryGrey;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+        .content {
+          width: 85%;
+          height: 150px;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow: 5px 5px 15px rgb(0 0 0 / 5%);
+          top: 200px;
+          position: absolute;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          &:hover {
+            transform: translateY(-6px);
+            transition: 0.5s;
+          }
+          @media screen and (max-width: $md) {
+            width: 100%;
+          }
+          h3 {
+            color: black;
+            font-weight: 800;
+            font-size: 1rem;
+          }
+          h4 {
+            display: flex;
+            align-items: center;
+            p {
+              color: $PrimaryGrey;
+              font-size: 0.8rem;
+              margin-left: 10px;
+            }
+            span {
+              font-size: 1rem !important;
+            }
+          }
+          p {
+            color: $PrimaryGrey;
+            font-size: 0.8rem;
+            span {
+              color: $PrimaryGreen;
+              font-weight: 800;
+            }
+          }
+          .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            h2 {
+              font-size: 18px;
+              color: $PrimaryGreen;
+            }
+            del {
+              flex-grow: 1;
+              margin-left: 10px;
+              font-size: 14px;
+              color: $PrimaryGrey;
+              font-weight: 600;
+            }
+            button {
+              flex-grow: 2;
+              @include PrimaryButton(5px, 14px, $PrimaryGreen);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

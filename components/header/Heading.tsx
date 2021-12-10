@@ -14,6 +14,7 @@ const MiddleHeader = dynamic(() => import('./middleheader/MiddleHeader'), {
 
 const Bottomheader = dynamic(() => import('./bottomheader/Bottomheader'), {
     loading: () => <BottomHeaderSK />,
+    ssr: false,
 });
 
 export default function Heading() {

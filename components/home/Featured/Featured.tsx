@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import FeaturedSk from '../../../skeletons/FeaturedSk';
 import styles from '../../../styles/components/Home/featured.module.scss';
-import { Fade, Image } from '../../../utils/commonImports';
+import { Fade, Image, SectionHeader } from '../../../utils/commonImports';
 import Carousel from '../../Common/Carousel';
 
 export default function Featured() {
@@ -105,7 +105,7 @@ export default function Featured() {
 
     return (
         <div className={styles.featuredContainer}>
-            <div className={styles.heading}>
+            <SectionHeader>
                 <h1>Featured Categories</h1>
                 <div className={styles.icons}>
                     <FiArrowLeft
@@ -117,7 +117,7 @@ export default function Featured() {
                         onClick={() => slider?.current?.slickNext()}
                     />
                 </div>
-            </div>
+            </SectionHeader>
             <Fade className={styles.carousel}>
                 <Carousel myref={slider} {...settings}>
                     {categories.length > 0
