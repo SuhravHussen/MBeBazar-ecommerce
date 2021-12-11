@@ -2,8 +2,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
-import { Image } from '../../../utils/commonImports';
-// import styles from '../../../styles/components/bottomNav/Blog/bloglist.module.scss';
+import { Image } from '../../../../utils/commonImports';
 
 export default function BlogList() {
     return (

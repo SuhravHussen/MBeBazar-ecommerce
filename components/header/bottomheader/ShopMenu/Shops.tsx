@@ -1,7 +1,7 @@
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import dynamic from 'next/dynamic';
-import styles from '../../../styles/components/bottomNav/shop.module.scss';
-import { LightTooltip } from '../../styled/styled';
+import styles from '../../../../styles/components/bottomNav/shop.module.scss';
+import { LightTooltip } from '../../../styled/bottomNav';
 
 const ShopList = dynamic(() => import('./ShopList'), {
     loading: () => <p>loading</p>,

@@ -1,6 +1,6 @@
 import { Divider } from '@mui/material';
-import styles from '../../../styles/components/bottomNav/shop.module.scss';
-import { Image } from '../../../utils/commonImports';
+import styles from '../../../../styles/components/bottomNav/shop.module.scss';
+import { Image } from '../../../../utils/commonImports';
 
 export default function ShopList() {
     return (

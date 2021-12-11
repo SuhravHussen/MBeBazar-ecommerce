@@ -1,4 +1,4 @@
-import styles from '../../../styles/components/bottomNav/megaMenu/megaMenu.module.scss';
+import styles from '../../../../styles/components/bottomNav/megaMenu/megaMenu.module.scss';
 
 export default function MegaList() {
     return (

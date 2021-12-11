@@ -22,8 +22,8 @@ export default function Heading() {
 
     return (
         <div className={styles.header}>
-            <Announce />
-            <TopHeader />
+            {width < 960 && <Announce />}
+            {width > 960 && <TopHeader />}
             <Sticky stickyStyle={{ zIndex: 2 }}>
                 <MiddleHeader />
             </Sticky>

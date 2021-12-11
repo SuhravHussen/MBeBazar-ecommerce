@@ -1,7 +1,7 @@
 import { AiOutlineEye, AiOutlineHeart } from 'react-icons/ai';
 import { RiArrowLeftRightLine } from 'react-icons/ri';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
-import { GreenTooltip } from '../../styled/styled';
+import { GreenTooltip } from '../../styled/popularProducts';
 
 export default function HoverIcons({
     index,

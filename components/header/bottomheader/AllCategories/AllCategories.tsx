@@ -2,8 +2,8 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Collapse from '@mui/material/Collapse';
 import { useState } from 'react';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
-import style from '../../../styles/components/bottomNav/allcategories.module.scss';
-import { Image } from '../../../utils/commonImports';
+import style from '../../../../styles/components/bottomNav/allcategories.module.scss';
+import { Image } from '../../../../utils/commonImports';
 
 export default function AllCategories({ layerProps }: any) {
     const categories = [

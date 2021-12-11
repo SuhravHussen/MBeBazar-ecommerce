@@ -2,13 +2,12 @@ import { Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import dynamic from 'next/dynamic';
 import { BsHeadset } from 'react-icons/bs';
-import Blogs from './Blog';
-import MegaMenu from './MegaMenu';
-import Shops from './Shops';
+import CategoriesToolTip from './AllCategories/CategoriesToolTip';
+import Blogs from './BlogMenu/Blog';
+import MegaMenu from './MegaMenu/MegaMenu';
+import Shops from './ShopMenu/Shops';
 
-const MyToolTip = dynamic(() => import('./MyToolTip'));
 export default function Bottomheader() {
     return (
         <>
@@ -31,7 +30,7 @@ export default function Bottomheader() {
                         display: 'flex',
                     }}
                 >
-                    <MyToolTip />
+                    <CategoriesToolTip />
                     <Box
                         sx={{
                             display: 'flex',

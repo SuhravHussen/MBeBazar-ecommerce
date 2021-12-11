@@ -14,14 +14,14 @@ import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import * as React from 'react';
 import { GiBlender, GiElectric, GiForkKnifeSpoon, GiKitchenKnives, GiTomato } from 'react-icons/gi';
-import styles from '../../../styles/components/middleNav/drawer.module.scss';
+import styles from '../../../../styles/components/middleNav/drawer.module.scss';
 import {
     DrawerInfoBox,
     MyListItemButton,
     MyListItemIcon,
     // eslint-disable-next-line prettier/prettier
     MyListItemText
-} from '../../styled/styled';
+} from '../../../styled/drawerStyled';
 import MyList from './List';
 
 interface props {
