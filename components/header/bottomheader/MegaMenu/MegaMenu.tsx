@@ -6,6 +6,7 @@ import { LightTooltip } from '../../../styled/bottomNav';
 
 const MegaList = dynamic(() => import('./MegaList'), {
     loading: () => <MegaMenuSk />,
+    ssr: false,
 });
 
 export default function MegaMenu() {

@@ -10,6 +10,7 @@ const TopHeader = dynamic(() => import('./topheader/Topheader'), {
 });
 const MiddleHeader = dynamic(() => import('./middleheader/MiddleHeader'), {
     loading: () => <p>loading</p>,
+    ssr: false,
 });
 
 const Bottomheader = dynamic(() => import('./bottomheader/Bottomheader'), {
@@ -22,7 +23,7 @@ export default function Heading() {
 
     return (
         <div className={styles.header}>
-            {width < 960 && <Announce />}
+            <Announce />
             {width > 960 && <TopHeader />}
             <Sticky stickyStyle={{ zIndex: 2 }}>
                 <MiddleHeader />

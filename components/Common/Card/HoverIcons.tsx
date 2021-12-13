@@ -1,6 +1,6 @@
 import { AiOutlineEye, AiOutlineHeart } from 'react-icons/ai';
 import { RiArrowLeftRightLine } from 'react-icons/ri';
-import styles from '../../../styles/components/Home/popularproducts.module.scss';
+import styles from '../../../styles/components/common/card/card.module.scss';
 import { GreenTooltip } from '../../styled/popularProducts';
 
 export default function HoverIcons({
@@ -12,7 +12,7 @@ export default function HoverIcons({
     setQuickViewDetails: any;
     setModalOpen: any;
 }) {
-    // handle modal open
+    // open quick view modal
     function HandleModal() {
         setQuickViewDetails(index);
         setModalOpen(true);

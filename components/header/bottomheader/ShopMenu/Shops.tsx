@@ -5,6 +5,7 @@ import { LightTooltip } from '../../../styled/bottomNav';
 
 const ShopList = dynamic(() => import('./ShopList'), {
     loading: () => <p>loading</p>,
+    ssr: false,
 });
 
 export default function Shops() {

@@ -1,9 +1,9 @@
 import data from '../../../FakeData/Data';
 import PopularSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
-import { dynamic, Fade, SectionHeader, useEffect, useState } from '../../../utils/commonImports';
-import { PopularProductsSchema } from './schema';
-import SingleProduct from './SingleProduct';
+import { dynamic, SectionHeader, useEffect, useState } from '../../../utils/commonImports';
+import Card from '../../Common/Card/Card';
+import { PopularProductsSchema } from '../../Common/Card/schema';
 
 const QuickView = dynamic(() => import('./QuickView'), { ssr: false });
 export default function PopularProducts() {
@@ -118,14 +118,13 @@ export default function PopularProducts() {
             <div className={styles.allProducts}>
                 {products.length > 0 && !loading ? (
                     products.map((p, i) => (
-                        <Fade className={styles.singleProduct} key={p.title} cascade>
-                            <SingleProduct
-                                product={p}
-                                index={i}
-                                setQuickViewDetails={setQuickViewDetails}
-                                setModalOpen={setModalOpen}
-                            />
-                        </Fade>
+                        <Card
+                            key={p.title}
+                            product={p}
+                            index={i}
+                            setQuickViewDetails={setQuickViewDetails}
+                            setModalOpen={setModalOpen}
+                        />
                     ))
                 ) : (
                     <div className={styles.notFound}>

@@ -1,11 +1,8 @@
-import dynamic from 'next/dynamic';
 import React from 'react';
 import { ReactNode } from 'react-is/node_modules/@types/react';
 import styles from '../../styles/components/layout/layout.module.scss';
+import Header from '../header/Heading';
 
-const Header = dynamic(() => import('../header/Heading'), {
-    loading: () => <p>loading</p>,
-});
 type Props = {
     children: ReactNode;
 };

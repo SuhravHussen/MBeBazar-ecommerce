@@ -12,7 +12,7 @@ import {
     // eslint-disable-next-line prettier/prettier
     useState
 } from '../../../utils/commonImports';
-import { PopularProductsSchema } from './schema';
+import { PopularProductsSchema } from '../../Common/Card/schema';
 
 type iProps = {
     open: boolean;
