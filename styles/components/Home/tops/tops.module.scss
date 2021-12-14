@@ -1,0 +1,10 @@
+.topsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20%;
+  gap: 10px;
+  @media screen and (max-width: $sm) {
+    flex-direction: column;
+  }
+}

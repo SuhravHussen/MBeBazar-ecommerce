@@ -309,9 +309,10 @@ const products = [
         featured: ['bestSell'],
         category: 'snack',
     },
+
     {
         title: 'Canada Dry Ginger Ale -2L Bootle 200ml-400g',
-        id: '3834303464544',
+        id: '38343034ff64544',
         reviews: 18,
         price: 33.8,
         offerPrice: 30.99,
@@ -326,6 +327,48 @@ const products = [
         images: [
             'https://res.cloudinary.com/doircnueq/image/upload/v1635596469/MBeCommerece/Products/product-7-1_k14yrq.jpg',
             'https://res.cloudinary.com/doircnueq/image/upload/v1635596230/MBeCommerece/Products/CanadaDryGinger_bibjut.jpg',
+        ],
+        vendorId: 243243443,
+        featured: ['bestSell'],
+        category: 'Dairy Product',
+    },
+    {
+        title: 'Fully Fresh Carrots, Original Carrot pure organic',
+        id: '38343034ff64544',
+        reviews: 33,
+        price: 33.8,
+        offerPrice: 30.99,
+        description:
+            ' Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi.',
+        'size/weight': ['50g', '60g', '80g', '100g', '150g'],
+        stock: 10,
+        details:
+            'Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.',
+        tags: 'dairyproductcanadadrygingerale200ml400gnestfood',
+        onSale: false,
+        images: [
+            'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-1_j8twtg.jpg',
+        ],
+        vendorId: 243243443,
+        featured: ['bestSell'],
+        category: 'Dairy Product',
+    },
+    {
+        title: 'Capsicum, ref pepper or chilli pepper fully fresh',
+        id: '38343034ht64544',
+        reviews: 33,
+        price: 43.8,
+        offerPrice: 35.99,
+        description:
+            ' Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi.',
+        'size/weight': ['50g', '60g', '80g', '100g', '150g'],
+        stock: 10,
+        details:
+            'Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.',
+        tags: 'dairyproductcanadadrygingerale200ml400gnestfood',
+        onSale: false,
+        images: [
+            'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-2_bvefyq.jpg',
         ],
         vendorId: 243243443,
         featured: ['bestSell'],
