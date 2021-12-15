@@ -5,9 +5,6 @@
 
   h1 {
     color: $PrimaryBlack;
-    @media screen and (max-width: $sm) {
-      font-size: 1.5rem;
-    }
   }
   .icons {
     margin-right: 1rem;

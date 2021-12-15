@@ -6,7 +6,9 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { FiShoppingCart } from 'react-icons/fi';
+import Banner from '../components/Common/Banner/Banner';
 import Carousel from '../components/Common/Carousel';
+import Footer from '../components/Common/Footer/Footer';
 import MyModal from '../components/Common/MyModal';
 import QuantityPicker from '../components/Common/QuantityPicker';
 import SectionHeader from '../components/Common/SectionHeader';
@@ -29,4 +31,6 @@ export {
     useRef,
     useCallback,
     useMemo,
+    Banner,
+    Footer,
 };

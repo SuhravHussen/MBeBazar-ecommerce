@@ -1,0 +1,91 @@
+.bannerItem {
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  border-radius: 30px;
+  width: 100%;
+  overflow: hidden;
+  @media screen and (min-width: $md) {
+    height: 400px;
+  }
+  .image {
+    z-index: 0;
+  }
+  .Item {
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    h1 {
+      z-index: 1;
+      font-size: 2.5rem;
+      color: $PrimaryBlack;
+      width: 60%;
+      @media screen and (max-width: $sm) {
+        font-size: 1.5rem;
+      }
+    }
+    h2 {
+      z-index: 1;
+      color: $PrimaryGrey;
+      font-size: 1.3rem;
+      @media screen and (max-width: $sm) {
+        font-size: 1rem;
+      }
+    }
+    .input {
+      z-index: 1;
+      background-color: $PrimaryWhite;
+      max-width: 450px;
+      display: flex;
+      border-radius: 30px;
+      height: 50px;
+      align-items: center;
+      @media screen and (max-width: $sm) {
+        height: 40px;
+      }
+      .icon {
+        z-index: 1;
+        height: 100%;
+        width: 10%;
+        color: $PrimaryGreen;
+        padding: 8px;
+        @media screen and (max-width: $sm) {
+          width: 15%;
+        }
+      }
+      input {
+        z-index: 1;
+        width: 65%;
+        z-index: 3;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-weight: 600;
+      }
+      button {
+        z-index: 1;
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 25%;
+        border-radius: 30px;
+        background-color: $PrimaryGreen;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+
+        @media screen and (max-width: $sm) {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}

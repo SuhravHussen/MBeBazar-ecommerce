@@ -1,10 +1,8 @@
-import { SiMinutemailer } from 'react-icons/si';
+import Banner1 from '../../../public/images/banner/banner1.png';
+import Banner2 from '../../../public/images/banner/banner2.png';
 import styles from '../../../styles/components/Home/heroCarousel.module.scss';
+import { Banner } from '../../../utils/commonImports';
 import Carousel from '../../Common/Carousel';
-// eslint-disable-next-line import/no-absolute-path
-import '/node_modules/slick-carousel/slick/slick-theme.css';
-// eslint-disable-next-line import/no-absolute-path
-import '/node_modules/slick-carousel/slick/slick.css';
 
 export default function HeroCarousel() {
     const settings = {
@@ -19,31 +17,20 @@ export default function HeroCarousel() {
         autoplaySpeed: 8000,
         arrows: false,
     };
+
     return (
         <div className={styles.carouselContainer}>
             <Carousel {...settings}>
-                <div className={`${styles.carouselItem} ${styles.item1}`}>
-                    <div className={styles.Item}>
-                        <h1>Don&apos;t miss amazing grocery deals</h1>
-                        <h2>Sign up for the daily newsletter</h2>
-                        <div className={styles.input}>
-                            <SiMinutemailer className={styles.icon} />{' '}
-                            <input type="text" placeholder="your email address" />
-                            <button type="button">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.carouselItem} ${styles.item2}`}>
-                    <div className={styles.Item}>
-                        <h1>Fresh Vegetables Big discount</h1>
-                        <h2>save up to 50% off on your first order</h2>
-                        <div className={styles.input}>
-                            <SiMinutemailer className={styles.icon} />{' '}
-                            <input type="text" placeholder="your email address" />
-                            <button type="button">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
+                <Banner
+                    title="Don't miss amazing grocery deals"
+                    image={Banner1}
+                    subHead="Sign up for the daily newsletter"
+                />
+                <Banner
+                    title="Fresh Vegetables Big discount"
+                    image={Banner2}
+                    subHead="save up to 50% off on your first order"
+                />
             </Carousel>
         </div>
     );
