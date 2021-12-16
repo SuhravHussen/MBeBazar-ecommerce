@@ -1,0 +1,38 @@
+.bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  @media screen and (max-width: $sm) {
+    flex-direction: column;
+    row-gap: 12px !important;
+    align-items: flex-start;
+  }
+  .columnLeft {
+    p {
+      font-size: 15px;
+      span {
+        font-weight: 700;
+        color: $PrimaryGreen;
+      }
+    }
+  }
+  .rightColumn {
+    .social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .icon {
+        position: relative;
+        height: 20px;
+        width: 20px;
+        padding: 12px;
+        background-color: $PrimaryGreen;
+        border-radius: 50%;
+      }
+    }
+  }
+}
