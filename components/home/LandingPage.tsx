@@ -1,4 +1,3 @@
-import { Footer } from '../../utils/commonImports';
 import DealsOftheDay from './DealsOfTheDay/DealsOftheDay';
 import Featured from './Featured/Featured';
 import HeroCarousel from './HeroCarousel/HeroCarousel';
@@ -12,7 +11,7 @@ const LandingPage = () => (
         <PopularProducts />
         <DealsOftheDay />
         <TopProducts />
-        <Footer />
+        {/* <Footer /> */}
     </>
 );
 

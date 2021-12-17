@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import React from 'react';
+import { Link } from '../../../../utils/commonImports';
 
 interface props {
     primaryIcon: any;
@@ -36,10 +37,21 @@ export default function MyList({ primaryIcon, primaryText, collapses = [] }: pro
                 collapses.map((d) => (
                     <Collapse in={foodExpand} key={d.text} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItemButton sx={{ pl: 4 }}>
-                                <ListItemIcon>{d.icon}</ListItemIcon>
-                                <ListItemText primary={d.text} />
-                            </ListItemButton>
+                            <Link
+                                href={{
+                                    pathname: 'category',
+                                    query: {
+                                        category: primaryText,
+                                        subCategory: d.text,
+                                    },
+                                }}
+                            >
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    {' '}
+                                    <ListItemIcon>{d.icon}</ListItemIcon>
+                                    <ListItemText primary={d.text} />
+                                </ListItemButton>
+                            </Link>
                         </List>
                     </Collapse>
                 ))}

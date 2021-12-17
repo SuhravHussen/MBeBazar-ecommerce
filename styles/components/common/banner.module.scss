@@ -5,6 +5,9 @@
   position: relative;
   border-radius: 30px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
   overflow: hidden;
   @media screen and (min-width: $md) {
     height: 400px;
