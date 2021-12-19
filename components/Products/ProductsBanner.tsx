@@ -6,7 +6,7 @@ import { Image } from '../../utils/commonImports';
 
 export default function ProductsBanner() {
     const router = useRouter();
-    const queries = Object.values(router.query);
+
     return (
         <div className={styles.bannerContainer}>
             <Image
@@ -18,17 +18,18 @@ export default function ProductsBanner() {
                 alt="Top-Banner"
             />
             <div className={styles.content}>
-                <h1>{queries[queries.length - 1] || 'Category'}</h1>
+                <h1>{router.query.subCategory || 'Category'}</h1>
                 <div className={styles.routes}>
                     <div className={styles.route}>
                         <AiOutlineHome /> Home
                     </div>
-                    {queries.map((q, i) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <div className={styles.route} key={i}>
-                            <MdArrowForwardIos /> <span>{q}</span>
-                        </div>
-                    ))}
+
+                    <div className={styles.route}>
+                        <MdArrowForwardIos /> <span>{router.query.category}</span>
+                    </div>
+                    <div className={styles.route}>
+                        <MdArrowForwardIos /> <span>{router.query.subCategory}</span>
+                    </div>
                 </div>
             </div>
         </div>

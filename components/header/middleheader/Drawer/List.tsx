@@ -39,7 +39,7 @@ export default function MyList({ primaryIcon, primaryText, collapses = [] }: pro
                         <List component="div" disablePadding>
                             <Link
                                 href={{
-                                    pathname: 'category',
+                                    pathname: 'products',
                                     query: {
                                         category: primaryText,
                                         subCategory: d.text,
