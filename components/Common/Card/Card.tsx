@@ -1,21 +1,16 @@
 import styles from '../../../styles/components/common/card/card.module.scss';
 import { Fade, FiShoppingCart, Image, Rating } from '../../../utils/commonImports';
 import HoverIcons from './HoverIcons';
-import { PopularProductsSchema } from './schema';
+import { ProductsSchema } from './schema';
 
 type iProps = {
-    product: PopularProductsSchema;
+    product: ProductsSchema;
     index: number;
     setQuickViewDetails: any;
     setModalOpen: any;
 };
 
-export default function SingleProduct({
-    product,
-    index,
-    setQuickViewDetails,
-    setModalOpen,
-}: iProps) {
+export default function Card({ product, index, setQuickViewDetails, setModalOpen }: iProps) {
     return (
         <Fade className={styles.singleProduct} cascade>
             <div>

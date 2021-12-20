@@ -12,12 +12,12 @@ import {
     // eslint-disable-next-line prettier/prettier
     useState
 } from '../../../utils/commonImports';
-import { PopularProductsSchema } from '../../Common/Card/schema';
+import { ProductsSchema } from './schema';
 
 type iProps = {
     open: boolean;
     setOpen: any;
-    details: PopularProductsSchema;
+    details: ProductsSchema;
 };
 
 export default function QuickView({ open, setOpen, details }: iProps) {

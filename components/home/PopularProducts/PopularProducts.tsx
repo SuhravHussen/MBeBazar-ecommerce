@@ -3,11 +3,11 @@ import PopularSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/Home/popularproducts.module.scss';
 import { dynamic, SectionHeader, useEffect, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
-import { PopularProductsSchema } from '../../Common/Card/schema';
+import { ProductsSchema } from '../../Common/Card/schema';
 
-const QuickView = dynamic(() => import('./QuickView'), { ssr: false });
+const QuickView = dynamic(() => import('../../Common/Card/QuickView'), { ssr: false });
 export default function PopularProducts() {
-    const [products, setProducts] = useState<PopularProductsSchema[]>([]);
+    const [products, setProducts] = useState<ProductsSchema[]>([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [quickViewDetails, setQuickViewDetails] = useState(0);
     const [loading] = useState(false);

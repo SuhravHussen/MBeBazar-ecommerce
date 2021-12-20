@@ -1,4 +1,4 @@
-export interface PopularProductsSchema {
+export type ProductsSchema = {
     title: string;
     onSale: boolean;
     vendorName: string;
@@ -8,4 +8,4 @@ export interface PopularProductsSchema {
     ratings: number;
     image: Array<string>;
     category: string;
-}
+};
