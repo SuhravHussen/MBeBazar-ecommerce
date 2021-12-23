@@ -1,0 +1,8 @@
+.relatedProductsContainer {
+  width: 100%;
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}

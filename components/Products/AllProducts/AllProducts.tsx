@@ -5,6 +5,7 @@ import { React, useEffect, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
 import QuickView from '../../Common/Card/QuickView';
 import Select from '../../Common/Select';
+import NoResult from './NoResult';
 
 export default function AllProducts() {
     const [page, setPage] = useState(1);
@@ -21,9 +22,13 @@ export default function AllProducts() {
     const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => setPage(value);
 
     const fetchTotalItems = async () => {
-        const promise = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-        const data = await promise.json();
-        setCount(data.length);
+        try {
+            const promise = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+            const data = await promise.json();
+            setCount(data.length);
+        } catch (e) {
+            console.log(e);
+        }
     };
     fetchTotalItems();
 
@@ -35,16 +40,19 @@ export default function AllProducts() {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            setLoading(true);
-            console.log('loading', loading);
-            const promise = await fetch(
-                `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`
-            );
-            const data = await promise.json();
-            setProducts(data);
+            try {
+                setLoading(true);
 
-            setLoading(false);
-            console.log('loading', loading);
+                const promise = await fetch(
+                    `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`
+                );
+                const data = await promise.json();
+                setProducts(data);
+
+                setLoading(false);
+            } catch (e) {
+                console.log(e);
+            }
         };
 
         fetchProducts();
@@ -112,14 +120,17 @@ export default function AllProducts() {
                         .fill(null)
                         // eslint-disable-next-line react/no-array-index-key
                         .map((_, i) => <ProductSk key={i} />)}
+                {!loading && products.length < 1 && <NoResult />}
             </section>
-            <Pagination
-                onChange={handlePageChange}
-                count={count / 10}
-                page={page}
-                shape="rounded"
-                color="secondary"
-            />
+            {products.length > 0 && (
+                <Pagination
+                    onChange={handlePageChange}
+                    count={count / 10}
+                    page={page}
+                    shape="rounded"
+                    color="secondary"
+                />
+            )}
         </div>
     );
 }

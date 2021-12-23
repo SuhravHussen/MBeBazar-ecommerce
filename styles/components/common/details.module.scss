@@ -1,0 +1,132 @@
+.detailsContainer {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  @media screen and (max-width: $sm) {
+    width: 95%;
+    margin: 0 auto;
+    gap: 5px;
+    margin-top: 5px;
+  }
+  h3 {
+    color: $PrimaryPink;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 4px 0px;
+    background-color: lighten($color: $PrimaryPink, $amount: 32);
+    @media screen and (max-width: $sm) {
+      font-size: 0.7rem;
+      width: 80px;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+  .ratings {
+    display: flex;
+    align-items: center;
+    h5 {
+      margin-left: 10px;
+      color: $PrimaryGrey;
+      font-weight: 500;
+    }
+    @media screen and (max-width: $sm) {
+      & > span {
+        font-size: 1rem !important;
+      }
+    }
+  }
+  .prices {
+    display: flex;
+    align-items: center;
+    h1 {
+      font-size: 58px;
+      color: $PrimaryGreen;
+      @media screen and (max-width: $sm) {
+        font-size: 1.8rem;
+      }
+    }
+    .off {
+      margin-left: 15px;
+      del {
+        font-size: 28px;
+        font-weight: 700;
+        color: $PrimaryGrey;
+        @media screen and (max-width: $sm) {
+          font-size: 1.2rem;
+        }
+      }
+      h6 {
+        color: #fdc040;
+        font-size: 12px;
+        margin-bottom: -5px;
+      }
+    }
+  }
+  .quantityCart {
+    display: flex;
+    gap: 10px;
+    width: 80%;
+    .quantity {
+      display: flex;
+      border: 2px solid $PrimaryGreen;
+      width: 35%;
+      padding: 7px 0px;
+      border-radius: 5px;
+      justify-content: space-between;
+      align-items: center;
+      @media screen and (max-width: $sm) {
+        padding: 0px;
+      }
+      p {
+        flex-grow: 3;
+        text-align: center;
+        color: $PrimaryGreen;
+        font-weight: 600;
+        font-family: $secondaryFont;
+      }
+      div {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        span {
+          color: $PrimaryGreen;
+          font-size: 13px;
+          cursor: pointer;
+          @media screen and (max-width: $sm) {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+    button {
+      width: 50%;
+      background-color: $PrimaryGreen;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      @media screen and (max-width: $sm) {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .footer {
+    margin-top: 20px;
+    font-size: 20px;
+    color: $PrimaryGrey;
+    span {
+      color: $PrimaryGreen;
+    }
+  }
+}

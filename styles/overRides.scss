@@ -38,3 +38,21 @@
 .quickViewLeftSlide {
   width: 100%;
 }
+
+// slide view
+.products_detail_slide_image {
+  @media screen and (max-width: $md) {
+    width: auto !important;
+    height: auto !important;
+  }
+}
+.product-details-slider .BrainhubCarousel__container {
+  border: 1px solid rgb(209, 209, 209);
+  width: 70%;
+  @media screen and (max-width: $md) {
+    width: 100%;
+  }
+}
+.product-details-slider .BrainhubCarousel__thumbnail--selected img {
+  border: 2px solid $PrimaryGreen !important;
+}

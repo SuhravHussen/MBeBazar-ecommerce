@@ -1,0 +1,110 @@
+.additionalInfoBox {
+  margin-top: 50px;
+  width: 100%;
+  border: 1px solid #ececec;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  @media screen and (max-width: $sm) {
+    padding: 0;
+    border: none;
+  }
+  .header {
+    display: flex;
+    gap: 20px;
+    h3 {
+      color: $PrimaryGreen;
+      border: 1px solid #ececec;
+      padding: 2px 10px;
+      border-radius: 20px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .active {
+      box-shadow: 5px 5px 15px rgb(0 0 0 / 5%);
+    }
+  }
+  .description {
+    margin-top: 20px;
+    color: $PrimaryGrey;
+  }
+  .reviews {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    margin-top: 20px;
+    .singleReview {
+      display: flex;
+      padding: 10px;
+      border: 1px solid #ececec;
+      border-radius: 8px;
+      min-height: 130px;
+      @media screen and (max-width: $sm) {
+        flex-direction: column;
+        position: relative;
+      }
+      .colum1 {
+        width: 13%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media screen and (max-width: $sm) {
+          position: absolute;
+          width: 20%;
+        }
+        .image {
+          position: relative;
+          height: 50px;
+          width: 50px;
+          border: 1px solid;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+      }
+      .column2 {
+        width: 85%;
+        @media screen and (max-width: $sm) {
+          width: 100%;
+        }
+        .firstRow {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+          @media screen and (max-width: $sm) {
+            // margin-left: 140px;
+            flex-direction: column;
+            margin-bottom: 20px;
+            align-items: flex-end;
+          }
+          small {
+            color: $PrimaryGrey;
+            font-weight: 700;
+          }
+          span {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+  .addReview {
+    border: 1px solid #ececec;
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h1 {
+      font-size: 24px;
+      color: $PrimaryGrey;
+    }
+    input {
+      min-height: 100px;
+      border: 1px solid #ececec;
+      border-radius: 8px;
+    }
+    button {
+      @include PrimaryButton(10px, 100%, $PrimaryGreen);
+    }
+  }
+}

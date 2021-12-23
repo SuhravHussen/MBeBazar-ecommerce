@@ -1,0 +1,56 @@
+.slider {
+  display: flex;
+  gap: 20px;
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+    gap: 100px;
+  }
+  .column {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media screen and (max-width: $md) {
+      width: 100%;
+    }
+    .slider1 {
+      height: 300px;
+      margin-bottom: 20px;
+    }
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      @media screen and (max-width: $md) {
+        justify-content: center;
+      }
+      .thumb {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .header {
+      height: 50px;
+      margin-bottom: 20px;
+    }
+    .rating {
+      height: 60px;
+      width: 90%;
+      margin-bottom: 20px;
+    }
+    .price {
+      width: 60%;
+      height: 40px;
+      margin-bottom: 20px;
+    }
+    .quantity {
+      margin-bottom: 20px;
+      width: 60%;
+      height: 50px;
+    }
+    .cart {
+      margin-bottom: 20px;
+      height: 50px;
+    }
+  }
+}

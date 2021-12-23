@@ -8,4 +8,5 @@ export type ProductsSchema = {
     ratings: number;
     image: Array<string>;
     category: string;
+    description?: string;
 };

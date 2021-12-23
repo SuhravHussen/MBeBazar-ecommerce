@@ -1,0 +1,33 @@
+.productDetailsContainer {
+  // border: 1px solid red;
+  display: flex;
+  width: 100%;
+
+  margin-top: 50px;
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+  }
+  .slide {
+    overflow: hidden;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    @media screen and (max-width: $md) {
+      width: 100%;
+      padding: 5px;
+    }
+  }
+  .details {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: $md) {
+      width: 100%;
+      margin-top: 50px;
+    }
+  }
+}
