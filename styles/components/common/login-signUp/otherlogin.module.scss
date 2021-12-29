@@ -1,0 +1,35 @@
+.moreLogin {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .otherLogins {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .facebook {
+      @include PrimaryButton(13px, 100%, #3b5998);
+    }
+    .google {
+      @include PrimaryButton(13px, 100%, red);
+    }
+  }
+  p {
+    margin-top: 20px;
+    font-size: 15px;
+    span {
+      font-weight: 800;
+      cursor: pointer;
+      &:hover {
+        color: $PrimaryGreen;
+      }
+    }
+  }
+}

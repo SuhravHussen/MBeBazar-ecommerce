@@ -1,38 +1,36 @@
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
 import { Sling as Hamburger } from 'hamburger-react';
 import * as React from 'react';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
 import { dynamic, Image } from '../../../utils/commonImports';
 import { useWindowDimensions } from '../../../utils/customHooks';
+import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
 import { Search, SearchIconWrapper, StyledInputBase } from '../../styled/middleNav';
-import Notifications from './Notifications';
-import { RenderMobileMenu, RenderProfileMenu } from './utils/renderMenu';
+import CartDrawer from './Cart/CartDrawer';
+import { RenderMobileMenu } from './utils/renderMenu';
 
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
 export default function MiddleHeader() {
     // states
-    const [ProfileEl, setProfileEl] = React.useState<null | HTMLElement>(null);
+
     const { width } = useWindowDimensions();
-    const isProfileMenuOpen = Boolean(ProfileEl);
-    const [notificationOpen, setNotificationOpen] = React.useState(false);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [hamburgerOpen, setHamburgurOpen] = React.useState(false);
     const [drawerOpen, setDrawerOpen] = React.useState(false);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+    const [cartOpen, setCartOpen] = React.useState(false);
+    const [loginDialogueOpen, setLoginDialogueOpen] = React.useState(false);
     // open or close drawer
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
@@ -43,9 +41,13 @@ export default function MiddleHeader() {
         callback(param);
     };
 
+    console.log(cartOpen, 'cart');
     return (
         <>
+            {/* drawer/modals  */}
             {width < 960 && <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />}
+            <CartDrawer open={cartOpen} setOpen={setCartOpen} />
+            <ResponsiveDialog open={loginDialogueOpen} setOpen={setLoginDialogueOpen} />
             <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1, position: 'sticky' }}>
                 {/* app bar */}
                 <AppBar className={styles.appBar} position="sticky" elevation={0}>
@@ -98,37 +100,19 @@ export default function MiddleHeader() {
                                 </Badge>
                             </IconButton>
                             <IconButton size="large" color="inherit">
-                                <ClickAwayListener
-                                    onClickAway={() => handleOpenClose(setNotificationOpen, false)}
-                                >
-                                    <Tooltip
-                                        title={<Notifications />}
-                                        arrow
-                                        onClose={() => handleOpenClose(setNotificationOpen, false)}
-                                        open={notificationOpen}
-                                        disableFocusListener
-                                        disableHoverListener
-                                        disableTouchListener
-                                        placement="bottom"
-                                        className={styles.tooltip}
-                                    >
-                                        <Badge badgeContent={17} color="error">
-                                            <NotificationsIcon
-                                                className={styles.icons}
-                                                onClick={() =>
-                                                    handleOpenClose(setNotificationOpen, true)
-                                                }
-                                            />
-                                        </Badge>
-                                    </Tooltip>
-                                </ClickAwayListener>
+                                <Badge badgeContent={17} color="error">
+                                    <ShoppingCartOutlinedIcon
+                                        className={styles.icons}
+                                        onClick={() => setCartOpen(true)}
+                                    />
+                                </Badge>
                             </IconButton>
                             <IconButton
                                 size="large"
                                 edge="end"
                                 aria-haspopup="true"
-                                onClick={(e) => handleOpenClose(setProfileEl, e.currentTarget)}
                                 color="inherit"
+                                onClick={() => setLoginDialogueOpen(true)}
                             >
                                 <AccountCircle className={styles.icons} />
                             </IconButton>
@@ -147,17 +131,12 @@ export default function MiddleHeader() {
                         </Box>
                     </Toolbar>
                 </AppBar>
-
-                <RenderProfileMenu
-                    open={isProfileMenuOpen}
-                    anchor={ProfileEl}
-                    handleMenuClose={() => handleOpenClose(setProfileEl, null)}
-                />
-
                 <RenderMobileMenu
+                    handleCart={setCartOpen}
                     open={isMobileMenuOpen}
                     anchor={mobileMoreAnchorEl}
                     handleMenuClose={() => handleOpenClose(setMobileMoreAnchorEl, null)}
+                    handleProfile={() => setLoginDialogueOpen(true)}
                 />
             </Box>
             <Divider />

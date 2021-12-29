@@ -1,0 +1,48 @@
+.singleProduct {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  justify-content: center;
+  gap: 10px;
+  .column1 {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image {
+      position: relative;
+      height: 35px;
+      width: 35px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+  .column2 {
+    width: 40%;
+  }
+  .column3 {
+    width: 25%;
+    .quantityPicker {
+      display: flex;
+      height: 45px;
+      border-radius: 8px;
+      justify-content: space-evenly;
+      border: 1px solid #ececee;
+      align-items: center;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 45px;
+        span {
+          color: $PrimaryGrey;
+        }
+      }
+    }
+  }
+  .column4 {
+    width: 10%;
+    text-align: center;
+  }
+}

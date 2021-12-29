@@ -2,21 +2,29 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Dispatch, SetStateAction } from 'react';
 
-interface iMenu {
+interface iProfileMenu {
     anchor: HTMLElement | null;
     open: boolean;
     handleMenuClose: any;
 }
+interface iMobileMenu {
+    anchor: HTMLElement | null;
+    open: boolean;
+    handleMenuClose: any;
+    handleCart: Dispatch<SetStateAction<boolean>>;
+    handleProfile: any;
+}
 
-export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iMenu) => (
+export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iProfileMenu) => (
     <>
         <Menu
             anchorEl={anchor}
@@ -53,7 +61,13 @@ export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iMenu) => (
     </>
 );
 
-export const RenderMobileMenu = ({ anchor, open, handleMenuClose }: iMenu) => (
+export const RenderMobileMenu = ({
+    anchor,
+    open,
+    handleMenuClose,
+    handleCart,
+    handleProfile,
+}: iMobileMenu) => (
     <Menu
         anchorEl={anchor}
         anchorOrigin={{
@@ -76,15 +90,21 @@ export const RenderMobileMenu = ({ anchor, open, handleMenuClose }: iMenu) => (
             </IconButton>
             <p>Messages</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+            onClick={() => {
+                handleMenuClose();
+                handleCart(true);
+                console.log('clicking');
+            }}
+        >
             <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                 <Badge badgeContent={17} color="error">
-                    <NotificationsIcon />
+                    <ShoppingCartOutlinedIcon />
                 </Badge>
             </IconButton>
-            <p>Notifications</p>
+            <p>Cart</p>
         </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
+        <MenuItem onClick={handleProfile}>
             <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -99,25 +119,25 @@ export const RenderMobileMenu = ({ anchor, open, handleMenuClose }: iMenu) => (
     </Menu>
 );
 
-export const RenderNotification = ({ anchor, open, handleMenuClose }: iMenu) => (
-    <>
-        <Menu
-            anchorEl={anchor}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleMenuClose}
-        >
-            <div>
-                <h5>notification</h5>
-            </div>
-        </Menu>
-    </>
-);
+// export const RenderNotification = ({ anchor, open, handleMenuClose }: iMenu) => (
+//     <>
+//         <Menu
+//             anchorEl={anchor}
+//             anchorOrigin={{
+//                 vertical: 'bottom',
+//                 horizontal: 'right',
+//             }}
+//             keepMounted
+//             transformOrigin={{
+//                 vertical: 'top',
+//                 horizontal: 'right',
+//             }}
+//             open={open}
+//             onClose={handleMenuClose}
+//         >
+//             <div>
+//                 <h5>notification</h5>
+//             </div>
+//         </Menu>
+//     </>
+// );
