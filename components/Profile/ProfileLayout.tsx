@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -13,8 +14,12 @@ import { Link, React } from '../../utils/commonImports';
 
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
     const { route } = useRouter();
-
-    const menuItems = [
+    type menuType = {
+        text: string;
+        icon: any;
+        link: string;
+    };
+    const menuItems: Array<menuType> = [
         {
             text: 'Dashboard',
             icon: <MdOutlineDashboardCustomize />,
@@ -48,7 +53,7 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
             <div className={styles.header}>
                 <List dense>
                     {menuItems.map((m, i) => (
-                        <Link href={m.link}>
+                        <Link href={m.link} key={i}>
                             <ListItem disablePadding>
                                 <ListItemButton
                                     sx={{

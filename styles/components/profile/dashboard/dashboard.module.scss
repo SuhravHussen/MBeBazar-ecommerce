@@ -1,0 +1,62 @@
+.dashboard {
+  @include BoxShadow1;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  h3 {
+    font-size: 20px;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    @media screen and (max-width: $sm) {
+      flex-direction: column;
+    }
+    .card {
+      width: 46%;
+      border: 1px solid rgb(216, 215, 215);
+      border-radius: 10px;
+      display: flex;
+      padding: 10px;
+      gap: 20px;
+      @media screen and (max-width: $sm) {
+        width: 100%;
+      }
+      .leftColumn {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          font-size: 27px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .cartIcon {
+          background-color: lighten($color: red, $amount: 43);
+          color: red;
+        }
+        .pendingIcon {
+          background-color: lighten($color: orange, $amount: 30);
+          color: orange;
+        }
+        .shippingIcon {
+          background-color: lighten($color: blue, $amount: 40);
+          color: blue;
+        }
+        .checkMarkIcon {
+          background-color: lighten($color: $PrimaryGreen, $amount: 40);
+          color: $PrimaryGreen;
+        }
+      }
+    }
+  }
+}

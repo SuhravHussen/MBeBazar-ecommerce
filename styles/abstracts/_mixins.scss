@@ -15,3 +15,7 @@
     transform: translateY(-6px);
   }
 }
+
+@mixin BoxShadow1 {
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
