@@ -41,11 +41,6 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
             icon: <FiUnlock />,
             link: '/profile/change-password',
         },
-        {
-            text: 'Logout',
-            icon: <IoMdExit />,
-            link: '/profile/my-orders',
-        },
     ];
 
     return (
@@ -88,6 +83,36 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
                             </ListItem>
                         </Link>
                     ))}
+                    <ListItem disablePadding>
+                        <ListItemButton
+                            sx={{
+                                '&:hover, &:focus': {
+                                    color: 'myColor.main',
+                                },
+                                marginBottom: '5px',
+                                fontSize: '20px',
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    '&:hover': {
+                                        color: 'myColor.main',
+                                    },
+                                }}
+                            >
+                                <IoMdExit />
+                            </ListItemIcon>
+                            <ListItemText
+                                disableTypography
+                                sx={{
+                                    fontSize: '15px',
+                                    fontWeight: '800',
+                                }}
+                            >
+                                Logout
+                            </ListItemText>
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </div>
             <div className={styles.body}>{children}</div>
