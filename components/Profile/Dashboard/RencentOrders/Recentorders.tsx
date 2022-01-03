@@ -3,7 +3,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { DateTime } from 'luxon';
 import React from 'react';
@@ -11,35 +10,29 @@ import styles from '../../../../styles/components/profile/dashboard/recentorders
 
 interface Column {
     id: 'ID' | 'ORDERTIME' | 'METHOD' | 'STATUS' | 'TOTAL';
-    label: string;
+    label: 'ID' | 'ORDER TIME' | 'METHOD' | 'STATUS' | 'TOTAL';
     minWidth?: number;
     align?: 'right';
-    format?: (value: number) => string;
 }
 
 const columns: Column[] = [
-    { id: 'ID', label: 'ID', minWidth: 100 },
-    { id: 'ORDERTIME', label: 'Order Time', minWidth: 170 },
+    { id: 'ID', label: 'ID', minWidth: 130 },
+    { id: 'ORDERTIME', label: 'ORDER TIME', minWidth: 120 },
     {
         id: 'METHOD',
         label: 'METHOD',
-        minWidth: 100,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
+        minWidth: 50,
     },
     {
         id: 'STATUS',
         label: 'STATUS',
-        minWidth: 150,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
+        minWidth: 90,
     },
     {
         id: 'TOTAL',
         label: 'TOTAL',
-        minWidth: 170,
+        minWidth: 100,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
     },
 ];
 
@@ -66,7 +59,6 @@ function createData(
 const rows = [
     createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
     createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-
     createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
     createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
     createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
@@ -120,7 +112,7 @@ export default function Recentorders() {
     return (
         <div className={styles.recentOrders}>
             <h3>Recent Orders</h3>
-            <TableContainer sx={{ maxHeight: 440 }}>
+            <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -129,6 +121,7 @@ export default function Recentorders() {
                                     key={column.id}
                                     align={column.align}
                                     style={{ minWidth: column.minWidth }}
+                                    sx={{ background: '#F0F0F0' }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -168,7 +161,7 @@ export default function Recentorders() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
+            {/* <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
                 count={rows.length}
@@ -176,7 +169,7 @@ export default function Recentorders() {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            /> */}
         </div>
     );
 }

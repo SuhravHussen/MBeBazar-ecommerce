@@ -16,3 +16,18 @@ a {
   font-family: $PrimaryFont;
   font-display: swap;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border: 1px solid rgb(236, 235, 235);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lighten($color: $PrimaryGreen, $amount: 20);
+  border-radius: 20px;
+}
