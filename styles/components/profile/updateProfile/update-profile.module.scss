@@ -1,0 +1,33 @@
+.updateProfileContainer {
+  margin-top: 30px;
+  @include BoxShadow1;
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+  .inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+    @media screen and (max-width: $sm) {
+      flex-direction: column;
+    }
+    .inputBox {
+      width: 47%;
+      @media screen and (max-width: $sm) {
+        width: 100%;
+      }
+    }
+  }
+  button {
+    display: block !important;
+    width: 95%;
+    margin: 25px auto;
+    @include PrimaryButton(10px, 100%, $PrimaryGreen);
+  }
+}

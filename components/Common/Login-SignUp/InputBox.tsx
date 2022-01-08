@@ -8,7 +8,7 @@ interface IProps {
     setValue: Dispatch<SetStateAction<string>>;
     error: boolean;
     placeholder: string;
-    icon: any;
+    icon?: any;
     type: string;
     showEye?: boolean;
     helperText?: string;
@@ -38,7 +38,11 @@ export default function InputBox({
                 placeholder={placeholder}
                 helperText={error ? <p style={{ marginLeft: '-14px' }}>{helperText}</p> : ''}
                 InputProps={{
-                    startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
+                    startAdornment: icon ? (
+                        <InputAdornment position="start">{icon}</InputAdornment>
+                    ) : (
+                        ''
+                    ),
                     // eslint-disable-next-line no-nested-ternary
                     endAdornment: showEye ? (
                         showPass === 'password' ? (
