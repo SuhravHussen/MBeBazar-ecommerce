@@ -1,0 +1,80 @@
+.invoiceContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  margin-top: 20px;
+  & > h3 {
+    background-color: $SecondaryGreen;
+    border-radius: 7px;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 17px;
+    span {
+      color: $PrimaryGreen;
+      font-weight: 700;
+      margin-left: 20px;
+    }
+  }
+  .data {
+    padding: 10px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #eef2ff;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      @media screen and (max-width: $sm) {
+        flex-direction: column;
+        gap: 20px;
+      }
+      h1 {
+        font-size: 25px;
+      }
+      .right {
+        display: flex;
+        width: 30%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        @media screen and (max-width: $sm) {
+          width: 100%;
+        }
+        .logo {
+          width: 100%;
+          height: 50%;
+        }
+        p {
+          font-size: 15px;
+          font-weight: 600;
+        }
+      }
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      @media screen and (max-width: $sm) {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .column {
+        width: 30%;
+        @media screen and (max-width: $sm) {
+          width: 100%;
+        }
+        h5 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 15px;
+          font-weight: 500;
+          color: grey;
+        }
+      }
+    }
+  }
+}
