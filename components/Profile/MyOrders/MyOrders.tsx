@@ -163,7 +163,7 @@ export default function MyOrders() {
                                             </TableCell>
                                         );
                                     })}
-                                    <Link href={row.ID}>
+                                    <Link href={`/order/${row.ID}`}>
                                         <TableCell align="center">
                                             <p className={styles.detailsBtn}>Details</p>
                                         </TableCell>
