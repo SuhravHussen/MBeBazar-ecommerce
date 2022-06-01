@@ -6,6 +6,20 @@ import validateEnv from '@utils/validateEnv';
 
 validateEnv();
 
-const app = new App([new IndexRoute(), new UsersRoute(), new AuthRoute()]);
+const app = new App();
 
+// database connect
+app.connectToDatabase();
+
+// initialize middleware
+app.initializeMiddlewares();
+
+// initialize routes
+app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute()]);
+
+// initialize swagger
+app.initializeSwagger();
+
+// error handler
+app.initializeErrorHandling();
 app.listen();

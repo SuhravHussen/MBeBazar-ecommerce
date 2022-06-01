@@ -19,16 +19,10 @@ class App {
   public env: string;
   public port: string | number;
 
-  constructor(routes: Routes[]) {
+  constructor() {
     this.app = express();
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
-
-    this.connectToDatabase();
-    this.initializeMiddlewares();
-    this.initializeRoutes(routes);
-    this.initializeSwagger();
-    this.initializeErrorHandling();
   }
 
   public listen() {
@@ -44,7 +38,7 @@ class App {
     return this.app;
   }
 
-  private connectToDatabase() {
+  public connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);
     }
@@ -56,7 +50,7 @@ class App {
     });
   }
 
-  private initializeMiddlewares() {
+  public initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
@@ -67,13 +61,13 @@ class App {
     this.app.use(cookieParser());
   }
 
-  private initializeRoutes(routes: Routes[]) {
+  public initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
       this.app.use(route.path, route.router);
     });
   }
 
-  private initializeSwagger() {
+  public initializeSwagger() {
     const options = {
       swaggerDefinition: {
         info: {
@@ -89,7 +83,7 @@ class App {
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
-  private initializeErrorHandling() {
+  public initializeErrorHandling() {
     this.app.use(errorMiddleware);
   }
 }
