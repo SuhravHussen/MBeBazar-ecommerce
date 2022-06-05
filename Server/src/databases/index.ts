@@ -6,5 +6,6 @@ export const dbConnection = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    dbName: 'MBBazar',
   },
 };
