@@ -1,5 +1,5 @@
 export interface product {
-  _id: string;
+  _id?: string;
   title: string;
   price: number;
   offerPrice: number;
@@ -11,6 +11,8 @@ export interface product {
   images: Array<string>;
   featured: Array<string>;
   category: string;
-  sold: 120;
+  sold: number;
   show: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

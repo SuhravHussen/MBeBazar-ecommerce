@@ -43,11 +43,13 @@ class App {
       set('debug', true);
     }
 
-    connect(dbConnection.url, dbConnection.options).then(() => {
-      logger.info(`=================================`);
-      logger.info(`Database connection successful`);
-      logger.info(`=================================`);
-    });
+    connect(dbConnection.url, dbConnection.options)
+      .then(() => {
+        logger.info(`=================================`);
+        logger.info(`Database connection successful`);
+        logger.info(`=================================`);
+      })
+      .catch(e => console.log(e));
   }
 
   public initializeMiddlewares() {

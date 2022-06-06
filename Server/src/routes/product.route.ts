@@ -11,6 +11,7 @@ class ProductRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.get('/', this.productController.getProductByCategory);
     this.router.post('/', this.productController.addProduct);
     this.router.get('/:id', this.productController.getProductById);
   }

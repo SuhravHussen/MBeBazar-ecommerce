@@ -12,6 +12,10 @@ class ProductService {
   public async getProductById(id: string): Promise<product> {
     return await this.products.findById(id);
   }
+
+  public async getProductByCategory(category: string): Promise<product[]> {
+    return await this.products.find({ category: category });
+  }
 }
 
 export default ProductService;

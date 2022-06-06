@@ -1,7 +1,7 @@
 import { product } from './../interfaces/product.interface';
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const productSchema: Schema = new Schema(
+const productSchema = new Schema<product>(
   {
     title: {
       type: String,
@@ -54,6 +54,6 @@ const productSchema: Schema = new Schema(
   },
 );
 
-const productModel = model<product & Document>('Product', productSchema);
+const productModel = model<product>('Product', productSchema);
 
 export default productModel;
