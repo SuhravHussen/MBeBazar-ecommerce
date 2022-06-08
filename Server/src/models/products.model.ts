@@ -1,6 +1,6 @@
 import { product } from './../interfaces/product.interface';
 import { model, Schema } from 'mongoose';
-
+import { mongoosePagination, Pagination } from 'mongoose-paginate-ts';
 const productSchema = new Schema<product>(
   {
     title: {
@@ -26,6 +26,10 @@ const productSchema = new Schema<product>(
     stock: {
       type: Number,
       required: [true, 'stock is required'],
+    },
+    tags: {
+      type: [String],
+      required: [true, 'Must give search tags'],
     },
     images: {
       type: [String],
@@ -54,6 +58,9 @@ const productSchema = new Schema<product>(
   },
 );
 
-const productModel = model<product>('Product', productSchema);
+productSchema.plugin(mongoosePagination);
+
+productSchema.index({ title: 'text', details: 'text', tags: 'text', featured: 'text', category: 'text' });
+const productModel: Pagination<product> = model<product, Pagination<product>>('Product', productSchema);
 
 export default productModel;

@@ -1,4 +1,5 @@
-export interface product {
+import { Document } from 'mongoose';
+export interface product extends Document {
   _id?: string;
   title: string;
   price: number;
@@ -15,4 +16,18 @@ export interface product {
   show: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface paginationProducts {
+  limit: number;
+  hasPrevPage: Boolean;
+  hasNextPage: Boolean;
+  hasMore: Boolean;
+  docs: Array<product>;
+  totalDocs: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  previousPage?: number | undefined;
+  nextPage: number;
 }
