@@ -23,14 +23,22 @@ class productController {
   getProductById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const product: product = await this.productService.getProductById(req.params.id);
+      const relatedProduct: product[] = await this.productService.getRelatedProducts(product._id, product.title);
+
       const response1: response = {
         message: 'Product found successfully',
-        data: product,
+        data: {
+          product,
+          relatedProduct,
+        },
         error: false,
       };
       const response2: response = {
         message: 'Sorry! No Product Found',
-        data: [],
+        data: {
+          product: [],
+          relatedProduct: [],
+        },
         error: false,
       };
       res.json(product !== null ? response1 : response2);

@@ -44,6 +44,19 @@ class ProductService {
 
     return await this.products.paginate(options);
   }
+
+  public async getRelatedProducts(id, title): Promise<product[]> {
+    const options = {
+      query: { $text: { $search: title }, _id: { $ne: id } },
+      limit: 10,
+      page: 1,
+      select: { score: { $meta: 'textScore' } },
+      sort: { score: { $meta: 'textScore' } as unknown as SortOrder },
+    };
+
+    const returnProduct = await this.products.paginate(options);
+    return returnProduct.docs;
+  }
 }
 
 export default ProductService;
