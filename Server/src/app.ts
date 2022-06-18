@@ -8,16 +8,20 @@ import morgan from 'morgan';
 import { connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
-import { dbConnection } from '@databases';
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config/index';
+import { dbConnection } from '@databases/index';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import { PassportLogin } from '@config/passport.config';
+import passport from 'passport';
+import redisClient from '@databases/redis';
 
 class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
+  public passportLocal = new PassportLogin();
 
   constructor() {
     this.app = express();
@@ -25,13 +29,15 @@ class App {
     this.port = PORT || 3000;
   }
 
-  public listen() {
-    this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
-    });
+  public async listen() {
+    this.app
+      .listen(this.port, () => {
+        logger.info(`=================================`);
+        logger.info(`======= ENV: ${this.env} =======`);
+        logger.info(`🚀 App listening on the port ${this.port}`);
+        logger.info(`=================================`);
+      })
+      .on('error', e => console.log(e));
   }
 
   public getServer() {
@@ -42,7 +48,7 @@ class App {
     if (this.env !== 'production') {
       set('debug', true);
     }
-
+    //mongoDB
     connect(dbConnection.url, dbConnection.options)
       .then(() => {
         logger.info(`=================================`);
@@ -50,6 +56,16 @@ class App {
         logger.info(`=================================`);
       })
       .catch(e => console.log(e));
+  }
+
+  public connectToRedis() {
+    //Redis
+    redisClient.on('error', e => console.log('Redis Client error', e));
+    redisClient.connect().then(() => {
+      logger.info(`=================================`);
+      logger.info(`Redis connection successful`);
+      logger.info(`=================================`);
+    });
   }
 
   public initializeMiddlewares() {
@@ -61,6 +77,11 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+    // this.app.use(
+    //   session({
+    //     secret: SECRET,
+    //   }),
+    // );
   }
 
   public initializeRoutes(routes: Routes[]) {
@@ -87,6 +108,12 @@ class App {
 
   public initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  public initializePassport() {
+    this.passportLocal.Login();
+    this.app.use(passport.session());
+    this.app.use(passport.initialize());
   }
 }
 

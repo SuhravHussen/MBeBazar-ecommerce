@@ -6,9 +6,9 @@ import { HttpException } from '@exceptions/HttpException';
 const validationMiddleware = (
   type: any,
   value: string | 'body' | 'query' | 'params' = 'body',
-  skipMissingProperties = false,
-  whitelist = true,
-  forbidNonWhitelisted = true,
+  skipMissingProperties = false /* If true, it wont give err if we dont pass a property*/,
+  whitelist = true /* If true it will give error if we pass additional property */,
+  forbidNonWhitelisted = true /* If true it will give error if we pass additional property */,
 ): RequestHandler => {
   return (req, res, next) => {
     validate(plainToInstance(type, req[value]), { skipMissingProperties, whitelist, forbidNonWhitelisted }).then((errors: ValidationError[]) => {

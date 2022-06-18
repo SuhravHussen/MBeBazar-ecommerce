@@ -166,7 +166,7 @@ class productController {
         data: [],
         error: false,
       };
-      console.log(products);
+
       res.json(products.totalDocs > 0 ? response1 : response2);
     } catch (err) {
       next(err);

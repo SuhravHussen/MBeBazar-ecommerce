@@ -1,7 +1,7 @@
 import { hash } from 'bcrypt';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
+import { User, UserDocument } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
 
@@ -38,7 +38,7 @@ class UserService {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     if (userData.email) {
-      const findUser: User = await this.users.findOne({ email: userData.email });
+      const findUser: UserDocument = await this.users.findOne({ email: userData.email });
       if (findUser && findUser._id != userId) throw new HttpException(409, `You're email ${userData.email} already exists`);
     }
 

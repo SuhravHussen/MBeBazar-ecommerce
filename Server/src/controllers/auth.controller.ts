@@ -9,38 +9,33 @@ class AuthController {
 
   public signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userData: CreateUserDto = req.body;
-      const signUpUserData: User = await this.authService.signup(userData);
-
-      res.status(201).json({ data: signUpUserData, message: 'signup' });
+      const userData: User = await this.authService.signup(req.body);
+      res.json(userData);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   };
 
-  public logIn = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userData: CreateUserDto = req.body;
-      const { cookie, findUser } = await this.authService.login(userData);
-
-      res.setHeader('Set-Cookie', [cookie]);
-      res.status(200).json({ data: findUser, message: 'login' });
-    } catch (error) {
-      next(error);
-    }
+  public logIn = async (req: RequestWithUser, res: Response) => {
+    const d = await this.authService.login();
+    res.json({
+      data: req.user,
+      error: false,
+    });
   };
 
-  public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    try {
-      const userData: User = req.user;
-      const logOutUserData: User = await this.authService.logout(userData);
+  // public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+  //   try {
+  //     const userData: User = req.user;
+  //     const logOutUserData: User = await this.authService.logout(userData);
 
-      res.setHeader('Set-Cookie', ['Authorization=; Max-age=0']);
-      res.status(200).json({ data: logOutUserData, message: 'logout' });
-    } catch (error) {
-      next(error);
-    }
-  };
+  //     res.setHeader('Set-Cookie', ['Authorization=; Max-age=0']);
+  //     res.status(200).json({ data: logOutUserData, message: 'logout' });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
 }
 
 export default AuthController;

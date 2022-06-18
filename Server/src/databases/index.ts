@@ -1,4 +1,4 @@
-import { URI } from '@config';
+import { URI } from '@config/index';
 
 export const dbConnection = {
   url: URI,

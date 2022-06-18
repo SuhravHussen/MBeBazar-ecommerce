@@ -1,9 +1,15 @@
+import { Document } from 'mongoose';
 export interface User {
   name: string;
-  _id: string;
   email: string;
   password: string;
-  address: string;
-  number: string;
-  avatar: string;
+  address?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+export interface UserDocument extends User, Document {
+  comparePassword(candidatePassword: string): Promise<boolean>;
+  createdAt: Date;
+  updatedAt: Date;
 }
