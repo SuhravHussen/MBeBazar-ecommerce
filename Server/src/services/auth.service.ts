@@ -1,11 +1,10 @@
-import { sign } from 'jsonwebtoken';
-import { SECRET_KEY } from '@config/index';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
+import { TokenData, DataStoredInToken } from '@interfaces/auth.interface';
 import { UserDocument } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
+import { generateJwt } from '@/utils/jwt';
 
 class AuthService {
   public users = userModel;
@@ -21,10 +20,9 @@ class AuthService {
     return createUserData;
   }
 
-  public async login(): Promise<{ cookie: string }> {
-    return {
-      cookie: 'sdjksd',
-    };
+  public async login(userData: DataStoredInToken): Promise<TokenData> {
+    const tokens: TokenData = await generateJwt(userData);
+    return tokens;
   }
 
   public async logout(userData: UserDocument): Promise<UserDocument> {
@@ -34,18 +32,6 @@ class AuthService {
     if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
 
     return findUser;
-  }
-
-  public createToken(user: UserDocument): TokenData {
-    const dataStoredInToken: DataStoredInToken = { _id: user._id };
-    const secretKey: string = SECRET_KEY;
-    const expiresIn: number = 60 * 60;
-
-    return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
-  }
-
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
   }
 }
 

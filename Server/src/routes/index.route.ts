@@ -1,7 +1,7 @@
+import jwtPassport from '@/middlewares/jwtPassport.middleware';
 import { Router } from 'express';
 import IndexController from '@controllers/index.controller';
 import { Routes } from '@interfaces/routes.interface';
-
 class IndexRoute implements Routes {
   public path = '/';
   public router = Router();
@@ -12,7 +12,7 @@ class IndexRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get('/', this.indexController.index);
+    this.router.get('/', jwtPassport, this.indexController.index);
   }
 }
 

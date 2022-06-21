@@ -18,4 +18,6 @@ export const {
   REDIS_PORT,
   REDIS_PASSWORD,
   REDIS_USERNAME,
+  JWT_TOKEN_EXPIRE,
+  JWT_REFRESH_EXPIRE,
 } = process.env;

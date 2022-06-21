@@ -13,7 +13,7 @@ import { dbConnection } from '@databases/index';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
-import { PassportLogin } from '@config/passport.config';
+import { PassportLogin, passportJwt } from '@config/passport.config';
 import passport from 'passport';
 import redisClient from '@databases/redis';
 
@@ -21,8 +21,8 @@ class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
-  public passportLocal = new PassportLogin();
-
+  private passportLocal = new PassportLogin();
+  private passportJwt = new passportJwt();
   constructor() {
     this.app = express();
     this.env = NODE_ENV || 'development';
@@ -52,7 +52,7 @@ class App {
     connect(dbConnection.url, dbConnection.options)
       .then(() => {
         logger.info(`=================================`);
-        logger.info(`Database connection successful`);
+        logger.info(`Database connection successful 🔗`);
         logger.info(`=================================`);
       })
       .catch(e => console.log(e));
@@ -60,12 +60,13 @@ class App {
 
   public connectToRedis() {
     //Redis
-    redisClient.on('error', e => console.log('Redis Client error', e));
+
     redisClient.connect().then(() => {
       logger.info(`=================================`);
-      logger.info(`Redis connection successful`);
+      logger.info(`Redis connection successful 🔗`);
       logger.info(`=================================`);
     });
+    redisClient.on('error', e => console.log('Redis Client error', e));
   }
 
   public initializeMiddlewares() {
@@ -106,14 +107,14 @@ class App {
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
-  public initializeErrorHandling() {
-    this.app.use(errorMiddleware);
-  }
-
   public initializePassport() {
     this.passportLocal.Login();
-    this.app.use(passport.session());
+    this.passportJwt.jwtAuth();
     this.app.use(passport.initialize());
+  }
+
+  public initializeErrorHandling() {
+    this.app.use(errorMiddleware);
   }
 }
 
