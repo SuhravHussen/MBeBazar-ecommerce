@@ -43,17 +43,15 @@ class AuthController {
     }
   };
 
-  // public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-  //   try {
-  //     const userData: User = req.user;
-  //     const logOutUserData: User = await this.authService.logout(userData);
-
-  //     res.setHeader('Set-Cookie', ['Authorization=; Max-age=0']);
-  //     res.status(200).json({ data: logOutUserData, message: 'logout' });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+  public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      res.clearCookie('jwt-token');
+      res.clearCookie('refresh-token');
+      res.status(200).json({ message: 'Logged out successfully', data: [], error: false });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default AuthController;
