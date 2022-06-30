@@ -1,5 +1,5 @@
 import { User } from '@interfaces/users.interface';
-import { IsEmail, IsOptional, IsString, Matches } from 'class-validator';
+import { IsArray, IsEmail, IsOptional, IsString, Matches } from 'class-validator';
 
 export class CreateUserDto implements User {
   @IsString({
@@ -39,4 +39,10 @@ export class CreateUserDto implements User {
     message: 'Invalid avatar url',
   })
   avatar: string;
+
+  @IsOptional()
+  @IsArray({
+    message: 'Invalid format of toReview items',
+  })
+  toReview: Array<string>;
 }

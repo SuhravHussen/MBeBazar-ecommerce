@@ -6,6 +6,7 @@ export interface User {
   address?: string;
   phone?: string;
   avatar?: string;
+  toReview?: Array<string>;
 }
 
 export interface UserDocument extends User, Document {

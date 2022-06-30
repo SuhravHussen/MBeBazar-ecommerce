@@ -12,7 +12,7 @@ class IndexRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get('/', jwtPassport, this.indexController.index);
+    this.router.post('/', jwtPassport, this.indexController.index);
   }
 }
 

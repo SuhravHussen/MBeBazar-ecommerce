@@ -3,6 +3,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { JWT_REFRESH_EXPIRE, JWT_TOKEN_EXPIRE, SECRET_KEY } from '@config/index';
 import { sign } from 'jsonwebtoken';
 import redisClient from '@/databases/redis';
+import { Request, Response } from 'express';
 
 // Create a token
 export const generateJwt = async (payload: DataStoredInToken): Promise<TokenData> => {
@@ -20,5 +21,18 @@ export const generateJwt = async (payload: DataStoredInToken): Promise<TokenData
     return tokens;
   } catch (e) {
     throw new HttpException(500, e.message);
+  }
+};
+
+export const checkIfCookiesNeedsToBeSet = (req: Request | any, res: Response) => {
+  if (req.tokens) {
+    res.cookie('jwt-token', req.tokens.token, {
+      httpOnly: true,
+      maxAge: parseInt(JWT_TOKEN_EXPIRE) * 1000,
+    });
+    res.cookie('refresh-token', req.tokens.refreshToken, {
+      httpOnly: true,
+      maxAge: parseInt(JWT_REFRESH_EXPIRE) * 1000,
+    });
   }
 };

@@ -12,4 +12,8 @@ export interface TokenData {
 
 export interface RequestWithUser extends Request {
   user: DataStoredInToken;
+  tokens?: {
+    token: string;
+    refreshToken: string;
+  };
 }

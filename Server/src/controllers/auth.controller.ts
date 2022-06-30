@@ -43,6 +43,14 @@ class AuthController {
     }
   };
 
+  public loginFailed = (req: Request, res: Response) => {
+    res.status(401).json({
+      error: true,
+      message: 'failed to login ',
+      data: [],
+    });
+  };
+
   public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       res.clearCookie('jwt-token');

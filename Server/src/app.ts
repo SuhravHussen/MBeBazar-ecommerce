@@ -13,7 +13,7 @@ import { dbConnection } from '@databases/index';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
-import { PassportLogin, passportJwt } from '@config/passport.config';
+import { PassportLogin, passportJwt, passportGoogle } from '@config/passport.config';
 import passport from 'passport';
 import redisClient from '@databases/redis';
 
@@ -23,6 +23,7 @@ class App {
   public port: string | number;
   private passportLocal = new PassportLogin();
   private passportJwt = new passportJwt();
+  private passportGoogle = new passportGoogle();
   constructor() {
     this.app = express();
     this.env = NODE_ENV || 'development';
@@ -78,11 +79,6 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-    // this.app.use(
-    //   session({
-    //     secret: SECRET,
-    //   }),
-    // );
   }
 
   public initializeRoutes(routes: Routes[]) {
@@ -110,6 +106,7 @@ class App {
   public initializePassport() {
     this.passportLocal.Login();
     this.passportJwt.jwtAuth();
+    this.passportGoogle.signupOrLogin();
     this.app.use(passport.initialize());
   }
 

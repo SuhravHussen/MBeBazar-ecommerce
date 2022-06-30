@@ -2,12 +2,13 @@ import { DataStoredInToken } from '@interfaces/auth.interface';
 import { generateJwt } from '@/utils/jwt';
 import { HttpException } from '@exceptions/HttpException';
 import redisClient from '@databases/redis';
-import { SECRET_KEY, JWT_REFRESH_EXPIRE } from '@config/index';
+import { SECRET_KEY, JWT_REFRESH_EXPIRE, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@config/index';
 import userModel from '@models/users.model';
 import passport from 'passport';
 const JwtStrategy = require('passport-jwt').Strategy;
 import LocalStrategy from 'passport-local';
-
+import GoogleStrategy from 'passport-google-oauth20';
+import passwordGenerator from 'password-generate';
 // login with email and pass
 export class PassportLogin {
   user = userModel;
@@ -82,7 +83,6 @@ export class passportJwt {
     try {
       if (req.refreshToken) {
         const verified = await redisClient.get(payload._id);
-        console.log(verified === req.refreshToken);
         if (verified === req.refreshToken) {
           const jwtPayload: DataStoredInToken = {
             _id: payload._id,
@@ -99,8 +99,9 @@ export class passportJwt {
         } else {
           done({ message: 'refresh token does not match with database' });
         }
+      } else {
+        done(false, payload);
       }
-      done(false, payload);
     } catch (e) {
       new HttpException(401, 'passport jwt invalid');
     }
@@ -109,6 +110,39 @@ export class passportJwt {
   strategy = new JwtStrategy(this.opts, this.jwtCallBack);
 
   public jwtAuth() {
+    passport.use(this.strategy);
+  }
+}
+
+export class passportGoogle {
+  private user = userModel;
+
+  private options = {
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3000/auth/google/callback',
+    passReqToCallback: true,
+  };
+
+  private googleCallBack = async (req, accessToken, refreshToken, profile, done) => {
+    try {
+      const userInfo = profile._json;
+
+      const found = await this.user.findOne({ email: userInfo.email });
+      if (!found) {
+        const password = passwordGenerator.generate({ length: 10, numbers: true });
+        const newUser = await this.user.create({ name: userInfo.name, email: userInfo.email, password: password, avatar: userInfo.picture });
+        done(false, newUser);
+      }
+
+      done(false, found);
+    } catch (e) {
+      new HttpException(500, 'Problem in google auth');
+    }
+  };
+
+  private strategy = new GoogleStrategy(this.options, this.googleCallBack);
+  public signupOrLogin() {
     passport.use(this.strategy);
   }
 }

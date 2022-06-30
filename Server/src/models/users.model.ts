@@ -29,6 +29,12 @@ const userSchema = new Schema<User, UserModel, UserDocument>(
     avatar: {
       type: String,
     },
+    toReview: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
   },
   {
     timestamps: true,
