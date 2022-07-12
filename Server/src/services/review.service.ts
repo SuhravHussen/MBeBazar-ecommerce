@@ -15,6 +15,28 @@ class reviewService {
     };
     return res;
   }
+
+  public async getReviews(id: string): Promise<response> {
+    const data: Review[] = await this.model.find({ product: id }).populate('user', 'name');
+
+    const res: response = {
+      data: data,
+      message: 'Reviews fetched successfully',
+      error: false,
+    };
+    return res;
+  }
+
+  public async getAvgRating(id: string): Promise<response> {
+    const data = await this.model.aggregate([{ $match: { product: id } }, { $group: { _id: null, avg_rating: { $avg: '$rating' } } }]);
+
+    const res: response = {
+      data: data,
+      message: 'Reviews fetched successfully',
+      error: false,
+    };
+    return res;
+  }
 }
 
 export default reviewService;

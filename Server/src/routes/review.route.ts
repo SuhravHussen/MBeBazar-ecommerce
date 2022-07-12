@@ -16,6 +16,8 @@ class review implements Routes {
 
   private initializeRoutes() {
     this.router.post('/', jwtPassport, validationMiddleware(reviewDto, 'body'), this.controller.addReview);
+    this.router.get('/', this.controller.getReviews);
+    this.router.get('/avg', this.controller.getAvgRating);
   }
 }
 

@@ -14,6 +14,11 @@ const reviewSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+
+    product: {
+      required: [true, 'product Id is required'],
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -11,14 +11,40 @@ class reviewController {
     const reviewIs = req.body.review;
     const rating = req.body.rating;
     const user = req.user._id;
+    const product = req.body.product;
 
     try {
       const review: Review = {
         review: reviewIs,
-        rating: rating,
-        user: user,
+        rating,
+        user,
+        product,
       };
       const data: response = await this.reviewService.addReview(review);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  public getReviews = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    const productId = req.query.id as string;
+
+    try {
+      const data: response = await this.reviewService.getReviews(productId);
+      res.json(data);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  };
+
+  public getAvgRating = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    const productId = req.query.id as string;
+
+    try {
+      const data: response = await this.reviewService.getAvgRating(productId);
       res.json(data);
     } catch (error) {
       console.log(error);
