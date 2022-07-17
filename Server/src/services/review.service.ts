@@ -1,12 +1,25 @@
+import userModel from '@models/users.model';
 import { Review } from './../interfaces/review.interface';
 import { response } from '@/interfaces/response.interface';
 import reviewModel from '@/models/review.model';
 
 class reviewService {
   public model = reviewModel;
-
+  private user = userModel;
   public async addReview(review: Review): Promise<response> {
+    const allowed = await this.user.findOne({ _id: review.user, toReview: { $in: [review.product] } });
+
+    if (!allowed) {
+      const res: response = {
+        data: null,
+        message: 'You are not allowed to review this product',
+        error: true,
+      };
+      return res;
+    }
+
     const data: Review = await this.model.create(review);
+    await this.user.updateOne({ _id: review.user }, { $pull: { toReview: review.product } });
 
     const res: response = {
       data: data,

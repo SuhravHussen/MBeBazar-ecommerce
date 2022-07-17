@@ -5,6 +5,7 @@ import UsersRoute from '@routes/users.route';
 import ProductRoute from '@routes/product.route';
 import validateEnv from '@utils/validateEnv';
 import ReviewRoute from '@routes/review.route';
+import orderRoute from '@routes/order.route';
 validateEnv();
 
 const app = new App();
@@ -16,7 +17,7 @@ app.connectToRedis();
 app.initializeMiddlewares();
 
 // initialize routes
-app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute(), , new ProductRoute(), new ReviewRoute()]);
+app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute(), , new ProductRoute(), new ReviewRoute(), new orderRoute()]);
 
 // initialize swagger
 app.initializeSwagger();
