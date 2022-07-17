@@ -1,8 +1,5 @@
 import { Order } from './../interfaces/order.interface';
-import Ajv, { JSONSchemaType } from 'ajv';
-
-const ajv = new Ajv({ allErrors: true });
-require('ajv-errors')(ajv /*, {singleError: true} */);
+import { JSONSchemaType } from 'ajv';
 
 export const orderDto: JSONSchemaType<Order> = {
   type: 'object',

@@ -15,8 +15,6 @@
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "bcrypt": "^5.0.1",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

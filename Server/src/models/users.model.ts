@@ -18,7 +18,6 @@ const userSchema = new Schema<User, UserModel, UserDocument>(
     },
     password: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
@@ -44,12 +43,14 @@ const userSchema = new Schema<User, UserModel, UserDocument>(
 userSchema.pre<UserDocument>('save', function (next: NextFunction) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-  if (this.isModified('password') || this.isNew) {
+  console.log(user.password, this.password);
+
+  if (this.isModified('password') || (this.isNew && this.password)) {
     genSalt(10, (err, salt) => {
       if (err) {
         return next(err);
       }
-      hash(user.password, salt, (err, hash) => {
+      hash(user.password as string, salt, (err, hash) => {
         if (err) {
           return next(err);
         }
@@ -70,7 +71,7 @@ userSchema.methods.comparePassword = function (candidatePassword: string): Promi
   const user = this as User;
   const { password } = user;
   return new Promise((resolve, reject) => {
-    compare(candidatePassword, password, (err, success) => {
+    compare(candidatePassword, password as string, (err, success) => {
       if (err) return reject(err);
       return resolve(success);
     });

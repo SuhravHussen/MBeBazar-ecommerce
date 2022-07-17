@@ -1,48 +1,44 @@
-import { User } from '@interfaces/users.interface';
-import { IsArray, IsEmail, IsOptional, IsString, Matches } from 'class-validator';
+import { User } from './../interfaces/users.interface';
 
-export class CreateUserDto implements User {
-  @IsString({
-    message: 'Invalid User name',
-  })
-  name: string;
-  @IsEmail(
-    {},
-    {
-      message: 'Invalid email address',
+import { JSONSchemaType } from 'ajv';
+
+export const userDto: JSONSchemaType<User> = {
+  type: 'object',
+  required: ['name', 'email'],
+  additionalProperties: false,
+  properties: {
+    name: {
+      type: 'string',
     },
-  )
-  public email: string;
-
-  @IsString({
-    message: 'password must be string',
-  })
-  @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
-    message: 'Password must contain min eight characters, at least one letter and one number ',
-  })
-  public password: string;
-
-  @IsOptional()
-  @IsString({
-    message: 'Invalid address',
-  })
-  address: string;
-
-  @IsOptional()
-  @Matches(/(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/, {
-    message: 'Phone number must be a Bangladeshi phone number',
-  })
-  phone: string;
-
-  @IsOptional()
-  @IsString({
-    message: 'Invalid avatar url',
-  })
-  avatar: string;
-
-  @IsOptional()
-  @IsArray({
-    message: 'Invalid format of toReview items',
-  })
-  toReview: Array<string>;
-}
+    email: {
+      type: 'string',
+      pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$',
+      errorMessage: 'Email is invalid',
+    },
+    password: {
+      type: 'string',
+      pattern: '^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$',
+      errorMessage: 'Password must be at least 8 characters, contain at least one letter and one number',
+      nullable: true,
+    },
+    address: {
+      type: 'string',
+      nullable: true,
+    },
+    phone: {
+      type: 'string',
+      nullable: true,
+    },
+    avatar: {
+      type: 'string',
+      nullable: true,
+    },
+    toReview: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      nullable: true,
+    },
+  },
+};

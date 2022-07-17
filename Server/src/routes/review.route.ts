@@ -1,9 +1,9 @@
 import { reviewDto } from './../dtos/review.dto';
-import validationMiddleware from '@middlewares/validation.middleware';
 import { Router } from 'express';
 import { Routes } from '@interfaces/routes.interface';
 import reviewController from '@/controllers/review.controller';
 import jwtPassport from '@/middlewares/jwtPassport.middleware';
+import { validate } from '@/middlewares/validate.middleware';
 
 class review implements Routes {
   public path = '/review';
@@ -15,7 +15,7 @@ class review implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post('/', jwtPassport, validationMiddleware(reviewDto, 'body'), this.controller.addReview);
+    this.router.post('/', jwtPassport, validate(reviewDto, 'body'), this.controller.addReview);
     this.router.get('/', this.controller.getReviews);
     this.router.get('/avg', this.controller.getAvgRating);
   }

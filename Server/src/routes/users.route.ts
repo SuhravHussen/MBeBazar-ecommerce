@@ -1,8 +1,8 @@
+import { userDto } from './../dtos/users.dto';
 import { Router } from 'express';
 import UsersController from '@controllers/users.controller';
-import { CreateUserDto } from '@dtos/users.dto';
 import { Routes } from '@interfaces/routes.interface';
-import validationMiddleware from '@middlewares/validation.middleware';
+import { validate } from '@/middlewares/validate.middleware';
 
 class UsersRoute implements Routes {
   public path = '/users';
@@ -16,8 +16,8 @@ class UsersRoute implements Routes {
   private initializeRoutes() {
     this.router.get('/', this.usersController.getUsers);
     this.router.get('/:id', this.usersController.getUserById);
-    this.router.post('/', validationMiddleware(CreateUserDto, 'body'), this.usersController.createUser);
-    this.router.put('/:id', validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
+    this.router.post('/', validate(userDto, 'body'), this.usersController.createUser);
+    this.router.put('/:id', validate(userDto, 'body'), this.usersController.updateUser);
     this.router.delete('/:id', this.usersController.deleteUser);
   }
 }

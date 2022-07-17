@@ -2,7 +2,7 @@ import { Document } from 'mongoose';
 export interface User {
   name: string;
   email: string;
-  password?: string;
+  password?: string | null;
   address?: string;
   phone?: string;
   avatar?: string;
