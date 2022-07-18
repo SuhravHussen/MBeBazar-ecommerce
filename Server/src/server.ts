@@ -1,3 +1,4 @@
+import { Routes } from '@interfaces/routes.interface';
 import App from '@/app';
 import AuthRoute from '@routes/auth.route';
 import IndexRoute from '@routes/index.route';
@@ -17,12 +18,16 @@ app.connectToRedis();
 app.initializeMiddlewares();
 
 // initialize routes
-app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute(), , new ProductRoute(), new ReviewRoute(), new orderRoute()]);
+app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute(), , new ProductRoute(), new ReviewRoute(), new orderRoute()] as Routes[]);
 
 // initialize swagger
 app.initializeSwagger();
 // initialize passport
 app.initializePassport();
+
+// intialize cloudinary
+app.initializeCloudinary();
+
 // error handler
 app.initializeErrorHandling();
 app.listen();

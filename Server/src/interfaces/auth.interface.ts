@@ -16,4 +16,5 @@ export interface RequestWithUser extends Request {
     token: string;
     refreshToken: string;
   };
+  file?: any;
 }

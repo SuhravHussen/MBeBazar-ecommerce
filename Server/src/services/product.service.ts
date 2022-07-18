@@ -10,7 +10,8 @@ class ProductService {
     return createProductData;
   }
   public async getProductById(id: string): Promise<product> {
-    return await this.products.findById(id);
+    const product: product | null = await this.products.findById(id);
+    return product as product;
   }
 
   public async getProductByCategory(category: string): Promise<product[]> {
@@ -42,7 +43,8 @@ class ProductService {
       sort: { score: { $meta: 'textScore' } as unknown as SortOrder },
     };
 
-    return await this.products.paginate(options);
+    const paginatedProducts: paginationProducts = (await this.products.paginate(options)) as paginationProducts;
+    return paginatedProducts as paginationProducts;
   }
 
   public async getRelatedProducts(id, title): Promise<product[]> {
@@ -54,7 +56,7 @@ class ProductService {
       sort: { score: { $meta: 'textScore' } as unknown as SortOrder },
     };
 
-    const returnProduct = await this.products.paginate(options);
+    const returnProduct: paginationProducts = (await this.products.paginate(options)) as paginationProducts;
     return returnProduct.docs;
   }
 }

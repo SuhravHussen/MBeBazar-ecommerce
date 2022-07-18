@@ -14,6 +14,11 @@ class orderService {
 
     return data;
   }
+
+  public async getOrderById(orderId: string): Promise<Order> {
+    const data: Order | null = await this.model.findOne({ _id: orderId });
+    return data as Order;
+  }
 }
 
 export default orderService;

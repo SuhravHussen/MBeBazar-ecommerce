@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@dtos/users.dto';
+import { User } from './../interfaces/users.interface';
 import { HttpException } from '@exceptions/HttpException';
 import { TokenData, DataStoredInToken } from '@interfaces/auth.interface';
 import { UserDocument } from '@interfaces/users.interface';
@@ -9,10 +9,10 @@ import { generateJwt } from '@/utils/jwt';
 class AuthService {
   public users = userModel;
 
-  public async signup(userData: CreateUserDto): Promise<UserDocument> {
+  public async signup(userData: User): Promise<UserDocument> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser: UserDocument = await this.users.findOne({ email: userData.email });
+    const findUser: UserDocument = (await this.users.findOne({ email: userData.email })) as UserDocument;
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
     const createUserData: UserDocument = await this.users.create(userData);
@@ -28,7 +28,7 @@ class AuthService {
   public async logout(userData: UserDocument): Promise<UserDocument> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser: UserDocument = await this.users.findOne({ email: userData.email, password: userData.password });
+    const findUser: UserDocument = (await this.users.findOne({ email: userData.email, password: userData.password })) as UserDocument;
     if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
 
     return findUser;

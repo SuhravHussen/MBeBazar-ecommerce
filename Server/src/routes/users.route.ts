@@ -1,8 +1,9 @@
-import { userDto } from './../dtos/users.dto';
+import jwtPassport from '@/middlewares/jwtPassport.middleware';
+
 import { Router } from 'express';
 import UsersController from '@controllers/users.controller';
 import { Routes } from '@interfaces/routes.interface';
-import { validate } from '@/middlewares/validate.middleware';
+import { fromidableMiddleware } from '@/middlewares/formidable.middleware';
 
 class UsersRoute implements Routes {
   public path = '/users';
@@ -14,11 +15,9 @@ class UsersRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get('/', this.usersController.getUsers);
-    this.router.get('/:id', this.usersController.getUserById);
-    this.router.post('/', validate(userDto, 'body'), this.usersController.createUser);
-    this.router.put('/:id', validate(userDto, 'body'), this.usersController.updateUser);
-    this.router.delete('/:id', this.usersController.deleteUser);
+    this.router.get('/orders', jwtPassport, this.usersController.getUserOrders);
+    this.router.get('/:id', jwtPassport, this.usersController.getUser);
+    this.router.post('/updateProfile', jwtPassport, fromidableMiddleware, this.usersController.updateProfile);
   }
 }
 

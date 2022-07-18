@@ -1,3 +1,4 @@
+import { HttpException } from '@exceptions/HttpException';
 import userModel from '@models/users.model';
 import { Review } from './../interfaces/review.interface';
 import { response } from '@/interfaces/response.interface';
@@ -10,12 +11,7 @@ class reviewService {
     const allowed = await this.user.findOne({ _id: review.user, toReview: { $in: [review.product] } });
 
     if (!allowed) {
-      const res: response = {
-        data: null,
-        message: 'You are not allowed to review this product',
-        error: true,
-      };
-      return res;
+      throw new HttpException(409, 'You are not allowed to review this product');
     }
 
     const data: Review = await this.model.create(review);

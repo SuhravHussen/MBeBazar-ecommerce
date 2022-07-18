@@ -22,7 +22,8 @@ export class PassportLogin {
     try {
       email = email || req.body.email;
       password = password || req.body.password;
-      let avatar: string, address: string;
+      let avatar: string | null = '';
+      let address: string | null = '';
 
       const userData = await this.user.findOne({ email: email });
       if (!userData)
@@ -93,7 +94,7 @@ export class passportJwt {
           };
           const tokens = await generateJwt(jwtPayload);
           await redisClient.set(payload._id, tokens.refreshToken);
-          await redisClient.expire(payload._id, parseInt(JWT_REFRESH_EXPIRE));
+          await redisClient.expire(payload._id, parseInt(JWT_REFRESH_EXPIRE as string));
           req.tokens = tokens;
           done(false, payload);
         } else {

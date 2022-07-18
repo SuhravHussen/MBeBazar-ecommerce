@@ -16,6 +16,7 @@ import { logger, stream } from '@utils/logger';
 import { PassportLogin, passportJwt, passportGoogle } from '@config/passport.config';
 import passport from 'passport';
 import redisClient from '@databases/redis';
+import { cloudinaryConfig } from './config/cloudinary.config';
 
 class App {
   public app: express.Application;
@@ -24,6 +25,7 @@ class App {
   private passportLocal = new PassportLogin();
   private passportJwt = new passportJwt();
   private passportGoogle = new passportGoogle();
+  private cloudinary = new cloudinaryConfig();
   constructor() {
     this.app = express();
     this.env = NODE_ENV || 'development';
@@ -50,7 +52,7 @@ class App {
       set('debug', true);
     }
     //mongoDB
-    connect(dbConnection.url, dbConnection.options)
+    connect(dbConnection.url as string, dbConnection.options)
       .then(() => {
         logger.info(`=================================`);
         logger.info(`Database connection successful 🔗`);
@@ -71,7 +73,7 @@ class App {
   }
 
   public initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
+    this.app.use(morgan(LOG_FORMAT as string, { stream }));
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());
@@ -83,7 +85,7 @@ class App {
 
   public initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
-      this.app.use(route.path, route.router);
+      this.app.use(route.path as string, route.router);
     });
   }
 
@@ -112,6 +114,10 @@ class App {
 
   public initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  public initializeCloudinary() {
+    this.cloudinary.config();
   }
 }
 

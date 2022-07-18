@@ -31,11 +31,11 @@ class AuthController {
       };
       res.cookie('jwt-token', tokens.token, {
         httpOnly: true,
-        maxAge: parseInt(JWT_TOKEN_EXPIRE) * 1000,
+        maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
-        maxAge: parseInt(JWT_REFRESH_EXPIRE) * 1000,
+        maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
       });
       res.json(response);
     } catch (e) {
