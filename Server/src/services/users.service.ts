@@ -26,9 +26,25 @@ class UserService {
     return findOrder;
   }
 
-  public async updateUser(req: RequestWithUser): Promise<any> {
-    const uploaded = uploadFile(req.file, `${req.user.name}_${req.user._id}`);
-    return {};
+  public async updateUser(req: RequestWithUser): Promise<User> {
+    let uploadedFile: null | { url: string } = null;
+    const user = await this.findUserById(req.user._id);
+    if (!user) throw new HttpException(409, "You're not user");
+    if (!isEmpty(req.file)) {
+      uploadedFile = await uploadFile(req.file, `${req.user.name}_${req.user._id}`);
+    }
+
+    const updatedProfile = {
+      name: req.body.name ? req.body.name : user.name,
+      email: req.body.email ? req.body.email : user.email,
+      phone: req.body.phone ? req.body.phone : user.phone,
+      address: req.body.address ? req.body.address : user.address,
+      avatar: uploadedFile ? uploadedFile.url : user.avatar,
+    };
+
+    const updateUser: User = (await this.users.findOneAndUpdate({ _id: req.user._id }, { $set: updatedProfile }, { new: true })) as User;
+
+    return updateUser;
   }
 }
 

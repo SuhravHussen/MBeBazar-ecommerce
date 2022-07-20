@@ -1,15 +1,15 @@
+import { HttpException } from '@exceptions/HttpException';
 import { v2 as cloudinary } from 'cloudinary';
 
 export const uploadFile = async (file, fileName) => {
-  console.log('comming');
   try {
     const res = await cloudinary.uploader.upload(file.files.filepath, {
       folder: 'users',
       use_filename: true,
       public_id: fileName,
     });
-    console.log(res);
+    return res;
   } catch (error) {
-    console.log(error);
+    throw new HttpException(400, error.message);
   }
 };

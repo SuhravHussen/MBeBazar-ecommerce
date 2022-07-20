@@ -9,6 +9,7 @@ export const fromidableMiddleware = (req: RequestWithUser, res: Response, next: 
       if (err) {
         next(err);
       }
+      console.log(files);
       req.body = fields;
       req.file = files;
       next();

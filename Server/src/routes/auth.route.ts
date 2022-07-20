@@ -36,6 +36,7 @@ class AuthRoute implements Routes {
         res.json({ message: 'Logged in successfully', data: [], error: false });
       },
     );
+    this.router.post('/updatePassword', jwtPassport, this.authController.updatePassword);
   }
 }
 

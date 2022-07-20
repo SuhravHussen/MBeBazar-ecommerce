@@ -18,3 +18,9 @@ export interface RequestWithUser extends Request {
   };
   file?: any;
 }
+
+export interface updatePassword {
+  id: string;
+  oldPassword: string;
+  newPassword: string;
+}

@@ -45,7 +45,7 @@ class UsersController {
 
       const response: response = {
         message: 'User updated successfully',
-        data: [],
+        data: userData,
         error: false,
       };
       res.json(response);

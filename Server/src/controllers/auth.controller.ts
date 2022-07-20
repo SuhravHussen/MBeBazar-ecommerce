@@ -1,3 +1,4 @@
+import { updatePassword } from '@interfaces/auth.interface';
 import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE } from '@config/index';
 import { response } from '@/interfaces/response.interface';
 import { NextFunction, Request, Response } from 'express';
@@ -56,6 +57,21 @@ class AuthController {
       res.clearCookie('jwt-token');
       res.clearCookie('refresh-token');
       res.status(200).json({ message: 'Logged out successfully', data: [], error: false });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updatePassword = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const data: updatePassword = {
+        oldPassword: req.body.oldPassword,
+        newPassword: req.body.newPassword,
+        id: req.user._id,
+      };
+
+      const userData = await this.authService.updatePassword(data);
+      res.json(userData);
     } catch (error) {
       next(error);
     }

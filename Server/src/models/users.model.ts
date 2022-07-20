@@ -1,7 +1,8 @@
+import { hashPassword } from './../utils/passwordHash';
 import { NextFunction } from 'express';
 import { model, Schema, Model } from 'mongoose';
 import { UserDocument, User } from '@interfaces/users.interface';
-import { genSalt, hash, compare } from 'bcrypt';
+import { compare } from 'bcrypt';
 
 type UserModel = Model<User, {}, UserDocument>;
 
@@ -46,18 +47,12 @@ userSchema.pre<UserDocument>('save', function (next: NextFunction) {
   console.log(user.password, this.password);
 
   if (this.isModified('password') || (this.isNew && this.password)) {
-    genSalt(10, (err, salt) => {
-      if (err) {
-        return next(err);
-      }
-      hash(user.password as string, salt, (err, hash) => {
-        if (err) {
-          return next(err);
-        }
-        user.password = hash;
+    hashPassword(user.password as string)
+      .then(hashedPassword => {
+        user.password = hashedPassword;
         next();
-      });
-    });
+      })
+      .catch(err => next(err));
   } else {
     return next();
   }
