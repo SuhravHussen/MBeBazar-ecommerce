@@ -40,7 +40,8 @@
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3",
-    "winston-daily-rotate-file": "^4.5.5"
+    "winston-daily-rotate-file": "^4.5.5",
+    "winston-mongodb": "^5.0.7"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.51",

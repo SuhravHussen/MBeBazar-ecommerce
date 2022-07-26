@@ -12,7 +12,7 @@ import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config/index';
 import { dbConnection } from '@databases/index';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
-import { logger, stream } from '@utils/logger';
+import { logger, stream } from '@/utils/logger';
 import { PassportLogin, passportJwt, passportGoogle } from '@config/passport.config';
 import passport from 'passport';
 import redisClient from '@databases/redis';
