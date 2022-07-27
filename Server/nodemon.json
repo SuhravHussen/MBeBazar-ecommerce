@@ -1,9 +1,10 @@
 {
     "watch": [
         "src",
-        ".env"
+        ".env",
+        "*.yaml"
     ],
-    "ext": "js,ts,json",
+    "ext": "js,ts,json ,yaml",
     "ignore": [
         "src/logs/*",
         "src/**/*.{spec,test}.ts"

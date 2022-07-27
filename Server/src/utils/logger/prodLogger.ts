@@ -6,6 +6,7 @@ import { LOG_DIR, URI } from '@config/index';
 require('winston-mongodb');
 // logs dir
 const logDir: string = join(__dirname + '../../', LOG_DIR as string);
+
 if (!existsSync(logDir)) {
   mkdirSync(logDir);
 }

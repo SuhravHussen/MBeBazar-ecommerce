@@ -1,120 +1,535 @@
+
 tags:
-- name: users
-  description: users API
-
-paths:
-# [GET] users
-  /users:
-    get:
-      tags:
-      - users
-      summary: Find All Users
-      responses:
-        200:
-          description: 'OK'
-        500:
-          description: 'Server Error'
-
-# [POST] users
-    post:
-      tags:
-      - users
-      summary: Add User
-      parameters:
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
-      responses:
-        201:
-          description: 'Created'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [GET] users/id
-  /users/{id}:
-    get:
-      tags:
-      - users
-      summary: Find User By Id
-      parameters:
-      - name: id
-        in: path
-        description: User Id
-        required: true
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [PUT] users/id
-    put:
-      tags:
-      - users
-      summary: Update User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-      - name: body
-        in: body
-        description: user Data
-        required: true
-        schema:
-          $ref: '#/definitions/users'
-      responses:
-        200:
-          description: 'OK'
-        400:
-          description: 'Bad Request'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# [DELETE] users/id
-    delete:
-      tags:
-      - users
-      summary: Delete User By Id
-      parameters:
-      - name: id
-        in: path
-        description: user Id
-        required: true
-      responses:
-        200:
-          description: 'OK'
-        409:
-          description: 'Conflict'
-        500:
-          description: 'Server Error'
-
-# definitions
-definitions:
-  users:
-    type: object
-    required:
-        - email
-        - password
-    properties:
-      email:
-        type: string
-        description: user Email
-      password:
-        type: string
-        description: user Password
-
+- name: "Welcome"
+  description: "welcome route"
+  externalDocs:
+    description: "Check Github"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"
+- name: "Product"
+  description: "Product related route"
+  externalDocs:
+    description: "Check Github"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: "Check Github"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"
 schemes:
- - https
- - http
+- "https"
+- "http"
+paths:
+  /:
+    get:
+      tags:
+      - "Welcome"
+      summary: "Get welcome message"
+      description: ""
+      operationId: "getWelcomeMessage"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Welcome to MBeBazar"
+        "500":   
+          description: "Internal server error"
+   
+  /product?category={category}:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns products based on category"
+      description: "It will return a array of same category's product"
+      operationId: "getProductByCategory"
+      produces:
+      - "application/json"
+      parameters: 
+      - in: "query"
+        name: "category"
+        description: "category string"
+        required: true
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                   
+  /product/mostSell:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns products based on most sell"
+      description: "It will return a array of most sold products"
+      operationId: "getProductByMostSell"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean             
+
+  /product/popular:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns popular products"
+      description: "It will return a array of most popular products"
+      operationId: "getPopularProduct"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean       
+
+
+  /product/deals-of-the-day:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns deals of the day"
+      description: "It will return a array of deals-of-the-day products"
+      operationId: "getDealsOfTheDay"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean  
+
+  /product/search-suggestions:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns suggested products"
+      description: "It will return a array of suggested products when searching"
+      operationId: "getSuggestion"
+      parameters: 
+      - in: "body"
+        name: "tags"
+        description: "Array of tags"
+        required: true
+        schema:
+         type: array
+         items:
+           type: string
+        example: ['fish', 'mach']   
+        
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean     
+
+  /product/full-search?page={pageNumber}&limit={limitNumber}:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns searched products"
+      description: "It will return a array of searched products and the length of array will be the length of limit. It is a pagination api"
+      operationId: "getSearchedProduct"
+      parameters: 
+      - in: "body"
+        name: "text"
+        description: "search text"
+        required: true
+        schema:
+         type: string
+        example: 'food'   
+      - in: "query"
+        name: "page"
+        description: "which page's product you want. default is 1"
+        required: false
+        schema:
+         type: string
+        example: page=1  
+      - in: "query"
+        name: "limit"
+        description: "how many products we want. default is 10"
+        required: false
+        schema:
+         type: string
+        example: limit=15          
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean   
+  /product/{id}:
+    get:
+      tags:
+      - "Product"
+      summary: "Returns single product by id"
+      description: "It will return a product by its id"
+      operationId: "getSuggestion"
+      parameters: 
+      - in: "path"
+        name: "id"
+        description: "mongodb id of product"
+        required: true
+        schema:
+         type: string
+        example: "629ef076d43eb983f88afcb1"  
+        
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got products successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Product'
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean                                     
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Product:
+    type: "object"
+    properties:
+     _id:
+       type: string
+     title:
+       type: string   
+     price:
+       type: number 
+     offerPrice:
+       type: number
+     details:
+       type: string
+     unit:
+       type: string
+     stock:
+       type: number
+     tags:
+       type: array
+     onSale:
+       type: boolean
+     images:
+       type: array
+     featured: 
+       type: array
+     category:
+       type: string
+     sold:
+       type: number 
+     show:
+       type: boolean
+     createdAt:
+        type: "string"
+        format: "date-time"       
+     updatedAt:
+        type: "string"
+        format: "date-time"                               
+  Order:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      petId:
+        type: "integer"
+        format: "int64"
+      quantity:
+        type: "integer"
+        format: "int32"
+      shipDate:
+        type: "string"
+        format: "date-time"
+      status:
+        type: "string"
+        description: "Order Status"
+        enum:
+        - "placed"
+        - "approved"
+        - "delivered"
+      complete:
+        type: "boolean"
+        default: false
+    xml:
+      name: "Order"
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Category"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phone:
+        type: "string"
+      userStatus:
+        type: "integer"
+        format: "int32"
+        description: "User Status"
+    xml:
+      name: "User"
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Tag"
+  Pet:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      category:
+        $ref: "#/definitions/Category"
+      name:
+        type: "string"
+        example: "doggie"
+      photoUrls:
+        type: "array"
+        xml:
+          name: "photoUrl"
+          wrapped: true
+        items:
+          type: "string"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Tag"
+      status:
+        type: "string"
+        description: "pet status in the store"
+        enum:
+        - "available"
+        - "pending"
+        - "sold"
+    xml:
+      name: "Pet"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
