@@ -4,7 +4,7 @@ import winston from 'winston';
 import { LOG_DIR } from '@config/index';
 
 // logs dir
-const logDir: string = join(__dirname, LOG_DIR as string);
+const logDir: string = join(__dirname + '../../', LOG_DIR as string);
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);
