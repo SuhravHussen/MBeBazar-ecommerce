@@ -70,7 +70,6 @@ export class passportJwt {
       token = req.cookies['refresh-token'];
       req.refreshToken = req.cookies['refresh-token'];
     }
-
     return token;
   };
 
