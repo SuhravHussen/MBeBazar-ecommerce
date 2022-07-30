@@ -15,6 +15,24 @@ tags:
   externalDocs:
     description: "Order products"
     url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"
+
+- name: "Auth"
+  description: "Sign up and login"
+  externalDocs:
+    description: "Sign up or login"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"
+
+- name: "Review"
+  description: "Review related api"
+  externalDocs:
+    description: "Add review , see reviews"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server"  
+
+- name: "User"
+  description: "user related api"
+  externalDocs:
+    description: "Add review , see reviews"
+    url: "https://github.com/SuhravHussen/MBeBazar-ecommerce/tree/main/Server" 
 schemes:
 - "https"
 - "http"
@@ -488,8 +506,645 @@ paths:
                 type: "string"
            
               error: 
-                type: boolean                         
+                type: boolean 
+                                        
+  
+  /auth/signup:
+    post:
+      tags:
+      - "Auth"
+      summary: "Sign up with information"
+      description: "It will return  success message with newly created data"
+      operationId: "signup"
+      parameters: 
+      - in: "body"
+        name: "name"
+        description: "user name"
+        required: true
+        schema:
+         type: string
+        example: "user one" 
+      - in: "body"
+        name: "email"
+        description: "user email"
+        required: true
+        schema:
+         type: string
+        example: "example@gmail.com"
 
+      - in: "body"
+        name: "password"
+        description: "user password must contain more then 8 characters long and one upper case, one lower case and number"
+        required: true
+        schema:
+         type: string
+        example: "This123password"    
+
+      - in: "body"
+        name: "phone"
+        description: "phone number must be a valid phone number"
+        required: false
+        schema:
+         type: string
+        example: "017XXXXXXXX"           
+        
+      produces:
+      - "application/json"
+      responses:
+        "201":
+          description: "user created successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/User'        
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean 
+
+        "409":
+          description: "Email already exist"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean        
+  /auth/login:
+    get:
+      tags:
+      - "Auth"
+      summary: "login with email and password"
+      description: "It will return  success message with user data"
+      operationId: "login"
+      parameters: 
+      - in: "body"
+        name: "email"
+        description: "user email"
+        required: true
+        schema:
+         type: string
+        example: "example@gmail.com"
+
+      - in: "body"
+        name: "password"
+        description: "user password must contain more then 8 characters long and one upper case, one lower case and number"
+        required: true
+        schema:
+         type: string
+        example: "This123password"          
+    
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "user created successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/User'        
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean 
+  
+  /auth/logout:
+    get:
+      tags:
+      - "Auth"
+      summary: "logout"
+      description: "It will remove jwt and refresh token from cookies"
+      operationId: "logout"
+      parameters: 
+      - in: "cookies"
+        name: "jwt"
+        description: "jwt must given in http only cookies."
+        required: true
+    
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "logged out successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : object
+                example: {}       
+              message:
+                type: "string"
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+              error: 
+                type: boolean 
+        "401":
+          description: "Unauthorized"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean   
+
+        "409":
+          description: "User not found"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean                      
+  
+  /auth/updatePassword:
+    post:
+      tags:
+      - "Auth"
+      summary: "update password"
+      description: "Update password by giving new password"
+      operationId: "updatePassword"
+      parameters: 
+      - in: "body"
+        name: "oldPassword"
+        description: "give previous password"
+        required: true
+        schema:
+         type : string
+      - in: "body"
+        name: "newPassword"
+        description: "give previous password"
+        required: true  
+        schema:
+           type : string
+
+      - in: "cookies"
+        name: "jwt"
+        description: "jwt must given in http only cookies."
+        required: true     
+      produces:
+      - "application/json"
+      responses:
+        "201":
+          description: "updated successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : object
+                example: {}       
+              message:
+                type: "string"
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+              error: 
+                type: boolean 
+        "401":
+          description: "Unauthorized"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean  
+        "409":
+          description: "User not found or invalid password"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean                       
+
+  /review:
+    post:
+      tags:
+      - "Review"
+      summary: "add review"
+      description: "Give review on a product. NB: You must have permission to review the product"
+      operationId: "addReview"
+      parameters: 
+      - in: "body"
+        name: "review"
+        description: "Review text"
+        required: true
+        schema:
+         type : string
+      - in: "body"
+        name: "rating"
+        description: "Give rating of the product. Cant be more than 5 and less than 0"
+        required: true  
+        schema:
+           type : string
+      - in: "body"
+        name: "product"
+        description: "Give the id of reviewed product"
+        required: true  
+        schema:
+           type : string  
+      - in: "cookies"
+        name: "jwt"
+        description: "jwt must given in http only cookies."
+        required: true     
+      produces:
+      - "application/json"
+      responses:
+        "201":
+          description: "review added successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : object
+                $ref: '#/definitions/Review'     
+              message:
+                type: "string"
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+              error: 
+                type: boolean 
+        "401":
+          description: "Unauthorized"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean  
+        "409":
+          description: "Not allowed to review the product"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean    
+
+    get:
+      tags:
+      - "Review"
+      summary: "getReviews"
+      description: "Get all reviews of a product"
+      operationId: "addReview"
+      parameters:    
+      - in: "query"
+        name: "id"
+        description: "Give product id in query"
+        required: true
+        schema:
+         type : string          
+
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "reviews found successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : array
+                items: 
+                  type: object
+                  $ref: '#/definitions/Review'   
+                  
+              message:
+                type: "string"
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+              error: 
+                type: boolean   
+  
+  /review/avg:
+    get:
+      tags:
+      - "Review"
+      summary: "get average review of a product"
+      operationId: "updatePassword"
+      parameters: 
+      - in: "query"
+        name: "id"
+        description: "get product average review by id"
+        required: true
+        schema:
+         type : string
+  
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "got avg reviews successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : object
+                example: {}       
+              message:
+                type: "string"
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+              error: 
+                type: boolean 
+ 
+  /users/orders:
+    get:
+      tags:
+      - "User"
+      summary: "get user orders"
+      description: "It will return  success message with user's orders"
+      operationId: "findUserOrders"
+      parameters: 
+      - in: "cookies"
+        name: "jwt"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "user created successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                type : array
+                items: 
+                  type : object
+                  $ref: '#/definitions/Order'        
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean 
+
+        "400":
+          description: "User id is  not valid"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean       
+
+  /users/{id}:
+    get:
+      tags:
+      - "User"
+      summary: "get user information"
+      description: "It will return  user information"
+      operationId: "findUser"
+      parameters: 
+      - in: "cookies"
+        name: "jwt"
+        required: true
+      - in: "params"
+        name: "id"
+        required: true
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "user created successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/User'        
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean 
+
+        "409":
+          description: "No user found"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean      
+
+  /users/updateProfile:
+    post:
+      tags:
+      - "User"
+      summary: "get user information"
+      description: "It will return  user information"
+      operationId: "findUser"
+      parameters: 
+      - in: "cookies"
+        name: "jwt"
+        required: true
+      - in: "formData"
+        name: "name"
+      - in: "formData"
+        name: "address"  
+      - in: "formData"
+        name: "phone"
+      - in: "formData"
+        name: "image file"  
+      produces:
+      - "application/json"
+      responses:
+        "201":
+          description: "user updated successfully"
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/User'        
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean
+                default: false
+        "500":
+          description: "Internal server error"
+          schema:
+            type: object
+            properties:
+              data:
+                example: {}
+              message:
+                type: "string"
+           
+              error: 
+                type: boolean 
+
+        "409":
+          description: "No user found"
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  type: string
+                example: []  
+              message:
+                type: "string"         
+              error: 
+                type: boolean     
 definitions:
   Product:
     type: "object"
@@ -580,27 +1235,13 @@ definitions:
              price:
                 type: number
                 example: 50                   
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
   User:
     type: "object"
     properties:
       id:
         type: "integer"
         format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
+      name:
         type: "string"
       email:
         type: "string"
@@ -608,69 +1249,27 @@ definitions:
         type: "string"
       phone:
         type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
+      address:
         type: "string"
-    xml:
-      name: "Tag"
-  Pet:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
+        default: null
+      avatar:
         type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
+        default: null
+      toReview:
+        type: array
         items:
-          type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
+          type: string    
+  Review:
+   type: object
+   properties:
+     review :
+      type: string
+      example: "very good product"
+     rating:
+      type: number
+      example: 4
+     product:
+      type : string  
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

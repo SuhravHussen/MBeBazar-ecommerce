@@ -4,7 +4,9 @@ import formidable from 'formidable';
 
 export const fromidableMiddleware = (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
-    const form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm({
+      maxFileSize: 50 * 1024 * 1024,
+    });
     form.parse(req, (err, fields, files) => {
       if (err) {
         next(err);
