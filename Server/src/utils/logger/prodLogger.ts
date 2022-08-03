@@ -40,9 +40,13 @@ const prodLogger = winston.createLogger({
         logFormat,
       ),
     }),
-    // error log setting
+  ],
+});
 
+if (process.env.NODE_ENV === 'production') {
+  prodLogger.add(
     new transports.MongoDB({
+      name: 'error-log',
       level: 'error',
       db: URI,
       options: {
@@ -51,7 +55,6 @@ const prodLogger = winston.createLogger({
       format: winston.format.combine(winston.format.timestamp(), winston.format.json(), winston.format.metadata()),
       collection: 'errorlog',
     }),
-  ],
-});
-
+  );
+}
 export { prodLogger };

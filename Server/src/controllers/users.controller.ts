@@ -26,7 +26,7 @@ class UsersController {
 
   public getUserOrders = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
-      const userOrders: Order[] | null = await this.userService.findUserOrder(req.user._id);
+      const userOrders: Order[] | null = await this.userService.findUserOrder('62b40bd17ab97151ee992ad8');
 
       const response: response = {
         message: userOrders.length > 0 ? 'Found user orders successfully' : 'No orders found',

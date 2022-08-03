@@ -44,7 +44,6 @@ const userSchema = new Schema<User, UserModel, UserDocument>(
 userSchema.pre<UserDocument>('save', function (next: NextFunction) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-  console.log(user.password, this.password);
 
   if (this.isModified('password') || (this.isNew && this.password)) {
     hashPassword(user.password as string)

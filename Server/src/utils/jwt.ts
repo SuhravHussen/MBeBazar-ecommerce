@@ -24,6 +24,7 @@ export const generateJwt = async (payload: DataStoredInToken): Promise<TokenData
   }
 };
 
+// set new token on cookie
 export const checkIfCookiesNeedsToBeSet = (req: Request | any, res: Response) => {
   if (req.tokens) {
     res.cookie('jwt-token', req.tokens.token, {
@@ -35,4 +36,9 @@ export const checkIfCookiesNeedsToBeSet = (req: Request | any, res: Response) =>
       maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
     });
   }
+};
+
+// return cookie string
+export const setCookie = (jwt: string): string => {
+  return `jwt-token=${jwt}`;
 };

@@ -63,6 +63,7 @@ export class PassportLogin {
 // jwt authentication
 export class passportJwt {
   private cookieExtractor = req => {
+    if (req.cookies === undefined) return null;
     let token = null;
     if (req && req.cookies['jwt-token']) {
       token = req.cookies['jwt-token'];
@@ -70,6 +71,7 @@ export class passportJwt {
       token = req.cookies['refresh-token'];
       req.refreshToken = req.cookies['refresh-token'];
     }
+
     return token;
   };
 
@@ -83,6 +85,7 @@ export class passportJwt {
     try {
       if (req.refreshToken) {
         const verified = await redisClient.get(payload._id);
+
         if (verified === req.refreshToken) {
           const jwtPayload: DataStoredInToken = {
             _id: payload._id,

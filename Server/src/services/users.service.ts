@@ -9,11 +9,11 @@ import { uploadFile } from '@/utils/cloudinaryUploader';
 
 class UserService {
   public users = userModel;
-  private order = orderModel;
+  public order = orderModel;
   public async findUserById(userId: string): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
 
-    const findUser: User | null = await this.users.findOne({ _id: userId });
+    const findUser: User | null = (await this.users.findOne({ _id: userId })) as User;
     if (!findUser) throw new HttpException(409, "You're not user");
     return findUser;
   }
@@ -29,16 +29,16 @@ class UserService {
   public async updateUser(req: RequestWithUser): Promise<User> {
     let uploadedFile: null | { url: string } = null;
     const user = await this.findUserById(req.user._id);
+
     if (!user) throw new HttpException(409, "You're not user");
     if (!isEmpty(req.file)) {
       uploadedFile = await uploadFile(req.file, `${req.user.name}_${req.user._id}`);
     }
 
     const updatedProfile = {
-      name: req.body.name ? req.body.name : user.name,
-      email: req.body.email ? req.body.email : user.email,
-      phone: req.body.phone ? req.body.phone : user.phone,
-      address: req.body.address ? req.body.address : user.address,
+      name: req.body.name ? req.body.name.trim() : user.name,
+      phone: req.body.phone ? req.body.phone.trim() : user.phone,
+      address: req.body.address ? req.body.address.trim() : user.address,
       avatar: uploadedFile ? uploadedFile.url : user.avatar,
     };
 

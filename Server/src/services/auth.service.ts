@@ -16,6 +16,8 @@ class AuthService {
 
     const findUser: UserDocument = (await this.users.findOne({ email: userData.email })) as UserDocument;
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
+    userData.name = userData.name.trim();
+    userData.email = userData.email.trim();
 
     const createUserData: UserDocument = await this.users.create(userData);
 

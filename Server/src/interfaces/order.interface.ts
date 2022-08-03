@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongoose';
-
 export interface Order {
   bookingInfo: {
     name: string;
@@ -12,7 +10,7 @@ export interface Order {
     payment: 'pending' | 'success' | 'failed';
     paymentMethod: 'COD' | 'CreditCard';
   };
-  user: ObjectId;
+  user: string;
   items: {
     product: string;
     quantity: number;

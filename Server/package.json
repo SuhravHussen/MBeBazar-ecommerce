@@ -9,7 +9,8 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "swc src -d dist --source-maps --copy-files",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest --forceExit --detectOpenHandles "
   },
   "dependencies": {
     "ajv": "^8.11.0",
@@ -44,6 +45,7 @@
     "winston-mongodb": "^5.0.7"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.0.0",
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.108",
     "@types/bcrypt": "^5.0.0",
