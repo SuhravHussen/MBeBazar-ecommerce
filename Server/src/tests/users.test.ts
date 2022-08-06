@@ -59,16 +59,14 @@ describe('Testing Users Route', () => {
     app.initializeRoutes([usersRoute]);
     it('get user information', async () => {
       const users = usersRoute.usersController.userService.users;
-      users.findOne = jest.fn().mockReturnValue([
-        {
-          _id: '62ce6bcd90b05947c41e39d8',
-          name: 'name',
-          email: 'suhrav@fmail.com',
-          phone: '123456789',
-          address: 'address',
-          avatar: 'avatar',
-        },
-      ]);
+      users.findOne = jest.fn().mockReturnValue({
+        _id: '62ce6bcd90b05947c41e39d8',
+        name: 'name',
+        email: 'suhrav@fmail.com',
+        phone: '123456789',
+        address: 'address',
+        avatar: 'avatar',
+      });
       (mongoose as any).connect = jest.fn();
 
       const res = await request(app.getServer()).get('/users/62a980a5030ab5cb1b306bf7').set('Cookie', setCookie(refresh));
@@ -99,6 +97,7 @@ describe('Testing Users Route', () => {
         .post('/users/updateProfile')
         .set('Cookie', setCookie(jwt))
         .set('Cookie', setCookie(refresh))
+        .set('enctype', 'multipart/form-data')
         .type('form')
         .field('name', 'name')
         .field('avatar', 'avatar');

@@ -14,7 +14,7 @@ class UserService {
     if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
 
     const findUser: User | null = (await this.users.findOne({ _id: userId })) as User;
-    if (!findUser) throw new HttpException(409, "You're not user");
+
     return findUser;
   }
 
@@ -27,7 +27,9 @@ class UserService {
   }
 
   public async updateUser(req: RequestWithUser): Promise<User> {
+    console.log('user information incoming');
     let uploadedFile: null | { url: string } = null;
+
     const user = await this.findUserById(req.user._id);
 
     if (!user) throw new HttpException(409, "You're not user");
