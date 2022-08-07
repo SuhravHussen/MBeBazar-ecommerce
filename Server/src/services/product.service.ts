@@ -11,10 +11,12 @@ class ProductService {
   }
   public async getProductById(id: string): Promise<product> {
     const product: product | null = await this.products.findById(id);
+    console.log(product, id);
     return product as product;
   }
 
   public async getProductByCategory(category: string): Promise<product[]> {
+    console.log(category);
     return await this.products.find({ category: { $regex: category, $options: 'i' } });
   }
 
