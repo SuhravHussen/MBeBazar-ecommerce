@@ -7,12 +7,12 @@ export interface Order {
     phone: string;
     totalPrice: number;
     shippingPrice: number;
-    shippingMethod: 'COD' | 'RedX' | 'Paperfly';
+    shippingMethod: 'Sundarban' | 'RedX' | 'Paperfly';
     status: 'pending' | 'processing' | 'cancelled' | 'delivered';
     payment: 'pending' | 'success' | 'failed';
     paymentMethod: 'COD' | 'CreditCard';
   };
-  user: ObjectId;
+  user: ObjectId | string;
   items: {
     product: string;
     quantity: number;

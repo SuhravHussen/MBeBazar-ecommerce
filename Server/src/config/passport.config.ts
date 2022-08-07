@@ -26,10 +26,11 @@ export class PassportLogin {
       let address: string | null = '';
 
       const userData = await this.user.findOne({ email: email });
-      if (!userData)
-        return done({
-          message: 'Could not find user in database',
-        });
+
+      if (!userData) {
+        throw new HttpException(409, 'User not found');
+      }
+
       const isValid = await userData.comparePassword(password);
 
       if (isValid) {

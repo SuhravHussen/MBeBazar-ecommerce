@@ -31,7 +31,7 @@ export const orderDto: JSONSchemaType<Order> = {
         },
         shippingMethod: {
           type: 'string',
-          enum: ['COD', 'RedX', 'Paperfly'],
+          enum: ['Sundarban', 'RedX', 'Paperfly'],
         },
         status: {
           type: 'string',

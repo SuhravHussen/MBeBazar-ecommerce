@@ -27,7 +27,6 @@ class UserService {
   }
 
   public async updateUser(req: RequestWithUser): Promise<User> {
-    console.log('user information incoming');
     let uploadedFile: null | { url: string } = null;
 
     const user = await this.findUserById(req.user._id);

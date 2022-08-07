@@ -11,6 +11,7 @@ export const generateJwt = async (payload: DataStoredInToken): Promise<TokenData
 
   try {
     const token = await sign(payload, SECRET_KEY as string, { expiresIn: JWT_TOKEN_EXPIRE + 's' });
+
     const refreshToken = await sign(payload, SECRET_KEY as string, { expiresIn: JWT_REFRESH_EXPIRE + 's' });
     await redisClient.set(payload._id, refreshToken);
     redisClient.expire(payload._id, parseInt(JWT_REFRESH_EXPIRE as string));
