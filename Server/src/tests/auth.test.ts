@@ -1,12 +1,8 @@
 import { setCookie } from './../utils/jwt';
-import redisClient from '@databases/redis';
-import { PassportLogin } from '@config/passport.config';
 import request from 'supertest';
 import App from '@/app';
 import AuthRoute from '@/routes/auth.route';
 import mongoose from 'mongoose';
-import passport from 'passport';
-import MockStrategy from 'passport-mock-strategy';
 
 const jwt =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic3VocmF2IGh1c3NhaW4iLCJfaWQiOiI2MmQ2M2QwYWU5YmNkYjY5NTFmNTRhODkiLCJlbWFpbCI6InN1aHJhdmh1c3NlbkBnbWFpbC5jb20iLCJhdmF0YXIiOm51bGwsImFkZHJlc3MiOm51bGwsImlhdCI6MTY1OTI1NDA3MCwiZXhwIjoxNjYxODQ2MDcwfQ.sCLL4UWy2z5-ES8d7EXy_dOnETusWrMuBVwcmpKi4QU';
