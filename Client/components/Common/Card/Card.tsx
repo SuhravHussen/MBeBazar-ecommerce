@@ -1,10 +1,10 @@
+import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/common/card/card.module.scss';
 import { Fade, FiShoppingCart, Image, Rating } from '../../../utils/commonImports';
 import HoverIcons from './HoverIcons';
-import { ProductsSchema } from './schema';
 
 type iProps = {
-    product: ProductsSchema;
+    product: iProduct;
     index: number;
     setQuickViewDetails: any;
     setModalOpen: any;
@@ -22,25 +22,25 @@ export default function Card({ product, index, setQuickViewDetails, setModalOpen
                         setModalOpen={setModalOpen}
                     />
                     <Image
-                        src={product.image[0]}
-                        width={244}
-                        height={244}
+                        src={product.images[0]}
+                        width={220}
+                        height={224}
                         placeholder="blur"
                         blurDataURL="/images/loading-min.jpg"
                     />
                 </div>
                 <small className={styles.category}>{product.category}</small>
                 <h3 className={styles.title}>{product.title}</h3>
-                <div style={{ display: 'flex' }}>
-                    <Rating name="read-only" value={product.ratings} precision={0.1} readOnly />
+                <div className={styles.ratingDiv}>
+                    <Rating name="read-only" value={5} precision={0.1} readOnly />
                     <span className={styles.reviewsNumber}>(32)</span>
                 </div>
                 <p>
-                    By <span>{product.vendorName}</span>
+                    By <span>MBeBazar</span>
                 </p>
                 <div className={styles.bottom}>
                     <h2>${product.offerPrice}</h2>
-                    <del>${product.actualPrice}</del>
+                    <del>${product.price}</del>
 
                     <button type="button" className={styles.button}>
                         <FiShoppingCart /> Add

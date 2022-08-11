@@ -3728,6 +3728,11 @@ react-fast-marquee@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-fast-marquee/-/react-fast-marquee-1.2.1.tgz#8a8ee91ec0cee04bcff7f1ea5c3fd5a2c4dc227d"
   integrity sha512-rd9ZDhiUrrL2puZNlnb633df/1gjtknuIaf749LIgTLXa18fzPIdFBrz4VjERu1ECUdU9tniaF5FuosNt/GYKQ==
 
+react-google-one-tap-login@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-google-one-tap-login/-/react-google-one-tap-login-0.1.1.tgz#12a61e63e19251622cf1575b601d79fd4d07847a"
+  integrity sha512-RCbOfR3Z7VcRae4AzrLoBfY/aqqdN24pkQeNz9CJ0W65C9SY3vAwF0Yp8mwpeFwsugaZ5b1HZsfhUYWtb3IMrw==
+
 react-icons@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"

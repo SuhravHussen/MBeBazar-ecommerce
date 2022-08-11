@@ -1,18 +1,19 @@
 .singleProduct {
   border: 1px solid #ececec;
-  height: 465px;
+
   width: 19%;
   margin-bottom: 30px;
   border-radius: 15px;
   display: flex;
   justify-content: space-between;
-  //   align-items: center;
+  // align-items: center;
   flex-direction: column;
   overflow: hidden;
   position: relative;
   padding: 20px;
   @media screen and (max-width: $md) {
-    width: 35%;
+    width: 30%;
+    padding: 10px;
   }
   @media screen and (max-width: $sm) {
     width: 95%;
@@ -56,10 +57,26 @@
     z-index: 2;
   }
   .title {
+    white-space: nowrap;
     font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    @media screen and (max-width: $md) {
+      font-size: 14px;
+      height: 25px;
+    }
+  }
+  .ratingDiv {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    span {
+      font-size: medium;
+    }
   }
   .reviewsNumber {
-    font-size: 0.8rem;
+    font-size: 12px !important;
     align-self: center;
     margin-left: 3px;
     color: $PrimaryGrey;

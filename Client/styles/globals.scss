@@ -15,6 +15,7 @@ a {
   padding: 0;
   font-family: $PrimaryFont;
   font-display: swap;
+  transition: color 0.2s;
 }
 
 ::-webkit-scrollbar {

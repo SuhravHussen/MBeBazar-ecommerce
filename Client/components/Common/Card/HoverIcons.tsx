@@ -1,5 +1,4 @@
-import { AiOutlineEye, AiOutlineHeart } from 'react-icons/ai';
-import { RiArrowLeftRightLine } from 'react-icons/ri';
+import { AiOutlineEye } from 'react-icons/ai';
 import styles from '../../../styles/components/common/card/card.module.scss';
 import { GreenTooltip } from '../../styled/popularProducts';
 
@@ -20,16 +19,6 @@ export default function HoverIcons({
 
     return (
         <div className={styles.hover} id="popularImageIcons">
-            <GreenTooltip arrow placement="top" title="add to whish-list">
-                <span role="button" tabIndex={0} onClick={HandleModal} className={styles.hoverIcon}>
-                    <AiOutlineHeart />
-                </span>
-            </GreenTooltip>
-            <GreenTooltip arrow placement="top" title="compare">
-                <span role="button" tabIndex={0} onClick={HandleModal} className={styles.hoverIcon}>
-                    <RiArrowLeftRightLine />
-                </span>
-            </GreenTooltip>
             <GreenTooltip arrow placement="top" title="quick view">
                 <span role="button" tabIndex={0} onClick={HandleModal} className={styles.hoverIcon}>
                     <AiOutlineEye />

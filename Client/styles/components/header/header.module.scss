@@ -1,4 +1,10 @@
 .header {
   font-family: $PrimaryFont !important;
   font-weight: 500;
+  .announcement {
+    height: 30px;
+    @media screen and (min-width: $md) {
+      display: none;
+    }
+  }
 }

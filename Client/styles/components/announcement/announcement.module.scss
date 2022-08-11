@@ -3,7 +3,7 @@
   text-align: center;
   background-color: $PrimaryGreen;
   color: $PrimaryWhite;
-  height: 30px;
+  height: 100%;
   font-size: 0.9rem;
   display: flex;
   justify-content: center;
@@ -12,8 +12,5 @@
     margin: 0;
     padding-top: 2px;
     font-size: 0.9rem;
-  }
-  @media screen and (min-width: $md) {
-    display: none;
   }
 }

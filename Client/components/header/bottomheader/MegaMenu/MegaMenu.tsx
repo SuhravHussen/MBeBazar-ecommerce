@@ -1,4 +1,5 @@
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { Zoom } from '@mui/material';
 import dynamic from 'next/dynamic';
 import MegaMenuSk from '../../../../skeletons/megaMenu/MegaMenuSk';
 import styles from '../../../../styles/components/bottomNav/shop.module.scss';
@@ -11,7 +12,12 @@ const MegaList = dynamic(() => import('./MegaList'), {
 
 export default function MegaMenu() {
     return (
-        <LightTooltip title={<MegaList />} arrow placement="bottom">
+        <LightTooltip
+            title={<MegaList />}
+            arrow
+            placement="bottom-start"
+            TransitionComponent={Zoom}
+        >
             <p className={styles.shopsMenu}>
                 Mega Menu <ExpandMore />
             </p>

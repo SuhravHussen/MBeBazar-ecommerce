@@ -16,6 +16,6 @@ export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
         maxWidth: '1600px',
     },
     [`& .${tooltipClasses.arrow}`]: {
-        color: 'grey',
+        color: 'green',
     },
 }));

@@ -1,17 +1,10 @@
+import { iProduct } from '../../../../models/product.interface';
 import styles from '../../../../styles/components/Home/tops/singleColumn.module.scss';
 import { Image, Rating } from '../../../../utils/commonImports';
 
 type IPros = {
     type: string;
-    products: {
-        image: string;
-        rating: number;
-        title: string;
-        id: 'string';
-        price: number;
-        offerPrice: number;
-        reviewsNumber: number;
-    }[];
+    products: iProduct[];
 };
 
 export default function SingleColumn({ type, products }: IPros) {
@@ -20,15 +13,14 @@ export default function SingleColumn({ type, products }: IPros) {
             <h3>{type}</h3>
             <div className={styles.products}>
                 {products.map((p) => (
-                    <div className={styles.row}>
+                    <div key={p._id} className={styles.row}>
                         <div className={styles.image}>
-                            <Image layout="fill" src={p?.image} />
+                            <Image layout="fill" src={p.images[0]} />
                         </div>
                         <div className={styles.detail}>
                             <h4>{p?.title}</h4>
                             <div className={styles.ratings}>
-                                <Rating readOnly precision={0.5} value={p?.rating} />{' '}
-                                <p>({p?.reviewsNumber})</p>
+                                <Rating readOnly precision={0.5} value={5} /> <p>23</p>
                             </div>
                             <div className={styles.prices}>
                                 <h3>${p?.offerPrice}</h3>

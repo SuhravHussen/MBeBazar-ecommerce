@@ -1,5 +1,6 @@
 import { RiCloseCircleLine } from 'react-icons/ri';
 import ReactImageMagnify from 'react-image-magnify';
+import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/Home/quickview.module.scss';
 import { getPercentage } from '../../../utils/calculations';
 import {
@@ -12,12 +13,11 @@ import {
     // eslint-disable-next-line prettier/prettier
     useState
 } from '../../../utils/commonImports';
-import { ProductsSchema } from './schema';
 
 type iProps = {
     open: boolean;
     setOpen: any;
-    details: ProductsSchema;
+    details: iProduct;
 };
 
 export default function QuickView({ open, setOpen, details }: iProps) {
@@ -91,23 +91,18 @@ export default function QuickView({ open, setOpen, details }: iProps) {
                 <div className={styles.leftSide}>
                     <div className={styles.firstSlide}>
                         <Carousel {...settings1} myref={(slider1: any) => setNav1(slider1)}>
-                            {details?.image.map((im) => (
+                            {details?.images.map((im) => (
                                 <div className={styles.singleSlide} key={im}>
-                                    {/* <Image
-                                        src={im}
-                                        height={350}
-                                        width={350}
-                                        placeholder="blur"
-                                        blurDataURL="/images/loading-min.jpg"
-                                    /> */}
                                     <ReactImageMagnify
                                         isHintEnabled
                                         enlargedImagePosition="over"
                                         {...{
                                             smallImage: {
-                                                alt: 'Wristwatch by Ted Baker London',
-                                                isFluidWidth: true,
+                                                alt: details?.title,
+                                                width: 300,
                                                 src: im,
+                                                isFluidWidth: false,
+                                                height: 300,
                                             },
                                             largeImage: {
                                                 src: im,
@@ -122,7 +117,7 @@ export default function QuickView({ open, setOpen, details }: iProps) {
                     </div>
                     <div className={`${styles.secondSlide} quickViewLeftSlide`}>
                         <Carousel {...settings2} myref={(slider2: any) => setNav2(slider2)}>
-                            {details?.image.map((img, i) => (
+                            {details?.images.map((img, i) => (
                                 <div className={styles.singleSlide2} key={img}>
                                     <Image
                                         src={img}
@@ -144,20 +139,15 @@ export default function QuickView({ open, setOpen, details }: iProps) {
                     <h1>{details?.title}</h1>
                     {/* third row */}
                     <div className={styles.ratings}>
-                        <Rating
-                            name="read-only"
-                            value={details?.ratings}
-                            precision={0.1}
-                            readOnly
-                        />
+                        <Rating name="read-only" value={4.5} precision={0.1} readOnly />
                         <h5>(32 Reviews)</h5>
                     </div>
                     {/* fourth row */}
                     <div className={styles.prices}>
                         <h1>${details?.offerPrice}</h1>
                         <div className={styles.off}>
-                            <h6>{getPercentage(details?.actualPrice, details?.offerPrice)}% Off</h6>
-                            <del>${details?.actualPrice}</del>
+                            <h6>{getPercentage(details?.price, details?.offerPrice)}% Off</h6>
+                            <del>${details?.price}</del>
                         </div>
                     </div>
                     {/* fifth row */}
@@ -176,7 +166,7 @@ export default function QuickView({ open, setOpen, details }: iProps) {
                     {/* sixth row */}
                     <div className={styles.footer}>
                         <h6>
-                            Vendor: <span>{details?.vendorName}</span>
+                            Vendor: <span>MBeBazar</span>
                         </h6>
                     </div>
                 </div>

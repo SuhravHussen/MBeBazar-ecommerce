@@ -3,10 +3,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { BsHeadset } from 'react-icons/bs';
+import Announce from '../topheader/Announce';
 import CategoriesToolTip from './AllCategories/CategoriesToolTip';
-import Blogs from './BlogMenu/Blog';
 import MegaMenu from './MegaMenu/MegaMenu';
-import Shops from './ShopMenu/Shops';
 
 export default function Bottomheader() {
     return (
@@ -39,9 +38,14 @@ export default function Bottomheader() {
                             justifyContent: 'space-around',
                         }}
                     >
-                        <Shops />
                         <MegaMenu />
-                        <Blogs />
+                        <div
+                            style={{
+                                width: '70%',
+                            }}
+                        >
+                            <Announce />
+                        </div>
                     </Box>
                     <Box
                         sx={{

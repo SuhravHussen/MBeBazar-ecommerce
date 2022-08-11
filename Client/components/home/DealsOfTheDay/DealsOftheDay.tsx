@@ -1,9 +1,6 @@
 import { IoIosArrowForward } from 'react-icons/io';
-import data from '../../../FakeData/Data';
-import deal1 from '../../../public/images/dealsOfDay/dealofDay1.png';
-import deal2 from '../../../public/images/dealsOfDay/dealofDay2.png';
-import deal3 from '../../../public/images/dealsOfDay/dealofDay3.png';
-import deal4 from '../../../public/images/dealsOfDay/dealofDay4.png';
+
+import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/Home/dealsOfTheDay/dealsOfTheDay.module.scss';
 import {
     Fade,
@@ -11,25 +8,14 @@ import {
     Image,
     Rating,
     SectionHeader,
-    useEffect,
+
     // eslint-disable-next-line prettier/prettier
     useState
 } from '../../../utils/commonImports';
 import Countdown from './Countdown';
 
-export default function DealsOftheDay() {
-    const [products, setProducts] = useState<any>([]);
-    const bgImages = [deal1, deal2, deal3, deal4];
-    useEffect(() => {
-        const deals = data.filter((d) => {
-            if (d.featured.indexOf('dealOfTheDay') === -1) {
-                return false;
-            }
-            return true;
-        });
-
-        setProducts(deals.slice(0, 4));
-    }, []);
+export default function DealsOftheDay({ dealsOfTheDay }: { dealsOfTheDay: iProduct[] }) {
+    const [products] = useState<iProduct[]>(dealsOfTheDay);
 
     return (
         <div className={styles.dealsContainer}>
@@ -40,12 +26,12 @@ export default function DealsOftheDay() {
                 </h3>
             </SectionHeader>
             <div className={styles.deals}>
-                {products.map((p: any, i: any) => (
-                    <Fade className={styles.singleDealFade} direction="left" key={p.id}>
+                {products.slice(0, 4).map((p) => (
+                    <Fade className={styles.singleDealFade} direction="left" key={p._id}>
                         <div className={styles.singleDeal}>
                             <div className={styles.image}>
                                 <Image
-                                    src={bgImages[i]}
+                                    src={p.images[0]}
                                     layout="fill"
                                     placeholder="blur"
                                     blurDataURL="/images/dealsOfDay/dealofDay1.png"
