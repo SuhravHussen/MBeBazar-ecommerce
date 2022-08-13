@@ -131,6 +131,7 @@ class productController {
   getProductSearchSuggestions = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const tags: string[] = req.body.tags;
+
       const products: product[] = await this.productService.productSearchSuggestions(tags);
 
       const response1: response = {

@@ -223,7 +223,7 @@ paths:
                 type: boolean  
 
   /product/search-suggestions:
-    get:
+    post:
       tags:
       - "Product"
       summary: "Returns suggested products"
@@ -275,7 +275,7 @@ paths:
                 type: boolean     
 
   /product/full-search?page={pageNumber}&limit={limitNumber}:
-    get:
+    post:
       tags:
       - "Product"
       summary: "Returns searched products"
