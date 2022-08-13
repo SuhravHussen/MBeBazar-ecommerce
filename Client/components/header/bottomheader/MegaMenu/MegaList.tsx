@@ -6,12 +6,12 @@ export default function MegaList() {
             <div className={styles.colum}>
                 <h2 className={styles.categoryHeader}>Fruits & Vegetables</h2>
                 <div className={styles.categories}>
-                    <p className={styles.category}>Meat and poultry</p>
-                    <p className={styles.category}>Fresh vegetables</p>
-                    <p className={styles.category}>Herbs & seasonings</p>
-                    <p className={styles.category}>Cuts & sprouts</p>
-                    <p className={styles.category}>Exotic fruits & veggies</p>
-                    <p className={styles.category}>package produce</p>
+                    <p className={styles.category}>Potato</p>
+                    <p className={styles.category}>Mango</p>
+                    <p className={styles.category}>Cauliflower</p>
+                    <p className={styles.category}>Strawberries Package</p>
+                    <p className={styles.category}>Pineapple Imported</p>
+                    <p className={styles.category}>Lettuce</p>
                 </div>
             </div>
             <div className={styles.colum}>
@@ -20,20 +20,20 @@ export default function MegaList() {
                     <p className={styles.category}>Milk & Flavoured Milk</p>
                     <p className={styles.category}>Butter and Margarine</p>
                     <p className={styles.category}>Eggs substitutes</p>
-                    <p className={styles.category}>Marmalades</p>
-                    <p className={styles.category}>Sour Cream</p>
-                    <p className={styles.category}>Cheese</p>
+                    <p className={styles.category}>Bread</p>
+                    <p className={styles.category}>Snack</p>
+                    <p className={styles.category}>Biscuits</p>
                 </div>
             </div>
             <div className={styles.colum}>
                 <h2 className={styles.categoryHeader}>Meat & Seafood</h2>
                 <div className={styles.categories}>
-                    <p className={styles.category}>Breakfast Sausage</p>
-                    <p className={styles.category}>Dinner Sausage</p>
-                    <p className={styles.category}>Chicken</p>
-                    <p className={styles.category}>Sliced Deli Meat</p>
-                    <p className={styles.category}>Wild Caught Fillets</p>
-                    <p className={styles.category}>Crab and shellfish</p>
+                    <p className={styles.category}>Beef Meat</p>
+                    <p className={styles.category}>Chicken meat</p>
+                    <p className={styles.category}>Mutton Meat</p>
+                    <p className={styles.category}>Elisha</p>
+                    <p className={styles.category}>Salmon</p>
+                    <p className={styles.category}>Sea Food</p>
                 </div>
             </div>
 

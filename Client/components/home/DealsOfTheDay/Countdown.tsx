@@ -2,7 +2,10 @@ import styles from '../../../styles/components/Home/dealsOfTheDay/dealsOfTheDay.
 import { useCountDown } from '../../../utils/customHooks';
 
 export default function Countdown() {
-    const [days, hours, minutes, seconds] = useCountDown(new Date('May 30 2023 00:00:00'));
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    const [days, hours, minutes, seconds] = useCountDown(tomorrow);
 
     return (
         <div className={styles.countDownDiv}>

@@ -8,7 +8,7 @@ import { Image } from '../../../../utils/commonImports';
 export default function AllCategories({ layerProps }: any) {
     const categories = [
         {
-            name: 'Milks and Dairies',
+            name: 'Fruits',
             image: '/images/categories/category-1.svg',
         },
         {
@@ -32,7 +32,7 @@ export default function AllCategories({ layerProps }: any) {
             image: '/images/categories/category-6.svg',
         },
         {
-            name: 'Fruits',
+            name: 'Organic Foods',
             image: '/images/categories/category-7.svg',
         },
         {
@@ -40,7 +40,7 @@ export default function AllCategories({ layerProps }: any) {
             image: '/images/categories/category-9.svg',
         },
         {
-            name: 'Vegetables',
+            name: 'Cakes',
             image: '/images/categories/category-8.svg',
         },
         {
@@ -48,19 +48,19 @@ export default function AllCategories({ layerProps }: any) {
             image: '/images/categories/category-10.svg',
         },
         {
-            name: 'On Sale',
+            name: 'Cooking Essentials',
             image: '/images/categories/icon-1.svg',
         },
         {
-            name: 'On Sale',
+            name: 'Milk and Dairy',
             image: '/images/categories/icon-1.svg',
         },
         {
-            name: 'On Sale',
+            name: 'Snacks',
             image: '/images/categories/icon-1.svg',
         },
         {
-            name: 'On Sale',
+            name: 'Jam & Jelly',
             image: '/images/categories/icon-1.svg',
         },
     ];

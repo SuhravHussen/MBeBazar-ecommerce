@@ -11,12 +11,15 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import { Sling as Hamburger } from 'hamburger-react';
 import * as React from 'react';
+import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
 import { dynamic, Image } from '../../../utils/commonImports';
 import { useWindowDimensions } from '../../../utils/customHooks';
+import debounceSearch from '../../../utils/debounce';
 import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
 import { Search, SearchIconWrapper, StyledInputBase } from '../../styled/middleNav';
 import CartDrawer from './Cart/CartDrawer';
+import SearchSuggestions from './SearchSuggestions';
 import { RenderMobileMenu } from './utils/renderMenu';
 
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
@@ -31,6 +34,7 @@ export default function MiddleHeader() {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const [cartOpen, setCartOpen] = React.useState(false);
     const [loginDialogueOpen, setLoginDialogueOpen] = React.useState(false);
+    const [items, setItems] = React.useState<iProduct[]>([]);
     // open or close drawer
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
@@ -41,7 +45,23 @@ export default function MiddleHeader() {
         callback(param);
     };
 
-    console.log(cartOpen, 'cart');
+    const searchSuggestionsHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const searchArr = e.target.value.split(' ');
+            const res = await fetch(`${process.env.BASE_URL}/product/search-suggestions`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({ tags: searchArr }),
+            });
+            const data = await res.json();
+            setItems(data.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return (
         <>
             {/* drawer/modals  */}
@@ -90,7 +110,12 @@ export default function MiddleHeader() {
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
-                            <StyledInputBase className={styles.searchInput} placeholder="Search…" />
+                            <StyledInputBase
+                                onChange={(e) => debounceSearch(500, searchSuggestionsHandler, e)}
+                                className={styles.searchInput}
+                                placeholder="Search…"
+                            />
+                            {items.length > 0 && <SearchSuggestions items={items} />}
                         </Search>
                         {/* right icons */}
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
