@@ -152,7 +152,7 @@ class productController {
 
   getFullSearchedProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { page = '1', limit = '5' } = req.params as unknown as { page: string; limit: string };
+      const { page = '1', limit = '5' } = req.query as unknown as { page: string; limit: string };
 
       const text: string = req.body.text;
       const products: paginationProducts = await this.productService.productFullSearch(text, parseInt(page), parseInt(limit));
