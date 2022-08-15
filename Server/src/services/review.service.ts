@@ -14,7 +14,7 @@ class reviewService {
       throw new HttpException(409, 'You are not allowed to review this product');
     }
 
-    const data: Review = await this.model.create(review);
+    const data: Review = (await this.model.create(review)) as Review;
     await this.user.updateOne({ _id: review.user }, { $pull: { toReview: review.product } });
 
     const res: response = {
@@ -26,7 +26,7 @@ class reviewService {
   }
 
   public async getReviews(id: string): Promise<response> {
-    const data: Review[] = await this.model.find({ product: id }).populate('user', 'name');
+    const data: Review[] = (await this.model.find({ product: id }).populate('user', ['name', 'avatar']).sort({ updatedAt: -1 })) as Review[];
 
     const res: response = {
       data: data,

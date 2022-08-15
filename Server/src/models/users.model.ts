@@ -28,6 +28,7 @@ const userSchema = new Schema<User, UserModel, UserDocument>(
     },
     avatar: {
       type: String,
+      default: null,
     },
     toReview: [
       {
