@@ -18,7 +18,6 @@ export default function Bottomheader() {
                     maxWidth: '1600px',
                     margin: '0 auto',
                     display: { xs: 'none', md: 'block' },
-                    zIndex: -1,
                 }}
                 elevation={0}
             >

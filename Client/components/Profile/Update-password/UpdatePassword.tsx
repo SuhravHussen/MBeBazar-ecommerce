@@ -3,10 +3,10 @@ import { useState } from '../../../utils/commonImports';
 import InputBox from '../../Common/Login-SignUp/InputBox';
 
 export default function UpdatePassword() {
-    const [currentPass, setCurrentPass] = useState('');
-    const [currentPassError, setCurrentPassError] = useState(false);
-    const [newPass, setNewPass] = useState('');
-    const [newPassError, setNewPassError] = useState(false);
+    const [, setCurrentPass] = useState('');
+    const [currentPassError] = useState(false);
+    const [, setNewPass] = useState('');
+    const [newPassError] = useState(false);
     return (
         <div className={styles.updatePassContainer}>
             <h3>Update Password</h3>

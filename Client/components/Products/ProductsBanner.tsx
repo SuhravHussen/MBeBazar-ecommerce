@@ -6,6 +6,8 @@ import { Image } from '../../utils/commonImports';
 
 export default function ProductsBanner() {
     const router = useRouter();
+    const categoryStr = router.query.category ? router.query.category : '';
+    const categories = typeof categoryStr === 'string' ? categoryStr.split('-') : [];
 
     return (
         <div className={styles.bannerContainer}>
@@ -23,13 +25,12 @@ export default function ProductsBanner() {
                     <div className={styles.route}>
                         <AiOutlineHome /> Home
                     </div>
-
-                    <div className={styles.route}>
-                        <MdArrowForwardIos /> <span>{router.query.category}</span>
-                    </div>
-                    <div className={styles.route}>
-                        <MdArrowForwardIos /> <span>{router.query.subCategory}</span>
-                    </div>
+                    {categories.map((category, index) => (
+                        // eslint-disable-next-line react/no-array-index-key
+                        <div className={styles.route} key={index + Math.random()}>
+                            <MdArrowForwardIos /> <span>{category}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

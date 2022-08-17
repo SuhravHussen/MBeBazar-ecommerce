@@ -6,7 +6,9 @@
   margin-top: 50px;
   @media screen and (max-width: $md) {
     flex-direction: column;
+    margin-top: 12px;
   }
+
   .slide {
     overflow: hidden;
     width: 50%;
@@ -27,7 +29,7 @@
     align-items: center;
     @media screen and (max-width: $md) {
       width: 100%;
-      margin-top: 50px;
+      margin-top: 12px;
     }
   }
 }

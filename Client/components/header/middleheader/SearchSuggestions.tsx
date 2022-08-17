@@ -6,9 +6,13 @@ import { Image } from '../../../utils/commonImports';
 export default function SearchSuggestions({ items }: { items: iProduct[] }) {
     return (
         <div className={styles.suggestionContainer}>
-            <List dense>
+            <List>
                 {items.map((item: iProduct) => (
-                    <ListItem>
+                    <ListItem
+                        sx={{
+                            cursor: 'pointer',
+                        }}
+                    >
                         <ListItemAvatar>
                             <Avatar>
                                 <Image

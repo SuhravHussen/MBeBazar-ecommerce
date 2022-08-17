@@ -1,7 +1,15 @@
 .slideView {
   width: 100%;
 }
-
+// .rootImgContainer {
+//   width: 300px !important;
+//   height: 300px !important;
+// }
 .thumb {
   width: 100px;
+  height: 100px;
+  @media screen and (max-width: $md) {
+    width: 70px;
+    height: 70px;
+  }
 }

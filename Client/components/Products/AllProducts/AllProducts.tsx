@@ -1,4 +1,6 @@
 import Pagination from '@mui/material/Pagination';
+import { iProduct } from '../../../models/product.interface';
+import { searchedProps } from '../../../pages/products';
 import ProductSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/products/allProducts.module.scss';
 import { React, useEffect, useState } from '../../../utils/commonImports';
@@ -7,30 +9,20 @@ import QuickView from '../../Common/Card/QuickView';
 import Select from '../../Common/Select';
 import NoResult from './NoResult';
 
-export default function AllProducts() {
-    const [page, setPage] = useState(1);
-    const [products, setProducts] = useState<any>([]);
-    const [count, setCount] = useState(5);
-    const [, setQuickViewDetails] = useState(0);
+export default function AllProducts({ data, query }: searchedProps) {
+    const [page, setPage] = useState<number>(1);
+    const [totalPage, setTotalPage] = useState<number>(data.totalPages);
+    const [hasNextPage, setHasNextPage] = useState<boolean>();
+    const [hasPrevPage, setHasPrevPage] = useState<boolean>();
+    const [products, setProducts] = useState<iProduct[]>([]);
+    const [quickViewDetails, setQuickViewDetails] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const handleSort = (v: {}) => {
         console.log(v);
     };
 
     // eslint-disable-next-line no-undef
-    const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => setPage(value);
-
-    const fetchTotalItems = async () => {
-        try {
-            const promise = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-            const data = await promise.json();
-            setCount(data.length);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-    fetchTotalItems();
 
     const options = [
         { value: 'Featured', label: 'Featured' },
@@ -38,52 +30,55 @@ export default function AllProducts() {
         { value: 'High to Low', label: 'High to Low' },
     ];
 
+    const fetchProducts = async (pageNumber: number) => {
+        try {
+            setLoading(true);
+            const response = await fetch(
+                `${process.env.BASE_URL}/product/full-search?page=${pageNumber}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: query }),
+                }
+            );
+            const resData = await response.json();
+
+            setProducts(resData.data.docs);
+            setHasNextPage(resData.data.hasNextPage);
+            setHasPrevPage(resData.data.hasPrevPage);
+            setTotalPage(resData.data.totalPages);
+            setPage(resData.data.page);
+            setLoading(false);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    // eslint-disable-next-line no-undef
+    const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+        fetchProducts(value);
+    };
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                setLoading(true);
-
-                const promise = await fetch(
-                    `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`
-                );
-                const data = await promise.json();
-                setProducts(data);
-
-                setLoading(false);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-
-        fetchProducts();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page]);
+        setPage(data.page);
+        setTotalPage(data.totalPages);
+        setHasNextPage(data.hasNextPage);
+        setHasPrevPage(data.hasPrevPage);
+        setProducts(data.docs);
+    }, [data]);
 
     return (
         <div className={styles.allProducts}>
             <QuickView
                 open={modalOpen}
                 setOpen={setModalOpen}
-                details={{
-                    title: 'et fugit quas eum in in aperiam quod',
-                    onSale: true,
-                    vendorName: 'NestStore',
-                    actualPrice: 54,
-                    offerPrice: 44,
-                    id: '3454454',
-                    ratings: 3.5,
-                    image: [
-                        'https://res.cloudinary.com/doircnueq/image/upload/v1635596669/MBeCommerece/Products/thumbnail-8_ulpjbv.jpg',
-                        'https://res.cloudinary.com/doircnueq/image/upload/v1635596231/MBeCommerece/Products/seedOfChangeOrganicQuinoe_oodn92.jpg',
-                        'https://res.cloudinary.com/doircnueq/image/upload/v1635596469/MBeCommerece/Products/product-10-1_goxpvv.jpg',
-                    ],
-                    category: 'Juice',
-                }}
+                details={products[quickViewDetails]}
             />
+
             <div className={styles.header}>
                 <p>
-                    We found <span>{count}</span> items for you!
+                    We found <span>{data.totalDocs}</span> items for you!
                 </p>
                 <div className={styles.filters}>
                     <Select handleChange={handleSort} options={options} />
@@ -93,42 +88,29 @@ export default function AllProducts() {
                 {!loading &&
                     products.map((p: any, i: number) => (
                         <Card
-                            // eslint-disable-next-line react/no-array-index-key
-                            key={i}
+                            key={p._id}
                             setQuickViewDetails={setQuickViewDetails}
                             setModalOpen={setModalOpen}
                             index={i}
-                            product={{
-                                title: 'et fugit quas eum in in aperiam quod',
-                                onSale: true,
-                                vendorName: 'NestStore',
-                                actualPrice: 54,
-                                offerPrice: 44,
-                                id: '3454454',
-                                ratings: 3.5,
-                                image: [
-                                    'https://res.cloudinary.com/doircnueq/image/upload/v1635596669/MBeCommerece/Products/thumbnail-8_ulpjbv.jpg',
-                                    'https://res.cloudinary.com/doircnueq/image/upload/v1635596231/MBeCommerece/Products/seedOfChangeOrganicQuinoe_oodn92.jpg',
-                                    'https://res.cloudinary.com/doircnueq/image/upload/v1635596469/MBeCommerece/Products/product-10-1_goxpvv.jpg',
-                                ],
-                                category: 'Juice',
-                            }}
+                            product={p}
                         />
                     ))}
                 {loading &&
-                    Array(10)
+                    Array(5)
                         .fill(null)
                         // eslint-disable-next-line react/no-array-index-key
                         .map((_, i) => <ProductSk key={i} />)}
                 {!loading && products.length < 1 && <NoResult />}
             </section>
-            {products.length > 0 && (
+            {data.totalDocs > 0 && (
                 <Pagination
                     onChange={handlePageChange}
-                    count={count / 10}
+                    count={totalPage}
                     page={page}
                     shape="rounded"
                     color="secondary"
+                    hideNextButton={!hasNextPage}
+                    hidePrevButton={!hasPrevPage}
                 />
             )}
         </div>

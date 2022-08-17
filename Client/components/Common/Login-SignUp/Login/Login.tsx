@@ -5,10 +5,10 @@ import InputBox from '../InputBox';
 import OtherLogins from '../OtherLogins';
 
 export default function Login({ handleScreen }: { handleScreen: any }) {
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [passWord, setPassword] = useState('');
-    const [passError, setPassError] = useState(false);
+    const [, setEmail] = useState('');
+    const [emailError] = useState(false);
+    const [, setPassword] = useState('');
+    const [passError] = useState(false);
 
     return (
         <div className={styles.loginContainer}>

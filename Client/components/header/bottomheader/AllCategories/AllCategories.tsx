@@ -3,7 +3,7 @@ import Collapse from '@mui/material/Collapse';
 import { useState } from 'react';
 import { AiOutlineMinusCircle } from 'react-icons/ai';
 import style from '../../../../styles/components/bottomNav/allcategories.module.scss';
-import { Image } from '../../../../utils/commonImports';
+import { Image, Link } from '../../../../utils/commonImports';
 
 export default function AllCategories({ layerProps }: any) {
     const categories = [
@@ -71,10 +71,12 @@ export default function AllCategories({ layerProps }: any) {
         <div {...layerProps} className={style.allCategories}>
             {categories?.map((cat: { name: string; image: string }, i) => (
                 <Collapse orientation="vertical" in={i < showMore} timeout={500}>
-                    <div className={style.singleCategory}>
-                        <Image src={cat.image} width="25%" height={30} />
-                        <p>{cat.name}</p>
-                    </div>
+                    <Link href={`/products?category=${cat.name}`}>
+                        <div className={style.singleCategory}>
+                            <Image src={cat.image} width="25%" height={30} />
+                            <p>{cat.name}</p>
+                        </div>
+                    </Link>
                 </Collapse>
             ))}
 

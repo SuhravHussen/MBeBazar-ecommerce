@@ -4,14 +4,14 @@ import InputBox from '../../Common/Login-SignUp/InputBox';
 import Dropzone from './Dropzone';
 
 export default function UpdateProfile() {
-    const [name, setName] = useState('');
-    const [nameError, setNameError] = useState(false);
-    const [phone, setPhone] = useState('');
-    const [phoneError, setPhoneError] = useState(false);
-    const [address, setAddress] = useState('');
-    const [addressError, setAddressError] = useState(false);
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState(false);
+    const [, setName] = useState('');
+    const [nameError] = useState(false);
+    const [, setPhone] = useState('');
+    const [phoneError] = useState(false);
+    const [, setAddress] = useState('');
+    const [addressError] = useState(false);
+    const [, setEmail] = useState('');
+    const [emailError] = useState(false);
 
     return (
         <div className={styles.updateProfileContainer}>

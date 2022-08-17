@@ -1,11 +1,5 @@
-import CallIcon from '@mui/icons-material/Call';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import FastfoodRoundedIcon from '@mui/icons-material/FastfoodRounded';
-import FoodBankRoundedIcon from '@mui/icons-material/FoodBankRounded';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import RoomIcon from '@mui/icons-material/Room';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -13,15 +7,9 @@ import List from '@mui/material/List';
 import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import * as React from 'react';
-import { GiBlender, GiElectric, GiForkKnifeSpoon, GiKitchenKnives, GiTomato } from 'react-icons/gi';
+import { catagories } from './catagories';
+
 import styles from '../../../../styles/components/middleNav/drawer.module.scss';
-import {
-    DrawerInfoBox,
-    MyListItemButton,
-    MyListItemIcon,
-    // eslint-disable-next-line prettier/prettier
-    MyListItemText
-} from '../../../styled/drawerStyled';
 import MyList from './List';
 
 interface props {
@@ -32,42 +20,6 @@ interface props {
 
 export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
     const [hamburgerOpen, setHamburgurOpen] = React.useState(true);
-
-    const catagories = [
-        {
-            primaryIcon: <FoodBankRoundedIcon />,
-            primaryText: 'Foods',
-            collapses: [
-                { text: 'Snack', icon: <FastfoodRoundedIcon /> },
-                {
-                    text: 'Vagetables',
-                    icon: <GiTomato />,
-                },
-            ],
-        },
-
-        {
-            primaryIcon: <LocalMallIcon />,
-            primaryText: 'Accessories',
-            collapses: [
-                { text: 'Knife', icon: <GiKitchenKnives /> },
-                {
-                    text: 'Fork',
-                    icon: <GiForkKnifeSpoon />,
-                },
-            ],
-        },
-        {
-            primaryIcon: <GiElectric />,
-            primaryText: 'Electronics',
-            collapses: [
-                {
-                    text: 'Blender',
-                    icon: <GiBlender />,
-                },
-            ],
-        },
-    ];
 
     return (
         <Drawer open={drawerOpen} elevation={1} onClose={toggleDrawer}>
@@ -112,28 +64,7 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
                         ))}
                     </List>
                 </div>
-                <DrawerInfoBox>
-                    <List>
-                        <MyListItemButton>
-                            <MyListItemIcon>
-                                <RoomIcon />
-                            </MyListItemIcon>
-                            <MyListItemText>Our Location</MyListItemText>
-                        </MyListItemButton>
-                        <MyListItemButton>
-                            <MyListItemIcon>
-                                <DraftsIcon />
-                            </MyListItemIcon>
-                            <MyListItemText>nest@ecommerce.com</MyListItemText>
-                        </MyListItemButton>
-                        <MyListItemButton>
-                            <MyListItemIcon>
-                                <CallIcon />
-                            </MyListItemIcon>
-                            <MyListItemText>(+01)-2345-6789</MyListItemText>
-                        </MyListItemButton>
-                    </List>
-                </DrawerInfoBox>
+
                 <h3 className={styles.followText}>Follow Us</h3>
                 <div className={styles.socialIcons}>
                     <FacebookIcon

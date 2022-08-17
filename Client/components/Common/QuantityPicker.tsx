@@ -1,4 +1,5 @@
-import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
+/* eslint-disable react/jsx-no-bind */
+import { BiMinus, BiPlus } from 'react-icons/bi';
 import styles from '../../styles/components/common/quantityPicker.module.scss';
 
 export default function QuantityPicker({
@@ -21,7 +22,7 @@ export default function QuantityPicker({
 
     // decrease value
     function decrease() {
-        if (value > 0) {
+        if (value > 1) {
             setValue(value - 1);
         }
     }
@@ -30,12 +31,12 @@ export default function QuantityPicker({
         <div className={className}>
             <p className={styles.value}>{value}</p>
             <div>
-                <span onClick={increase} role="button" tabIndex={0}>
-                    <BiUpArrow />
-                </span>
-                <span onClick={decrease} role="button" tabIndex={0}>
-                    <BiDownArrow />
-                </span>
+                <button className={styles.button} type="button">
+                    <BiPlus onClick={increase} className={styles.arrow} />
+                </button>
+                <button className={styles.button} type="button">
+                    <BiMinus onClick={decrease} className={styles.arrow} />
+                </button>
             </div>
         </div>
     );

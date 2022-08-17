@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import { Sling as Hamburger } from 'hamburger-react';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
@@ -35,11 +36,14 @@ export default function MiddleHeader() {
     const [cartOpen, setCartOpen] = React.useState(false);
     const [loginDialogueOpen, setLoginDialogueOpen] = React.useState(false);
     const [items, setItems] = React.useState<iProduct[]>([]);
+    const [search, setSearch] = React.useState('');
     // open or close drawer
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
     };
 
+    // router
+    const router = useRouter();
     // open or close menus or notifications
     const handleOpenClose = (callback: React.Dispatch<React.SetStateAction<any>>, param: any) => {
         callback(param);
@@ -47,6 +51,7 @@ export default function MiddleHeader() {
 
     const searchSuggestionsHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
+            setSearch(e.target.value);
             const searchArr = e.target.value.split(' ');
             const res = await fetch(`${process.env.BASE_URL}/product/search-suggestions`, {
                 method: 'POST',
@@ -57,9 +62,15 @@ export default function MiddleHeader() {
             });
             const data = await res.json();
             setItems(data.data);
-        } catch (e) {
+        } catch (_e) {
             console.log(e);
         }
+    };
+
+    const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        router.replace(`/products?category=${search}`);
+        setItems([]);
     };
 
     return (
@@ -106,17 +117,23 @@ export default function MiddleHeader() {
                             />
                         </span>
                         {/* search bar */}
+
                         <Search className={styles.searchContainer}>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
-                            <StyledInputBase
-                                onChange={(e) => debounceSearch(500, searchSuggestionsHandler, e)}
-                                className={styles.searchInput}
-                                placeholder="Search…"
-                            />
+                            <form onSubmit={handleSearchSubmit}>
+                                <StyledInputBase
+                                    onChange={(e) =>
+                                        debounceSearch(500, searchSuggestionsHandler, e)
+                                    }
+                                    className={styles.searchInput}
+                                    placeholder="Search…"
+                                />
+                            </form>
                             {items.length > 0 && <SearchSuggestions items={items} />}
                         </Search>
+
                         {/* right icons */}
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" color="inherit">

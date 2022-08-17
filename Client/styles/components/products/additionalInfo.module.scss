@@ -8,6 +8,7 @@
   @media screen and (max-width: $sm) {
     padding: 0;
     border: none;
+    margin-top: 16px;
   }
   .header {
     display: flex;
@@ -33,6 +34,9 @@
     flex-direction: column;
     row-gap: 30px;
     margin-top: 20px;
+    height: 400px;
+    overflow: scroll;
+
     .singleReview {
       display: flex;
       padding: 10px;

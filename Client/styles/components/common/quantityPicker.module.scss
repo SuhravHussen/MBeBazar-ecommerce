@@ -5,3 +5,10 @@
   -o-user-select: none;
   user-select: none;
 }
+.arrow {
+  color: $PrimaryGreen;
+  cursor: pointer;
+}
+.button {
+  background-color: transparent !important;
+}

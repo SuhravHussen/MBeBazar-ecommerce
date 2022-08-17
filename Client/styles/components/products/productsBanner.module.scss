@@ -8,6 +8,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  z-index: -1;
   .content {
     margin-left: 4%;
     h1 {

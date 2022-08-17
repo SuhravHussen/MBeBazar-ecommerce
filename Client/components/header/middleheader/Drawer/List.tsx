@@ -37,17 +37,8 @@ export default function MyList({ primaryIcon, primaryText, collapses = [] }: pro
                 collapses.map((d) => (
                     <Collapse in={foodExpand} key={d.text} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <Link
-                                href={{
-                                    pathname: 'products',
-                                    query: {
-                                        category: primaryText,
-                                        subCategory: d.text,
-                                    },
-                                }}
-                            >
+                            <Link href={`/products?category=${primaryText}-${d.text}`}>
                                 <ListItemButton sx={{ pl: 4 }}>
-                                    {' '}
                                     <ListItemIcon>{d.icon}</ListItemIcon>
                                     <ListItemText primary={d.text} />
                                 </ListItemButton>

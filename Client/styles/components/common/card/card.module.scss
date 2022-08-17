@@ -62,6 +62,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     height: 30px;
+    cursor: pointer;
+    &:hover {
+      color: $PrimaryGreen;
+    }
     @media screen and (max-width: $md) {
       font-size: 14px;
       height: 25px;

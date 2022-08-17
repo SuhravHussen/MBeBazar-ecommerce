@@ -6,95 +6,34 @@ import ReactImageMagnify from 'react-image-magnify';
 import styles from '../../../styles/components/products/slideview.module.scss';
 
 const Carousel = dynamic(() => import('@brainhubeu/react-carousel'), { ssr: false });
-export default function SlideView() {
+export default function SlideView({ images }: { images: string[] }) {
     const [value, setValue] = useState(0);
-    const [slides] = useState([
-        <ReactImageMagnify
-            isHintEnabled
-            enlargedImagePosition="over"
-            {...{
-                className: 'products_detail_slide_image',
-                smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    isFluidWidth: true,
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-5_vqmyif.jpg',
-                },
-                largeImage: {
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-5_vqmyif.jpg',
-                    width: 1200,
-                    height: 1200,
-                },
-            }}
-        />,
-        <ReactImageMagnify
-            isHintEnabled
-            enlargedImagePosition="over"
-            {...{
-                className: 'products_detail_slide_image',
-                smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    isFluidWidth: true,
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-5_vqmyif.jpg',
-                },
-                largeImage: {
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-5_vqmyif.jpg',
-                    width: 1200,
-                    height: 1200,
-                },
-            }}
-        />,
 
+    const magnifyImages = images.map((image) => (
         <ReactImageMagnify
             isHintEnabled
             enlargedImagePosition="over"
             {...{
-                className: 'products_detail_slide_image',
+                className: styles.rootImgContainer,
                 smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    isFluidWidth: true,
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-2_bvefyq.jpg',
+                    alt: 'image',
+                    isFluidWidth: false,
+                    height: 400,
+                    width: 400,
+                    src: image,
                 },
                 largeImage: {
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-2_bvefyq.jpg',
+                    src: image,
                     width: 1200,
                     height: 1200,
                 },
             }}
-        />,
-        <ReactImageMagnify
-            isHintEnabled
-            enlargedImagePosition="over"
-            {...{
-                smallImage: {
-                    alt: 'Wristwatch by Ted Baker London',
-                    isFluidWidth: true,
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-4_pwutld.jpg',
-                },
-                largeImage: {
-                    src: 'https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-4_pwutld.jpg',
-                    width: 1200,
-                    height: 1200,
-                },
-            }}
-        />,
-    ]);
-    const [thumb] = useState([
-        <img
-            className={styles.thumb}
-            alt="any"
-            src="https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-5_vqmyif.jpg"
-        />,
-        <img
-            className={styles.thumb}
-            alt="any"
-            src="https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-2_bvefyq.jpg"
-        />,
-        <img
-            className={styles.thumb}
-            alt="any"
-            src="https://res.cloudinary.com/doircnueq/image/upload/v1635596670/MBeCommerece/Products/thumbnail-4_pwutld.jpg"
-        />,
-    ]);
+        />
+    ));
+
+    const thumbnailImages = images.map((image) => (
+        <img className={styles.thumb} alt="any" src={image} />
+    ));
 
     const onChange = (v: any) => {
         setValue(v);
@@ -102,8 +41,13 @@ export default function SlideView() {
 
     return (
         <>
-            <Carousel value={value} slides={slides} onChange={onChange} />
-            <Dots number={slides.length} thumbnails={thumb} value={value} onChange={onChange} />
+            <Carousel value={value} slides={magnifyImages} onChange={onChange} />
+            <Dots
+                number={thumbnailImages.length}
+                thumbnails={thumbnailImages}
+                value={value}
+                onChange={onChange}
+            />
         </>
     );
 }

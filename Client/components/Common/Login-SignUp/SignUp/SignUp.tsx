@@ -5,12 +5,12 @@ import InputBox from '../InputBox';
 import OtherLogins from '../OtherLogins';
 
 export default function SignUp({ handleScreen }: { handleScreen: any }) {
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [passWord, setPassword] = useState('');
-    const [passError, setPassError] = useState(false);
-    const [name, setName] = useState('');
-    const [nameError, setNameError] = useState(false);
+    const [, setEmail] = useState('');
+    const [emailError] = useState(false);
+    const [, setPassword] = useState('');
+    const [passError] = useState(false);
+    const [, setName] = useState('');
+    const [nameError] = useState(false);
     return (
         <div className={styles.signUpContainer}>
             <h1>Sign up</h1>
