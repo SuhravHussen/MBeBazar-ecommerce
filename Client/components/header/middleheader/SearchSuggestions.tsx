@@ -1,11 +1,25 @@
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
-import { Image } from '../../../utils/commonImports';
+import { Image, Link, useEffect, useRef } from '../../../utils/commonImports';
+import { useOutsideAlerter } from '../../../utils/customHooks';
 
-export default function SearchSuggestions({ items }: { items: iProduct[] }) {
+export default function SearchSuggestions({
+    items,
+    setItems,
+}: {
+    items: iProduct[];
+    setItems: ([]) => void;
+}) {
+    const wrapperRef = useRef(null);
+    const isOutSide = useOutsideAlerter(wrapperRef);
+    useEffect(() => {
+        if (isOutSide) {
+            setItems([]);
+        }
+    }, [isOutSide, setItems]);
     return (
-        <div className={styles.suggestionContainer}>
+        <div ref={wrapperRef} className={styles.suggestionContainer}>
             <List>
                 {items.map((item: iProduct) => (
                     <ListItem
@@ -23,7 +37,9 @@ export default function SearchSuggestions({ items }: { items: iProduct[] }) {
                                 />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={item.title} />
+                        <Link href={`/product-details/${item._id}`}>
+                            <ListItemText primary={item.title} />
+                        </Link>
                     </ListItem>
                 ))}
             </List>

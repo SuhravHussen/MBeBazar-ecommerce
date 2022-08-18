@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+import React from 'react';
 import { useEffect, useState } from './commonImports';
 
 // get window height and weight
@@ -62,4 +63,28 @@ export function useCountDown(countDownDate: Date) {
         };
     }, [countDownDate]);
     return [days, hours, minutes, seconds];
+}
+
+// outside click
+
+export function useOutsideAlerter(ref: React.RefObject<HTMLElement>) {
+    const [isOutside, setIsOutSIde] = useState(false);
+
+    useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event: any) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setIsOutSIde(true);
+            }
+        }
+        // Bind the event listener
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [ref]);
+    return isOutside;
 }

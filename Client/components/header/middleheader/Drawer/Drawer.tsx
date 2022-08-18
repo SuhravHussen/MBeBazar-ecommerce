@@ -41,7 +41,7 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
                                     setTimeout(() => {
                                         toggleDrawer();
                                         setHamburgurOpen(true);
-                                    }, 270);
+                                    }, 160);
                                 }
                             }}
                         />

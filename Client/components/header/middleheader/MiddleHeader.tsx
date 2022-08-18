@@ -79,9 +79,9 @@ export default function MiddleHeader() {
             {width < 960 && <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />}
             <CartDrawer open={cartOpen} setOpen={setCartOpen} />
             <ResponsiveDialog open={loginDialogueOpen} setOpen={setLoginDialogueOpen} />
-            <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1, position: 'sticky' }}>
+            <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1 }}>
                 {/* app bar */}
-                <AppBar className={styles.appBar} position="sticky" elevation={0}>
+                <AppBar className={styles.appBar} position="static" elevation={0}>
                     <Toolbar className={styles.toolbar}>
                         {/* drawer icon */}
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -131,7 +131,9 @@ export default function MiddleHeader() {
                                     placeholder="Search…"
                                 />
                             </form>
-                            {items.length > 0 && <SearchSuggestions items={items} />}
+                            {items.length > 0 && (
+                                <SearchSuggestions items={items} setItems={setItems} />
+                            )}
                         </Search>
 
                         {/* right icons */}

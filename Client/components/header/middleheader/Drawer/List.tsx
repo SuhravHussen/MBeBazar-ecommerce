@@ -20,7 +20,7 @@ export default function MyList({ primaryIcon, primaryText, collapses = [] }: pro
     return (
         <>
             <ListItemButton onClick={() => setFoodExpand(!foodExpand)}>
-                <ListItemIcon>{primaryIcon}</ListItemIcon>
+                <ListItemIcon sx={{ marginRight: '-10px' }}>{primaryIcon}</ListItemIcon>
                 <ListItemText
                     sx={{
                         color: foodExpand ? 'myColor.main' : null,
