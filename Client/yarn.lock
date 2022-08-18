@@ -136,6 +136,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.18.9":
+  version "7.18.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
+  integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.15.4":
   version "7.15.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.15.4.tgz#51898d35dcf3faa670c4ee6afcfd517ee139f194"
@@ -763,6 +770,14 @@
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz#be3e914e84eacf16dbebd311c0d0b44aa1174c64"
   integrity sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw==
+
+"@tanem/react-nprogress@^5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@tanem/react-nprogress/-/react-nprogress-5.0.11.tgz#ac05edd3b93c88170b91ce33871e1dc71ca5af22"
+  integrity sha512-zLOsKXzTjXkCEgicC+wHxZiXl5/ONOQIFoZ1HBmHmNbrnMStg4/T6gmyBLRDu4lQ5cS00F1ElRwLSODd0xmNMg==
+  dependencies:
+    "@babel/runtime" "^7.18.9"
+    hoist-non-react-statics "^3.3.2"
 
 "@types/brainhubeu__react-carousel@^2.0.5":
   version "2.0.5"

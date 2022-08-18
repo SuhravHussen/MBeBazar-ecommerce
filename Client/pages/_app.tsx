@@ -11,6 +11,7 @@ import 'slick-carousel/slick/slick-theme.css';
 // eslint-disable-next-line import/no-absolute-path
 import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
+import Loading from '../components/routeChange/Loading';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
 import '../styles/globals.scss';
@@ -22,20 +23,36 @@ export default function MyApp(props: any) {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     const router = useRouter();
+    const [state, setState] = React.useState({
+        isRouteChanging: false,
+        loadingKey: 0,
+    });
 
     React.useEffect(() => {
-        const handleRouteChange = (url: any, { shallow }: any) => {
-            console.log(
-                `App is changing to ${url} ${shallow ? 'with' : 'without'} shallow routing`
-            );
+        const handleRouteChangeStart = () => {
+            setState((prevState) => ({
+                ...prevState,
+                isRouteChanging: true,
+                // eslint-disable-next-line no-bitwise
+                loadingKey: prevState.loadingKey ^ 1,
+            }));
         };
 
-        router.events.on('routeChangeStart', handleRouteChange);
+        const handleRouteChangeEnd = () => {
+            setState((prevState) => ({
+                ...prevState,
+                isRouteChanging: false,
+            }));
+        };
 
-        // If the component is unmounted, unsubscribe
-        // from the event with the `off` method:
+        router.events.on('routeChangeStart', handleRouteChangeStart);
+        router.events.on('routeChangeComplete', handleRouteChangeEnd);
+        router.events.on('routeChangeError', handleRouteChangeEnd);
+
         return () => {
-            router.events.off('routeChangeStart', handleRouteChange);
+            router.events.off('routeChangeStart', handleRouteChangeStart);
+            router.events.off('routeChangeComplete', handleRouteChangeEnd);
+            router.events.off('routeChangeError', handleRouteChangeEnd);
         };
     }, [router.events]);
 
@@ -47,6 +64,7 @@ export default function MyApp(props: any) {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
             </Head>
             <ThemeProvider theme={theme}>
+                <Loading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
                 {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                 <CssBaseline />
                 <Component {...pageProps} />
