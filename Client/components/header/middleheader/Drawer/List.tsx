@@ -13,9 +13,10 @@ interface props {
     primaryIcon: any;
     primaryText: string;
     collapses?: Array<{ text: string; icon: any }>;
+    toggleDrawer: () => void;
 }
 
-export default function MyList({ primaryIcon, primaryText, collapses = [] }: props) {
+export default function MyList({ primaryIcon, primaryText, collapses = [], toggleDrawer }: props) {
     const [foodExpand, setFoodExpand] = React.useState(false);
     return (
         <>
@@ -38,7 +39,7 @@ export default function MyList({ primaryIcon, primaryText, collapses = [] }: pro
                     <Collapse in={foodExpand} key={d.text} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
                             <Link href={`/products?category=${primaryText}-${d.text}`}>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton onClick={toggleDrawer} sx={{ pl: 4 }}>
                                     <ListItemIcon>{d.icon}</ListItemIcon>
                                     <ListItemText primary={d.text} />
                                 </ListItemButton>

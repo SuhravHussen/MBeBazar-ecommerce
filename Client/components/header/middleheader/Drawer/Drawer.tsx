@@ -35,14 +35,8 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
                             size={20}
                             rounded
                             toggled={hamburgerOpen}
-                            toggle={() => setHamburgurOpen(false)}
-                            onToggle={(t) => {
-                                if (!t) {
-                                    setTimeout(() => {
-                                        toggleDrawer();
-                                        setHamburgurOpen(true);
-                                    }, 160);
-                                }
+                            toggle={() => {
+                                toggleDrawer();
                             }}
                         />
                     </span>
@@ -60,6 +54,7 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
                                 primaryIcon={c.primaryIcon}
                                 primaryText={c.primaryText}
                                 collapses={c.collapses}
+                                toggleDrawer={toggleDrawer}
                             />
                         ))}
                     </List>
