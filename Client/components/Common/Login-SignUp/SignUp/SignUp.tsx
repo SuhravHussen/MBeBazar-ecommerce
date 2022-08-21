@@ -1,50 +1,130 @@
+import { Alert, CircularProgress, circularProgressClasses } from '@mui/material';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiOutlineLock, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
+import { useToasts } from 'react-toast-notifications';
 import styles from '../../../../styles/components/common/login-signUp/sign-up.module.scss';
-import { useState } from '../../../../utils/commonImports';
 import InputBox from '../InputBox';
 import OtherLogins from '../OtherLogins';
 
+interface IFormInputs {
+    name: string;
+    email: string;
+    password: string;
+}
+
 export default function SignUp({ handleScreen }: { handleScreen: any }) {
-    const [, setEmail] = useState('');
-    const [emailError] = useState(false);
-    const [, setPassword] = useState('');
-    const [passError] = useState(false);
-    const [, setName] = useState('');
-    const [nameError] = useState(false);
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm<IFormInputs>();
+    const [showSpinner, setSpinner] = useState(false);
+    const [authError, setError] = useState('');
+    const { addToast } = useToasts();
+    const onSubmit = async (data: any) => {
+        setSpinner(true);
+        try {
+            setError('');
+            if (!errors.name && !errors.email && !errors.password) {
+                const res = await fetch(`${process.env.BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: data.name.trim(),
+                        email: data.email.trim(),
+                        password: data.password,
+                    }),
+                });
+
+                const resData = await res.json();
+                if (resData.error) {
+                    setSpinner(true);
+                } else {
+                    addToast('account created successfully', {
+                        appearance: 'success',
+                        autoDismiss: true,
+                        autoDismissTimeout: 2000,
+                    });
+                    handleScreen(true);
+                }
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Something went wrong');
+            }
+        }
+        setSpinner(false);
+    };
+
     return (
         <div className={styles.signUpContainer}>
             <h1>Sign up</h1>
             <p>Register with email and password</p>
-            <div className={styles.form}>
-                <InputBox
-                    placeholder="your name"
-                    setValue={setName}
-                    error={nameError}
-                    type="Name"
-                    helperText="Please input a valid email!"
-                    icon={<AiOutlineUser style={{ fontSize: '18px' }} />}
-                />
-                <InputBox
-                    placeholder="example@giailbox.com"
-                    setValue={setEmail}
-                    error={emailError}
-                    type="Email"
-                    helperText="Please input a valid email!"
-                    icon={<AiOutlineMail style={{ fontSize: '18px' }} />}
-                />
-                <InputBox
-                    showEye
-                    placeholder="your password"
-                    setValue={setPassword}
-                    error={passError}
-                    helperText="Input a valid password"
-                    type="password"
-                    icon={<AiOutlineLock style={{ fontSize: '18px' }} />}
-                />
-                <button type="submit" className={styles.button}>
-                    Login
-                </button>
-            </div>
+            <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
+                <div className={styles.form}>
+                    <InputBox
+                        required="Valid name is required"
+                        control={control}
+                        placeholder="your name"
+                        error={!!errors.name}
+                        type="name"
+                        helperText="Please input a valid name"
+                        icon={<AiOutlineUser style={{ fontSize: '18px' }} />}
+                        validation={(v: any) => v.trim().length > 3}
+                    />
+
+                    <InputBox
+                        required
+                        control={control}
+                        placeholder="example@giailbox.com"
+                        error={!!errors.email}
+                        type="email"
+                        validation={(v: any) => {
+                            const reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+                            return reg.test(v);
+                        }}
+                        helperText="Please input a valid email!"
+                        icon={<AiOutlineMail style={{ fontSize: '18px' }} />}
+                    />
+                    <InputBox
+                        required
+                        control={control}
+                        showEye
+                        placeholder="your password"
+                        error={!!errors.password}
+                        helperText="Input a valid password"
+                        type="password"
+                        validation={(v: any) => {
+                            const reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+                            return reg.test(v);
+                        }}
+                        icon={<AiOutlineLock style={{ fontSize: '18px' }} />}
+                    />
+                    {authError && <Alert severity="error">{authError}</Alert>}
+                    <button disabled={showSpinner} type="submit" className={styles.button}>
+                        {showSpinner ? (
+                            <CircularProgress
+                                sx={{
+                                    color: 'green',
+                                    animationDuration: '150ms',
+                                    [`& .${circularProgressClasses.circle}`]: {
+                                        strokeLinecap: 'round',
+                                    },
+                                }}
+                                thickness={5}
+                                size={16}
+                            />
+                        ) : (
+                            ' Sign up'
+                        )}
+                    </button>
+                </div>
+            </form>
             <h3>OR</h3>
             <OtherLogins screen="sign-up" handleScreen={() => handleScreen(true)} />
         </div>

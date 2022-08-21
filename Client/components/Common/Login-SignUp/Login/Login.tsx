@@ -1,7 +1,5 @@
-import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
 import styles from '../../../../styles/components/common/login-signUp/login.module.scss';
 import { useState } from '../../../../utils/commonImports';
-import InputBox from '../InputBox';
 import OtherLogins from '../OtherLogins';
 
 export default function Login({ handleScreen }: { handleScreen: any }) {
@@ -15,15 +13,15 @@ export default function Login({ handleScreen }: { handleScreen: any }) {
             <h1>Login</h1>
             <p>Login with your email and password</p>
             <div className={styles.form}>
-                <InputBox
+                {/* <InputBox
                     placeholder="example@giailbox.com"
                     setValue={setEmail}
                     error={emailError}
                     type="Email"
                     helperText="Please input a valid email!"
                     icon={<AiOutlineMail style={{ fontSize: '18px' }} />}
-                />
-                <InputBox
+                /> */}
+                {/* <InputBox
                     showEye
                     placeholder="your password"
                     setValue={setPassword}
@@ -31,7 +29,7 @@ export default function Login({ handleScreen }: { handleScreen: any }) {
                     helperText="Input a valid password"
                     type="password"
                     icon={<AiOutlineLock style={{ fontSize: '18px' }} />}
-                />
+                /> */}
                 <button type="submit" className={styles.button}>
                     Login
                 </button>

@@ -6,7 +6,6 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
-import * as React from 'react';
 import { catagories } from './catagories';
 
 import styles from '../../../../styles/components/middleNav/drawer.module.scss';
@@ -19,8 +18,6 @@ interface props {
 }
 
 export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
-    const [hamburgerOpen, setHamburgurOpen] = React.useState(true);
-
     return (
         <Drawer open={drawerOpen} elevation={1} onClose={toggleDrawer}>
             <div className={styles.drawerContainer}>
@@ -34,7 +31,7 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
                         <Hamburger
                             size={20}
                             rounded
-                            toggled={hamburgerOpen}
+                            toggled
                             toggle={() => {
                                 toggleDrawer();
                             }}

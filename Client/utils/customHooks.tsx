@@ -77,6 +77,8 @@ export function useOutsideAlerter(ref: React.RefObject<HTMLElement>) {
         function handleClickOutside(event: any) {
             if (ref.current && !ref.current.contains(event.target)) {
                 setIsOutSIde(true);
+            } else {
+                setIsOutSIde(false);
             }
         }
         // Bind the event listener
