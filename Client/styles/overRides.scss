@@ -56,3 +56,8 @@
 .product-details-slider .BrainhubCarousel__thumbnail--selected img {
   border: 2px solid $PrimaryGreen !important;
 }
+
+// toast
+.react-toast-notifications__container.css-nvf14r-ToastContainer {
+  z-index: 9000 !important;
+}

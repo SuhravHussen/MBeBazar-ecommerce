@@ -41,12 +41,12 @@ export default function SignUp({ handleScreen }: { handleScreen: any }) {
 
                 const resData = await res.json();
                 if (resData.error) {
-                    setSpinner(true);
+                    setError(resData.message);
                 } else {
                     addToast('account created successfully', {
                         appearance: 'success',
-                        autoDismiss: true,
-                        autoDismissTimeout: 2000,
+                        // autoDismiss: true,
+                        // autoDismissTimeout: 2000,
                     });
                     handleScreen(true);
                 }
