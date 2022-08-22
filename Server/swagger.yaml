@@ -592,7 +592,7 @@ paths:
               error: 
                 type: boolean        
   /auth/login:
-    get:
+    post:
       tags:
       - "Auth"
       summary: "login with email and password"
