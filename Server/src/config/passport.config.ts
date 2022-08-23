@@ -64,13 +64,14 @@ export class PassportLogin {
 // jwt authentication
 export class passportJwt {
   private cookieExtractor = req => {
-    if (req.cookies === undefined) return null;
+    if (req.signedCookies === undefined) return null;
+    if (!req.signedCookies) return null;
     let token = null;
-    if (req && req.cookies['jwt-token']) {
-      token = req.cookies['jwt-token'];
-    } else if (req && req.cookies['refresh-token']) {
-      token = req.cookies['refresh-token'];
-      req.refreshToken = req.cookies['refresh-token'];
+    if (req && req.signedCookies['jwt-token']) {
+      token = req.signedCookies['jwt-token'];
+    } else if (req && req.signedCookies['refresh-token']) {
+      token = req.signedCookies['refresh-token'];
+      req.refreshToken = req.signedCookies['refresh-token'];
     }
 
     return token;

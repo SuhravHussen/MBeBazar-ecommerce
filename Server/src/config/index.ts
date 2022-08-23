@@ -22,4 +22,5 @@ export const {
   JWT_REFRESH_EXPIRE,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
+  COOKIE_SECRET,
 } = process.env;

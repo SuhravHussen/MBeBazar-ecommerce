@@ -6,10 +6,12 @@ const setCookie = (req, res, next) => {
     res.cookie('jwt-token', req.tokens.token, {
       httpOnly: true,
       maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
+      signed: true,
     });
     res.cookie('refresh-token', req.tokens.refreshToken, {
       httpOnly: true,
       maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
+      signed: true,
     });
   }
   next();

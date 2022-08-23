@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import { connect, set, disconnect } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config/index';
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS, COOKIE_SECRET } from '@config/index';
 import { dbConnection } from '@databases/index';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -80,7 +80,7 @@ class App {
     this.app.use(compression());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(cookieParser());
+    this.app.use(cookieParser(COOKIE_SECRET));
   }
 
   public initializeRoutes(routes: Routes[]) {
