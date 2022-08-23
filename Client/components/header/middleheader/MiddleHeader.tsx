@@ -21,7 +21,8 @@ import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
 import { Search, SearchIconWrapper, StyledInputBase } from '../../styled/middleNav';
 import CartDrawer from './Cart/CartDrawer';
 import SearchSuggestions from './SearchSuggestions';
-import { RenderMobileMenu } from './utils/renderMenu';
+import { RenderMobileMenu } from './utils/RenderMenu';
+import RenderNotification from './utils/RenderNotification';
 
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
@@ -182,6 +183,7 @@ export default function MiddleHeader() {
                     handleMenuClose={() => handleOpenClose(setMobileMoreAnchorEl, null)}
                     handleProfile={() => setLoginDialogueOpen(true)}
                 />
+                <RenderNotification />
             </Box>
             <Divider />
         </>

@@ -55,7 +55,7 @@ export default function ResponsiveDialog({
                 <AiOutlineCloseCircle />
             </button>
             {loginScreen ? (
-                <Login handleScreen={setLoginScreen} />
+                <Login handleModalClose={handleClose} handleScreen={setLoginScreen} />
             ) : (
                 <SignUp handleScreen={setLoginScreen} />
             )}

@@ -45,20 +45,15 @@ export default function SignUp({ handleScreen }: { handleScreen: any }) {
                 } else {
                     addToast('account created successfully', {
                         appearance: 'success',
-                        // autoDismiss: true,
-                        // autoDismissTimeout: 2000,
                     });
                     handleScreen(true);
                 }
             }
         } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError('Something went wrong');
-            }
+            setError('Something went wrong');
+        } finally {
+            setSpinner(false);
         }
-        setSpinner(false);
     };
 
     return (

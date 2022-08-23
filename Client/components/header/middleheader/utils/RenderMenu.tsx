@@ -1,21 +1,12 @@
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Dispatch, SetStateAction } from 'react';
 
-interface iProfileMenu {
-    anchor: HTMLElement | null;
-    open: boolean;
-    handleMenuClose: any;
-}
 interface iMobileMenu {
     anchor: HTMLElement | null;
     open: boolean;
@@ -24,43 +15,44 @@ interface iMobileMenu {
     handleProfile: any;
 }
 
-export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iProfileMenu) => (
-    <>
-        <Menu
-            anchorEl={anchor}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-            }}
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>
-                <ListItemIcon>
-                    <LoginIcon />
-                </ListItemIcon>
-                <ListItemText>Login</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <ListItemIcon>
-                    <AccountCircle />
-                </ListItemIcon>
-                <ListItemText>Profile</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <ListItemIcon>
-                    <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText>Log out</ListItemText>
-            </MenuItem>
-        </Menu>
-    </>
-);
+// export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iProfileMenu) => (
+//     <>
+//         <Menu
+//             anchorEl={anchor}
+//             anchorOrigin={{
+//                 vertical: 'bottom',
+//                 horizontal: 'right',
+//             }}
+//             transformOrigin={{
+//                 vertical: 'top',
+//                 horizontal: 'right',
+//             }}
+//             open={open}
+//             onClose={handleMenuClose}
+//         >
+//             <MenuItem onClick={handleMenuClose}>
+//                 <ListItemIcon>
+//                     <LoginIcon />
+//                 </ListItemIcon>
+//                 <ListItemText>Login</ListItemText>
+//             </MenuItem>
+//             <MenuItem onClick={handleMenuClose}>
+//                 <ListItemIcon>
+//                     <AccountCircle />
+//                 </ListItemIcon>
+//                 <ListItemText>Profile</ListItemText>
+//             </MenuItem>
+//             <MenuItem onClick={handleMenuClose}>
+//                 <ListItemIcon>
+//                     <LogoutIcon />
+//                 </ListItemIcon>
+//                 <ListItemText>Log out</ListItemText>
+//             </MenuItem>
+//         </Menu>
+//     </>
+// );
 
+// eslint-disable-next-line import/prefer-default-export
 export const RenderMobileMenu = ({
     anchor,
     open,

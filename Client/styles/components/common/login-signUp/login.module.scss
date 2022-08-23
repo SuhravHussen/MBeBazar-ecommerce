@@ -27,6 +27,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-left: auto;
+    margin-right: auto;
     button {
       margin-top: 15px;
       @include PrimaryButton(10px, 100%, $PrimaryGreen);
