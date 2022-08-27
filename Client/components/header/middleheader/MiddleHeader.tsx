@@ -3,18 +3,20 @@ import MailIcon from '@mui/icons-material/Mail';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { Divider } from '@mui/material';
+import { Avatar, Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import { Sling as Hamburger } from 'hamburger-react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { iProduct } from '../../../models/product.interface';
+import { iUser } from '../../../models/user.interface';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
-import { dynamic, Image } from '../../../utils/commonImports';
+import { dynamic, Image, Link } from '../../../utils/commonImports';
 import { useWindowDimensions } from '../../../utils/customHooks';
 import debounceSearch from '../../../utils/debounce';
 import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
@@ -36,8 +38,30 @@ export default function MiddleHeader() {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const [cartOpen, setCartOpen] = React.useState(false);
     const [loginDialogueOpen, setLoginDialogueOpen] = React.useState(false);
+
+    const [notiAnchorEL, setNotiAnchorEL] = React.useState<HTMLElement | null>(null);
     const [items, setItems] = React.useState<iProduct[]>([]);
     const [search, setSearch] = React.useState('');
+    const [user, setUser] = React.useState<null | iUser>(null);
+    const { data: session } = useSession();
+    // user
+
+    React.useEffect(() => {
+        if (session) {
+            localStorage.setItem('user', JSON.stringify(session.user));
+        }
+    }, [session]);
+
+    React.useEffect(() => {
+        const userData = JSON.parse(localStorage.getItem('user') || '{}');
+
+        if (userData._id) {
+            setUser(userData);
+        } else {
+            setUser(null);
+        }
+    }, []);
+
     // open or close drawer
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
@@ -72,6 +96,10 @@ export default function MiddleHeader() {
         e.preventDefault();
         router.replace(`/products?category=${search}`);
         setItems([]);
+    };
+
+    const handleNotificationOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setNotiAnchorEL(event.currentTarget);
     };
 
     return (
@@ -139,7 +167,11 @@ export default function MiddleHeader() {
 
                         {/* right icons */}
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" color="inherit">
+                            <IconButton
+                                onClick={handleNotificationOpen}
+                                size="large"
+                                color="inherit"
+                            >
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon className={styles.icons} />
                                 </Badge>
@@ -152,15 +184,27 @@ export default function MiddleHeader() {
                                     />
                                 </Badge>
                             </IconButton>
-                            <IconButton
-                                size="large"
-                                edge="end"
-                                aria-haspopup="true"
-                                color="inherit"
-                                onClick={() => setLoginDialogueOpen(true)}
-                            >
-                                <AccountCircle className={styles.icons} />
-                            </IconButton>
+                            {user === null ? (
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-haspopup="true"
+                                    color="inherit"
+                                    onClick={() => setLoginDialogueOpen(true)}
+                                >
+                                    <AccountCircle className={styles.icons} />
+                                </IconButton>
+                            ) : (
+                                <Link href="/profile">
+                                    <Avatar
+                                        sx={{ cursor: 'pointer' }}
+                                        alt={user?.name}
+                                        src={
+                                            user?.avatar ? user.avatar : '/images/default/user.jpeg'
+                                        }
+                                    />
+                                </Link>
+                            )}
                         </Box>
                         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -177,13 +221,20 @@ export default function MiddleHeader() {
                     </Toolbar>
                 </AppBar>
                 <RenderMobileMenu
+                    user={user}
                     handleCart={setCartOpen}
                     open={isMobileMenuOpen}
                     anchor={mobileMoreAnchorEl}
                     handleMenuClose={() => handleOpenClose(setMobileMoreAnchorEl, null)}
+                    setNotiAnchorEL={setNotiAnchorEL}
                     handleProfile={() => setLoginDialogueOpen(true)}
                 />
-                <RenderNotification />
+                <RenderNotification
+                    anchorEl={notiAnchorEL}
+                    onClose={() => {
+                        setNotiAnchorEL(null);
+                    }}
+                />
             </Box>
             <Divider />
         </>

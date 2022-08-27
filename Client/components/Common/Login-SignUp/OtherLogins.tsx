@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import styles from '../../../styles/components/common/login-signUp/otherlogin.module.scss';
@@ -9,20 +10,29 @@ export default function OtherLogins({
     handleScreen: any;
     screen: string;
 }) {
-    const google = () => {
-        fetch('http://localhost:3000/auth/google')
-            .then((res) => res.json())
-            .then((c) => console.log(c))
-            .catch((err) => console.log(err));
+    const handleSocialLogin = async (method: 'google' | 'facebook') => {
+        try {
+            await signIn(method);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
         <div className={styles.moreLogin}>
             <div className={styles.otherLogins}>
-                <button className={styles.facebook} type="button">
+                <button
+                    onClick={() => handleSocialLogin('facebook')}
+                    className={styles.facebook}
+                    type="button"
+                >
                     <FaFacebookF /> <span>Login With Facebook</span>
                 </button>
-                <button onClick={google} className={styles.google} type="button">
+                <button
+                    onClick={() => handleSocialLogin('google')}
+                    className={styles.google}
+                    type="button"
+                >
                     <FcGoogle /> <span>Login With Google</span>
                 </button>
             </div>

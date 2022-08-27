@@ -12,6 +12,7 @@ import 'slick-carousel/slick/slick-theme.css';
 // eslint-disable-next-line import/no-absolute-path
 import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
+import { SessionProvider } from 'next-auth/react';
 import Loading from '../components/routeChange/Loading';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
@@ -21,7 +22,11 @@ import '../styles/overRides.scss';
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props: any) {
-    const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+    const {
+        Component,
+        emotionCache = clientSideEmotionCache,
+        pageProps: { session, ...pageProps },
+    } = props;
 
     const router = useRouter();
     const [state, setState] = React.useState({
@@ -59,6 +64,7 @@ export default function MyApp(props: any) {
 
     return (
         // <Loader>
+
         <ToastProvider>
             <CacheProvider value={emotionCache}>
                 <Head>
@@ -69,7 +75,9 @@ export default function MyApp(props: any) {
                     <Loading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
                     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                     <CssBaseline />
-                    <Component {...pageProps} />
+                    <SessionProvider session={session}>
+                        <Component {...pageProps} />
+                    </SessionProvider>
                 </ThemeProvider>
             </CacheProvider>
         </ToastProvider>

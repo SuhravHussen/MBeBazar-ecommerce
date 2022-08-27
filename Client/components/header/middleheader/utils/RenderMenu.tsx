@@ -1,56 +1,22 @@
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Avatar, Link } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Dispatch, SetStateAction } from 'react';
+import { GoSignIn } from 'react-icons/go';
 
 interface iMobileMenu {
+    user: any;
     anchor: HTMLElement | null;
     open: boolean;
     handleMenuClose: any;
     handleCart: Dispatch<SetStateAction<boolean>>;
     handleProfile: any;
+    setNotiAnchorEL: Dispatch<SetStateAction<HTMLElement | null>>;
 }
-
-// export const RenderProfileMenu = ({ anchor, open, handleMenuClose }: iProfileMenu) => (
-//     <>
-//         <Menu
-//             anchorEl={anchor}
-//             anchorOrigin={{
-//                 vertical: 'bottom',
-//                 horizontal: 'right',
-//             }}
-//             transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-//             }}
-//             open={open}
-//             onClose={handleMenuClose}
-//         >
-//             <MenuItem onClick={handleMenuClose}>
-//                 <ListItemIcon>
-//                     <LoginIcon />
-//                 </ListItemIcon>
-//                 <ListItemText>Login</ListItemText>
-//             </MenuItem>
-//             <MenuItem onClick={handleMenuClose}>
-//                 <ListItemIcon>
-//                     <AccountCircle />
-//                 </ListItemIcon>
-//                 <ListItemText>Profile</ListItemText>
-//             </MenuItem>
-//             <MenuItem onClick={handleMenuClose}>
-//                 <ListItemIcon>
-//                     <LogoutIcon />
-//                 </ListItemIcon>
-//                 <ListItemText>Log out</ListItemText>
-//             </MenuItem>
-//         </Menu>
-//     </>
-// );
 
 // eslint-disable-next-line import/prefer-default-export
 export const RenderMobileMenu = ({
@@ -59,6 +25,8 @@ export const RenderMobileMenu = ({
     handleMenuClose,
     handleCart,
     handleProfile,
+    user,
+    setNotiAnchorEL,
 }: iMobileMenu) => (
     <Menu
         anchorEl={anchor}
@@ -74,7 +42,11 @@ export const RenderMobileMenu = ({
         open={open}
         onClose={handleMenuClose}
     >
-        <MenuItem>
+        <MenuItem
+            onClick={(e) => {
+                setNotiAnchorEL(e.currentTarget);
+            }}
+        >
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={4} color="error">
                     <MailIcon />
@@ -96,40 +68,39 @@ export const RenderMobileMenu = ({
             </IconButton>
             <p>Cart</p>
         </MenuItem>
-        <MenuItem onClick={handleProfile}>
-            <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="primary-search-account-menu"
-                aria-haspopup="true"
-                color="inherit"
-            >
-                <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
-        </MenuItem>
+        {user === null ? (
+            <MenuItem onClick={handleProfile}>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <GoSignIn />
+                </IconButton>
+                <p>Log in</p>
+            </MenuItem>
+        ) : (
+            <Link style={{ textDecoration: 'none', color: 'black' }} href="/profile">
+                <MenuItem>
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                    >
+                        <Avatar
+                            sx={{ cursor: 'pointer', height: '27px', width: '27px' }}
+                            alt={user?.name}
+                            src={user?.avatar ? user.avatar : '/images/default/user.jpeg'}
+                        />
+                    </IconButton>
+
+                    <p>Profile</p>
+                </MenuItem>
+            </Link>
+        )}
     </Menu>
 );
-
-// export const RenderNotification = ({ anchor, open, handleMenuClose }: iMenu) => (
-//     <>
-//         <Menu
-//             anchorEl={anchor}
-//             anchorOrigin={{
-//                 vertical: 'bottom',
-//                 horizontal: 'right',
-//             }}
-//             keepMounted
-//             transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-//             }}
-//             open={open}
-//             onClose={handleMenuClose}
-//         >
-//             <div>
-//                 <h5>notification</h5>
-//             </div>
-//         </Menu>
-//     </>
-// );
