@@ -6,7 +6,8 @@ export default function Bottom() {
         <div className={styles.bottom}>
             <div className={styles.columnLeft}>
                 <p>
-                    © 2022, Nest - <span>Suhrav&apos;s </span>Ecommerce Template All rights reserved
+                    © 2022, MBeBAZAR - <span>Suhrav&apos;s </span>Ecommerce Template All rights
+                    reserved
                 </p>
             </div>
             <div className={styles.rightColumn}>

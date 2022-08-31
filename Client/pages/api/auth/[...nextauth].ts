@@ -56,6 +56,7 @@ const getOptions = (req: any, res: any) => ({
             }
         },
         async session({ session }: { session: any }) {
+            console.log(session);
             try {
                 session.user = {
                     ...session.user.name,
@@ -67,6 +68,11 @@ const getOptions = (req: any, res: any) => ({
             }
         },
     },
+    // cookies: {
+    //     sessionToken : {
+
+    //     }
+    // }
 });
 
 export default (req: any, res: any) => NextAuth(req, res, getOptions(req, res));

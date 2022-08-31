@@ -47,20 +47,21 @@ export default function MiddleHeader() {
     // user
 
     React.useEffect(() => {
-        if (session) {
-            localStorage.setItem('user', JSON.stringify(session.user));
+        const userJson = localStorage.getItem('user');
+
+        if (!userJson || userJson === 'undefined') {
+            localStorage.setItem('user', JSON.stringify(session?.user));
+            // @ts-ignore
+            setUser(session?.user);
+        } else {
+            const userData = JSON.parse(userJson);
+            if (userData._id) {
+                setUser(userData);
+            } else {
+                setUser(null);
+            }
         }
     }, [session]);
-
-    React.useEffect(() => {
-        const userData = JSON.parse(localStorage.getItem('user') || '{}');
-
-        if (userData._id) {
-            setUser(userData);
-        } else {
-            setUser(null);
-        }
-    }, []);
 
     // open or close drawer
     const toggleDrawer = () => {
@@ -138,11 +139,11 @@ export default function MiddleHeader() {
                         {/* logo */}
                         <span className={styles.logo}>
                             <Image
-                                src="/images/logos/nestLogo.svg"
+                                src="/images/logos/MBeBAZAR.png"
                                 width={180}
                                 height={100}
                                 placeholder="blur"
-                                blurDataURL="/images/logos/nestLogo.svg"
+                                blurDataURL="/images/logos/MBeBAZAR.png"
                             />
                         </span>
                         {/* search bar */}
@@ -166,7 +167,7 @@ export default function MiddleHeader() {
                         </Search>
 
                         {/* right icons */}
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <Box sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
                             <IconButton
                                 onClick={handleNotificationOpen}
                                 size="large"
@@ -184,7 +185,7 @@ export default function MiddleHeader() {
                                     />
                                 </Badge>
                             </IconButton>
-                            {user === null ? (
+                            {!user ? (
                                 <IconButton
                                     size="large"
                                     edge="end"
@@ -197,7 +198,7 @@ export default function MiddleHeader() {
                             ) : (
                                 <Link href="/profile">
                                     <Avatar
-                                        sx={{ cursor: 'pointer' }}
+                                        sx={{ cursor: 'pointer', height: '30px', width: '30px' }}
                                         alt={user?.name}
                                         src={
                                             user?.avatar ? user.avatar : '/images/default/user.jpeg'

@@ -24,6 +24,7 @@
     "@types/next": "^9.0.0",
     "@types/set-cookie-parser": "^2.4.2",
     "chroma-js": "^2.1.2",
+    "cookie-cutter": "^0.2.0",
     "cookie-parse": "^0.4.0",
     "create-emotion-server": "^11.0.0",
     "hamburger-react": "^2.4.1",

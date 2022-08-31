@@ -6,9 +6,9 @@ export default function About() {
         <div className={styles.aboutContainer}>
             <div className={styles.column}>
                 <Image
-                    width={215}
-                    height={60}
-                    src="/images/logos/nestLogo.svg"
+                    width={100}
+                    height={80}
+                    src="/images/logos/MBeBAZAR.png"
                     alt="e-commerce logo"
                 />
                 <p>Awesome grocery store website template</p>

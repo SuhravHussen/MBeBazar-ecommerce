@@ -1646,6 +1646,11 @@ convert-source-map@^1.5.0:
   dependencies:
     safe-buffer "~5.1.1"
 
+cookie-cutter@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/cookie-cutter/-/cookie-cutter-0.2.0.tgz#5988f598b68c060a00ec8524ad6e6aa193e72244"
+  integrity sha512-eVyP5liHjDMCmGlp2OD+qoin5TJlwUBRjBKN8R2yJ3ePf8xqUtqmRP6e36ipe0nBm2lTiertH6iHPOptNQzAEw==
+
 cookie-parse@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/cookie-parse/-/cookie-parse-0.4.0.tgz#f9e8b1dcad4cd03e7a4c9dd12cee18fde3e4a6ea"

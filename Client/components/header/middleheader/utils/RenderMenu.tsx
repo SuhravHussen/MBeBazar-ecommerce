@@ -68,7 +68,7 @@ export const RenderMobileMenu = ({
             </IconButton>
             <p>Cart</p>
         </MenuItem>
-        {user === null ? (
+        {!user ? (
             <MenuItem onClick={handleProfile}>
                 <IconButton
                     size="large"

@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
 import React from 'react';
+import { Order } from '../../../models/order.interface';
 import styles from '../../../styles/components/profile/myorders/myorders.module.scss';
 
 interface Column {
@@ -40,14 +41,14 @@ const columns: Column[] = [
     },
 ];
 
-type statuses = 'Pending' | 'Cancel' | 'Delivered' | 'Processing';
+type statuses = 'Pending' | 'Cancelled' | 'Delivered' | 'Processing';
 
 interface Data {
     ID: string;
     ORDERTIME: string;
     STATUS: statuses;
     METHOD: string;
-    TOTAL: string;
+    TOTAL: number;
 }
 
 function createData(
@@ -55,53 +56,12 @@ function createData(
     ORDERTIME: string,
     METHOD: string,
     STATUS: statuses,
-    TOTAL: string
+    TOTAL: number
 ): Data {
     return { ID, ORDERTIME, STATUS, METHOD, TOTAL };
 }
 
-const rows = [
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Processing', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Delivered', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-    createData('C36E', 'December 30, 2021', 'COD', 'Pending', '204'),
-];
-
-export default function MyOrders() {
+export default function MyOrders({ orders }: { orders: Order[] }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -113,6 +73,21 @@ export default function MyOrders() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const [rows, setRows] = React.useState<Data[]>([]);
+    React.useEffect(() => {
+        const recentOrders = orders.map((order) =>
+            createData(
+                order._id,
+                new Date(order.createdAt).toLocaleDateString(),
+                order.bookingInfo.paymentMethod,
+                order.bookingInfo.status,
+                order.bookingInfo.totalPrice
+            )
+        );
+        setRows(recentOrders);
+    }, [orders]);
+
     return (
         <div className={styles.MyOrders}>
             <h3>All Orders </h3>

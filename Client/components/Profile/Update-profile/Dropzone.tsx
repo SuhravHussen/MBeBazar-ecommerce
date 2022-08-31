@@ -1,23 +1,56 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { GoCloudUpload } from 'react-icons/go';
 
-export default function Dropzone() {
+export default function Dropzone({ setAvatar }: { setAvatar: any }) {
     const image = useRef<HTMLImageElement>(null);
-
-    const onDrop = useCallback((acceptedFiles) => {
-        const size = Math.round(acceptedFiles[0].size / 1024);
-
-        console.log(size);
-        if (image.current) {
-            image.current.src = URL.createObjectURL(acceptedFiles[0]);
-            image.current.onload = () => {
-                if (image.current) URL.revokeObjectURL(image.current.src); // free memory
+    const [errors, setErrors] = useState('');
+    const sizeCheck = (file: any) => {
+        if (file.size > 600000) {
+            return {
+                code: 'file-too-large',
+                message: 'File is too large',
             };
         }
+        return null;
+    };
+    useEffect(() => {
+        if (image.current) {
+            const userImage = JSON.parse(localStorage.getItem('user') || '')?.avatar;
+            image.current.src = userImage || '/images/default/user.png';
+        }
     }, []);
+
+    const onDrop = useCallback(
+        (acceptedFiles, fileRejections) => {
+            if (fileRejections.length > 0) {
+                fileRejections.forEach((file: any) => {
+                    file.errors.forEach((err: any) => {
+                        if (err.code === 'file-too-large') {
+                            setErrors(`Error: ${err.message}`);
+                        }
+
+                        if (err.code === 'file-invalid-type') {
+                            setErrors(`Error: ${err.message}`);
+                        }
+                    });
+                });
+            } else if (image.current) {
+                setAvatar(acceptedFiles[0]);
+                image.current.src = URL.createObjectURL(acceptedFiles[0]);
+                image.current.onload = () => {
+                    if (image.current) URL.revokeObjectURL(image.current.src); // free memory
+                };
+            }
+        },
+        [setAvatar]
+    );
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
+        accept: ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'],
+        maxFiles: 1,
+        maxSize: 600000,
+        validator: sizeCheck,
     });
 
     return (
@@ -56,6 +89,7 @@ export default function Dropzone() {
                     )}
                 </div>
             </div>
+            <p style={{ color: 'red', padding: 5, margin: 0, fontSize: 14 }}>{errors}</p>
             <img
                 style={{
                     height: '60px',

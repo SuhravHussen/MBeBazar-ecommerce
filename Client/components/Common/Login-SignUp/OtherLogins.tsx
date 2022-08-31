@@ -12,9 +12,15 @@ export default function OtherLogins({
 }) {
     const handleSocialLogin = async (method: 'google' | 'facebook') => {
         try {
-            await signIn(method);
+            signIn(method);
         } catch (error) {
             console.log(error);
+        } finally {
+            const reloadSession = () => {
+                const event = new Event('visibilitychange');
+                document.dispatchEvent(event);
+            };
+            reloadSession();
         }
     };
 

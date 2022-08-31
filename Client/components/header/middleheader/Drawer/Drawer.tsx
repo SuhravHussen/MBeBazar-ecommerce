@@ -22,11 +22,7 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
         <Drawer open={drawerOpen} elevation={1} onClose={toggleDrawer}>
             <div className={styles.drawerContainer}>
                 <div className={styles.header}>
-                    <Image
-                        src="https://res.cloudinary.com/doircnueq/image/upload/v1636035369/MBeCommerece/logos/logo_nbh5ke_hwub6l.svg"
-                        width={130}
-                        height={90}
-                    />
+                    <Image src="/images/logos/MBeBAZAR.png" width={130} height={90} />
                     <span className={styles.icon}>
                         <Hamburger
                             size={20}
