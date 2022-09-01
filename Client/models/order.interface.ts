@@ -1,4 +1,4 @@
-export interface Order {
+export interface Order<T = string> {
     _id: string;
     bookingInfo: {
         name: string;
@@ -13,7 +13,7 @@ export interface Order {
     };
     user: string;
     items: {
-        product: string;
+        product: T;
         quantity: number;
         price: number;
     }[];

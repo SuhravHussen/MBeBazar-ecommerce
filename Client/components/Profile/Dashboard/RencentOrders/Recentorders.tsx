@@ -4,7 +4,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { Order } from '../../../../models/order.interface';
 import styles from '../../../../styles/components/profile/dashboard/recentorders.module.scss';
@@ -108,11 +107,7 @@ export default function Recentorders({ orders }: { orders: Order[] }) {
                                             key={column.id}
                                             align={column.align}
                                         >
-                                            {column.id === 'ORDERTIME'
-                                                ? DateTime.fromISO(
-                                                      '2017-05-15T08:30:00'
-                                                  ).toLocaleString(DateTime.DATE_MED)
-                                                : value}
+                                            {value}
                                         </TableCell>
                                     );
                                 })}

@@ -4,19 +4,30 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useEffect, useState } from 'react';
+import { Order } from '../../../models/order.interface';
+import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/common/invoice/orderedItems.module.scss';
 
-export default function OrderItems() {
+export default function OrderItems({ order }: { order: Order<iProduct> }) {
     interface Column {
-        id: 'productName' | 'quantity' | 'price';
+        id: 'title' | 'quantity' | 'price';
         label: 'SR.' | 'PRODUCT NAME' | 'QUANTITY' | 'ITEM PRICE';
         minWidth?: number;
         align?: 'right' | 'center';
     }
 
+    const [rows, setRows] = useState<
+        {
+            title: string;
+            quantity: number;
+            price: number;
+        }[]
+    >([]);
+
     const columns: Column[] = [
         {
-            id: 'productName',
+            id: 'title',
             label: 'PRODUCT NAME',
             minWidth: 100,
             align: 'center',
@@ -35,34 +46,14 @@ export default function OrderItems() {
         },
     ];
 
-    interface Data {
-        productName: string;
-        quantity: number;
-        price: number;
-    }
-
-    const rows: Data[] = [
-        {
-            productName: 'Rainbow Chard',
-            quantity: 4,
-            price: 60,
-        },
-        {
-            productName: 'Rainbow Chard',
-            quantity: 4,
-            price: 60,
-        },
-        {
-            productName: 'Rainbow Chard',
-            quantity: 4,
-            price: 60,
-        },
-        {
-            productName: 'Rainbow Chard',
-            quantity: 4,
-            price: 60,
-        },
-    ];
+    useEffect(() => {
+        const rowsData = order?.items?.map((item) => ({
+            title: item?.product?.title ? item.product.title : 'N/A',
+            quantity: item?.quantity,
+            price: item?.price,
+        }));
+        setRows(rowsData);
+    }, [order]);
 
     return (
         <div className={styles.orders}>
@@ -84,39 +75,40 @@ export default function OrderItems() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, i) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row.price}>
-                                <TableCell>{i + 1}</TableCell>
-                                {columns.map((column) => {
-                                    const value = row[column.id];
-
-                                    return (
+                        {rows &&
+                            rows.map((row, i) => (
+                                <TableRow hover role="checkbox" tabIndex={-1} key={order._id}>
+                                    <TableCell>{i + 1}</TableCell>
+                                    {columns.map((column) => (
                                         <TableCell key={column.id} align={column.align}>
-                                            {value}
+                                            {row[column.id]}
                                         </TableCell>
-                                    );
-                                })}
-                            </TableRow>
-                        ))}
+                                    ))}
+                                </TableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>
             <div className={styles.total}>
                 <div className={styles.column}>
                     <h4>PAYMENT METHOD</h4>
-                    <p>COD</p>
+                    <p>{order?.bookingInfo?.paymentMethod}</p>
                 </div>
                 <div className={styles.column}>
                     <h4>SHIPPING COST</h4>
-                    <p>$80</p>
+                    <p>{order?.bookingInfo?.shippingPrice}</p>
                 </div>
                 <div className={styles.column}>
-                    <h4>DISCOUNT</h4>
-                    <p>$0.00</p>
+                    <h4>SHIPPING</h4>
+                    <p>
+                        {order?.bookingInfo?.shippingMethod
+                            ? order?.bookingInfo?.shippingMethod
+                            : 'Sundarban'}
+                    </p>
                 </div>
                 <div className={styles.column}>
                     <h4>TOTAL AMOUNT</h4>
-                    <h5>$80</h5>
+                    <h5>{order?.bookingInfo?.totalPrice}</h5>
                 </div>
             </div>
         </div>

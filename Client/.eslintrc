@@ -1,14 +1,14 @@
 {
   "extends": [
     "airbnb",
+    "airbnb-typescript",
     "airbnb/hooks",
-    // "eslint:recommended",
     "prettier",
     "plugin:jsx-a11y/recommended"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 8
+    "project": "./tsconfig.json"
   },
   "env": {
     "browser": true,
@@ -33,6 +33,10 @@
     "no-await-in-loop": 0,
     "no-underscore-dangle": 0,
     "no-param-reassign": 0,
+    "space-before-blocks": 0,
+    "@typescript-eslint/naming-convention": 0,
+    "import/no-cycle": 0,
+    "react/require-default-props": 0,
     "react/jsx-filename-extension": [
       1,
       {

@@ -5,7 +5,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { DateTime } from 'luxon';
 import Link from 'next/link';
 import React from 'react';
 import { Order } from '../../../models/order.interface';
@@ -130,15 +129,11 @@ export default function MyOrders({ orders }: { orders: Order[] }) {
                                                 key={column.id}
                                                 align={column.align}
                                             >
-                                                {column.id === 'ORDERTIME'
-                                                    ? DateTime.fromISO(
-                                                          '2017-05-15T08:30:00'
-                                                      ).toLocaleString(DateTime.DATE_MED)
-                                                    : value}
+                                                {value}
                                             </TableCell>
                                         );
                                     })}
-                                    <Link href={`/order/${row.ID}`}>
+                                    <Link href={`/profile/order/${row.ID}`}>
                                         <TableCell align="center">
                                             <p className={styles.detailsBtn}>Details</p>
                                         </TableCell>
