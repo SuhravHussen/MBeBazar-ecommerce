@@ -17,13 +17,7 @@ class AuthRoute implements Routes {
     this.router.post('/login', passport.authenticate('local', { session: false }), this.authController.logIn);
     this.router.get('/logout', jwtPassport, this.authController.logOut);
     this.router.post('/login/failed', this.authController.loginFailed);
-    this.router.get(
-      '/google',
-      passport.authenticate('google', {
-        scope: ['profile', 'email'],
-        session: false,
-      }),
-    );
+    this.router.post('/google', this.authController.socialLogin);
     this.router.get(
       '/google/callback',
       passport.authenticate('google', {

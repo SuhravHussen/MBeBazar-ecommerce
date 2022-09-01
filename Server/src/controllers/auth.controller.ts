@@ -80,6 +80,40 @@ class AuthController {
       next(error);
     }
   };
+
+  public socialLogin = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const user = await this.authService.socialLogin(req.body);
+      const tokens: TokenData = await this.authService.login({
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        avatar: user?.avatar,
+        address: user?.address,
+        phone: user?.phone,
+        toReview: user?.toReview,
+      });
+
+      res.cookie('jwt-token', tokens.token, {
+        httpOnly: true,
+        signed: true,
+        maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
+      });
+      res.cookie('refresh-token', tokens.refreshToken, {
+        httpOnly: true,
+        signed: true,
+        maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
+      });
+
+      res.json({
+        message: 'Logged in successfully',
+        data: user,
+        error: false,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default AuthController;

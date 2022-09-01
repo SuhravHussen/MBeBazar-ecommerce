@@ -16,7 +16,7 @@ class orderService {
   }
 
   public async getOrderById(orderId: string): Promise<Order> {
-    const data: Order | null = await this.model.findOne({ _id: orderId });
+    const data: Order | null = await this.model.findOne({ _id: orderId }).populate('items.product');
     return data as Order;
   }
 }

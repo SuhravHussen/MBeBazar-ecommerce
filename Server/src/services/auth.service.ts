@@ -65,6 +65,17 @@ class AuthService {
 
     return updateUser;
   }
+
+  public async socialLogin(userData: User): Promise<UserDocument> {
+    const findUser: UserDocument = (await this.users.findOne({ email: userData.email })) as UserDocument;
+
+    if (findUser) {
+      return findUser;
+    }
+
+    const createUserData: UserDocument = await this.users.create(userData);
+    return createUserData;
+  }
 }
 
 export default AuthService;
