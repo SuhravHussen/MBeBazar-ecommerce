@@ -5,10 +5,18 @@
   -o-user-select: none;
   user-select: none;
 }
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
 .arrow {
   color: $PrimaryGreen;
   cursor: pointer;
 }
 .button {
+  border: none;
   background-color: transparent !important;
 }

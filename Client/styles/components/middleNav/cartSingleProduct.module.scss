@@ -20,6 +20,12 @@
   }
   .column2 {
     width: 40%;
+    h5 {
+      white-space: nowrap;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .column3 {
     width: 25%;

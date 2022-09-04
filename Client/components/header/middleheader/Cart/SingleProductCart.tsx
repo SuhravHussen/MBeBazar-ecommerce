@@ -1,40 +1,53 @@
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import styles from '../../../../styles/components/middleNav/cartSingleProduct.module.scss';
 import { Image, useState } from '../../../../utils/commonImports';
+import getLocalStorage from '../../../../utils/getLocalStorage';
+import handleQuantity from '../../../../utils/quantityHandler';
 import QuantityPicker from '../../../Common/QuantityPicker';
+import { iCart } from './CartDrawer';
 
-export default function SingleProductCart() {
-    const [productQuantity, setProductQuantity] = useState(1);
+export default function SingleProductCart({ product }: { product: iCart }) {
+    const [quantity, setProductQuantity] = useState(product.quantity);
+
     return (
         <div className={styles.singleProduct}>
             <div className={styles.column1}>
                 <div className={styles.image}>
                     <Image
-                        src="https://res.cloudinary.com/doircnueq/image/upload/v1635596669/MBeCommerece/Products/thumbnail-10_ymxck0.jpg"
+                        src={product.images[0]}
                         layout="fill"
                         placeholder="blur"
-                        blurDataURL="https://res.cloudinary.com/doircnueq/image/upload/v1635596669/MBeCommerece/Products/thumbnail-10_ymxck0.jpg"
-                        alt="Product Image"
+                        blurDataURL={product.images[0]}
+                        alt={product.title}
                     />
                 </div>
             </div>
             <div className={styles.column2}>
-                <h5 className={styles.productName}>Organic Purple Cauliflower</h5>
+                <h5 className={styles.productName}>{product.title}</h5>
                 <small>
-                    Item per price <span>$43</span>
+                    Item per price <span>${product.offerPrice}</span>
                 </small>
-                <h4>$43.00</h4>
+                <h4>${product?.total}</h4>
             </div>
             <div className={styles.column3}>
                 <QuantityPicker
+                    defaultValue={quantity}
                     className={styles.quantityPicker}
-                    value={productQuantity}
-                    setValue={setProductQuantity}
                     max={15}
+                    callback={(value) => handleQuantity(value, setProductQuantity, product._id)}
                 />
             </div>
-            <div className={styles.column4}>
-                <RiDeleteBin6Line style={{ color: 'red' }} />
+            <div
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                    const cartItems = getLocalStorage('cartItems', 'array');
+                    const newCartItems = cartItems.filter((p: iCart) => p._id !== product._id);
+                    localStorage.setItem('cartItems', JSON.stringify(newCartItems));
+                }}
+                className={styles.column4}
+            >
+                <RiDeleteBin6Line style={{ color: 'red', cursor: 'pointer' }} />
             </div>
         </div>
     );

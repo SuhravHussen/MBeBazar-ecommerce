@@ -1,7 +1,9 @@
 import { RiCloseCircleLine } from 'react-icons/ri';
 import ReactImageMagnify from 'react-image-magnify';
+import { useToasts } from 'react-toast-notifications';
 import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/Home/quickview.module.scss';
+import handleAddToCart from '../../../utils/addToCart';
 import { getPercentage } from '../../../utils/calculations';
 import {
     Carousel,
@@ -23,6 +25,9 @@ type iProps = {
 export default function QuickView({ open, setOpen, details }: iProps) {
     const [nav1, setNav1] = useState<any>();
     const [nav2, setNav2] = useState();
+    const [quantity, setProductQuantity] = useState(1);
+    const { addToast } = useToasts();
+
     const settings1 = {
         infinite: true,
         speed: 500,
@@ -69,8 +74,6 @@ export default function QuickView({ open, setOpen, details }: iProps) {
             },
         ],
     };
-
-    const [value, setValue] = useState(0);
 
     return (
         <MyModal
@@ -153,12 +156,22 @@ export default function QuickView({ open, setOpen, details }: iProps) {
                     {/* fifth row */}
                     <div className={styles.quantityCart}>
                         <QuantityPicker
-                            value={value}
-                            setValue={setValue}
-                            max={10}
+                            defaultValue={quantity}
+                            callback={(v: number) => setProductQuantity(v)}
+                            max={15}
                             className={styles.quantity}
                         />
-                        <button type="button">
+                        <button
+                            onClick={() => {
+                                handleAddToCart(details, quantity);
+                                addToast('Product added to cart', {
+                                    appearance: 'success',
+                                    autoDismiss: true,
+                                    autoDismissTimeout: 2000,
+                                });
+                            }}
+                            type="button"
+                        >
                             <FiShoppingCart />
                             Add to Cart
                         </button>

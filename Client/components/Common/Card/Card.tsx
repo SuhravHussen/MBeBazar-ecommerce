@@ -1,5 +1,7 @@
+import { useToasts } from 'react-toast-notifications';
 import { iProduct } from '../../../models/product.interface';
 import styles from '../../../styles/components/common/card/card.module.scss';
+import handleAddToCart from '../../../utils/addToCart';
 import { Fade, FiShoppingCart, Image, Link, Rating } from '../../../utils/commonImports';
 import HoverIcons from './HoverIcons';
 
@@ -11,6 +13,8 @@ type iProps = {
 };
 
 export default function Card({ product, index, setQuickViewDetails, setModalOpen }: iProps) {
+    const { addToast } = useToasts();
+
     return (
         <Fade className={styles.singleProduct} cascade>
             <div>
@@ -44,7 +48,18 @@ export default function Card({ product, index, setQuickViewDetails, setModalOpen
                     <h2>${product?.offerPrice}</h2>
                     <del>${product?.price}</del>
 
-                    <button type="button" className={styles.button}>
+                    <button
+                        onClick={() => {
+                            handleAddToCart(product);
+                            addToast('Product added to cart', {
+                                appearance: 'success',
+                                autoDismiss: true,
+                                autoDismissTimeout: 2000,
+                            });
+                        }}
+                        type="button"
+                        className={styles.button}
+                    >
                         <FiShoppingCart /> Add
                     </button>
                 </div>

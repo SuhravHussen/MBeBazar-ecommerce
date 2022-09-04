@@ -1,36 +1,46 @@
 /* eslint-disable react/jsx-no-bind */
+import { useEffect, useRef, useState } from 'react';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 import styles from '../../styles/components/common/quantityPicker.module.scss';
 
 export default function QuantityPicker({
-    value,
-    setValue,
+    defaultValue = 1,
     max,
     className,
+    callback,
 }: {
-    value: number;
+    defaultValue?: number;
     max: number;
-    setValue: any;
-    className: any;
+    className?: any;
+    callback: (number: number) => void;
 }) {
+    const [quantity, setQuantity] = useState(defaultValue);
+    const ref = useRef(false);
+    useEffect(() => {
+        if (!ref.current) ref.current = true;
+        if (ref.current) {
+            callback(quantity);
+        }
+    }, [callback, quantity]);
+
     // increase value
     function increase() {
-        if (value !== max) {
-            setValue(value + 1);
+        if (quantity !== max) {
+            setQuantity((prev) => prev + 1);
         }
     }
 
     // decrease value
     function decrease() {
-        if (value > 1) {
-            setValue(value - 1);
+        if (quantity > 1) {
+            setQuantity((prev) => prev - 1);
         }
     }
 
     return (
         <div className={className}>
-            <p className={styles.value}>{value}</p>
-            <div>
+            <p className={styles.value}>{quantity}</p>
+            <div className={styles.icons}>
                 <button className={styles.button} type="button">
                     <BiPlus onClick={increase} className={styles.arrow} />
                 </button>

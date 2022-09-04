@@ -21,7 +21,7 @@ import { useWindowDimensions } from '../../../utils/customHooks';
 import debounceSearch from '../../../utils/debounce';
 import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
 import { Search, SearchIconWrapper, StyledInputBase } from '../../styled/middleNav';
-import CartDrawer from './Cart/CartDrawer';
+import CartDrawer, { iCart } from './Cart/CartDrawer';
 import SearchSuggestions from './SearchSuggestions';
 import { RenderMobileMenu } from './utils/RenderMenu';
 import RenderNotification from './utils/RenderNotification';
@@ -43,6 +43,7 @@ export default function MiddleHeader() {
     const [items, setItems] = React.useState<iProduct[]>([]);
     const [search, setSearch] = React.useState('');
     const [user, setUser] = React.useState<null | iUser>(null);
+    const [cart, setCart] = React.useState<iCart[]>([]);
     const { data: session } = useSession();
     // user
 
@@ -60,6 +61,11 @@ export default function MiddleHeader() {
             } else {
                 setUser(null);
             }
+        }
+
+        const cartProduct = localStorage.getItem('cartItems');
+        if (cartProduct) {
+            setCart(JSON.parse(cartProduct));
         }
     }, [session]);
 
@@ -107,7 +113,7 @@ export default function MiddleHeader() {
         <>
             {/* drawer/modals  */}
             {width < 960 && <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />}
-            <CartDrawer open={cartOpen} setOpen={setCartOpen} />
+            <CartDrawer cart={cart} open={cartOpen} setOpen={setCartOpen} />
             <ResponsiveDialog open={loginDialogueOpen} setOpen={setLoginDialogueOpen} />
             <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1 }}>
                 {/* app bar */}
@@ -178,7 +184,7 @@ export default function MiddleHeader() {
                                 </Badge>
                             </IconButton>
                             <IconButton size="large" color="inherit">
-                                <Badge badgeContent={17} color="error">
+                                <Badge badgeContent={cart.length} color="success">
                                     <ShoppingCartOutlinedIcon
                                         className={styles.icons}
                                         onClick={() => setCartOpen(true)}

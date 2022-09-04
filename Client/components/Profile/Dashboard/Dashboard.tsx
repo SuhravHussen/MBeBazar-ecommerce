@@ -13,7 +13,6 @@ export default function Dashboard({ orders }: { orders: Order[] }) {
     const [completedOrder, setCompletedOrder] = useState(0);
 
     useEffect(() => {
-        console.log(orders);
         setTotalOrders(orders.length);
         setPenddingOrders(orders.filter((order) => order.bookingInfo.status === 'Pending').length);
         setProcessingOrders(

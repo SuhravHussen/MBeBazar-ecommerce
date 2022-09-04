@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactNode } from 'react-is/node_modules/@types/react';
 import styles from '../../styles/components/layout/layout.module.scss';
 import Footer from '../Common/Footer/Footer';
