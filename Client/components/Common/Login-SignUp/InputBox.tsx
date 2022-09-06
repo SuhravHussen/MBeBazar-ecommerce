@@ -15,6 +15,7 @@ interface IProps {
     control: any;
     validation?: (v: any) => boolean;
     required: boolean | string;
+    defaultValue?: string | null;
 }
 
 export default function InputBox({
@@ -27,6 +28,7 @@ export default function InputBox({
     control,
     required,
     validation,
+    defaultValue,
 }: IProps) {
     const [showPass, setShowPass] = useState('password');
 
@@ -37,6 +39,7 @@ export default function InputBox({
             <Controller
                 control={control && control}
                 name={type}
+                defaultValue={defaultValue || undefined}
                 rules={{
                     required,
                     validate: validation,
@@ -48,6 +51,7 @@ export default function InputBox({
                         error={error}
                         color="secondary"
                         placeholder={placeholder}
+                        defaultValue={defaultValue || undefined}
                         helperText={
                             error ? <p style={{ marginLeft: '-14px' }}>{helperText}</p> : ''
                         }

@@ -3,6 +3,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import { Divider } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
+import Link from 'next/link';
 import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
 import { iProduct } from '../../../../models/product.interface';
 import styles from '../../../../styles/components/middleNav/cartdrawer.module.scss';
@@ -54,9 +55,11 @@ export default function CartDrawer({ open, setOpen, cart }: IProps) {
                     ))}
                 </div>
                 <div className={styles.footer}>
-                    <div className={styles.checkout}>
-                        <p>Proceed to checkout </p> <h4>${total}</h4>
-                    </div>
+                    <Link href="/checkout">
+                        <div className={styles.checkout}>
+                            <p>Proceed to checkout </p> <h4>${total}</h4>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </Drawer>

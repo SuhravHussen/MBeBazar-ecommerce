@@ -1,0 +1,12 @@
+.detailsContainer {
+  width: 100%;
+  display: block;
+  margin-top: 20px;
+  gap: 10px;
+  .inputs {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

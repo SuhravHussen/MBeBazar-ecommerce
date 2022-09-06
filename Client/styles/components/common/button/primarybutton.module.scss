@@ -1,0 +1,4 @@
+.button {
+  @include SecondaryButton(10px, 100%, $PrimaryGreen);
+  margin-top: 12px;
+}

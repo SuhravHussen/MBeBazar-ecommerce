@@ -17,6 +17,27 @@
   }
 }
 
+@mixin SecondaryButton($padding, $size, $hoverColor) {
+  color: white;
+  background-color: $PrimaryGreen;
+  border: none;
+  padding: $padding;
+  font-size: $size;
+  transition: 0.4s;
+  //   width: $width;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: translateY(-6px);
+  }
+}
+
+@mixin BoxShadow1 {
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
 @mixin BoxShadow1 {
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
