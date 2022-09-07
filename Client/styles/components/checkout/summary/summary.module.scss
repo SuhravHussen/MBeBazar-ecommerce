@@ -1,0 +1,43 @@
+.summaryDiv {
+  width: 100%;
+  border: 1px solid rgb(216, 214, 214);
+  border-radius: 10px;
+  position: sticky;
+  padding: 10px;
+  .products {
+    max-height: 16rem;
+    overflow: scroll;
+  }
+  .price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    p:first-of-type {
+      color: $PrimaryGrey;
+      font-weight: bolder;
+      font-size: 0.9rem;
+    }
+    p:last-of-type {
+      font-weight: bolder;
+      font-size: 0.9rem;
+    }
+    .discount {
+      color: #fb923c;
+    }
+  }
+  .totalPrice {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    p:first-of-type {
+      font-weight: bolder;
+      font-size: 1.1rem;
+    }
+    p:last-of-type {
+      font-weight: bolder;
+      font-size: 1rem;
+    }
+  }
+}

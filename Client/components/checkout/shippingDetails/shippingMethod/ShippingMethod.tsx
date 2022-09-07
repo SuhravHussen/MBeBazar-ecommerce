@@ -3,11 +3,16 @@ import { BsTruck } from 'react-icons/bs';
 import styles from '../../../../styles/components/checkout/shippingDetails/shippingMethod/shippngMethod.module.scss';
 import RadioInput from '../../../Common/Inputs/Radio';
 
-export default function ShippingMethod({ register }: any) {
+export default function ShippingMethod({ register, setShippingMethod }: any) {
     return (
         <div className={styles.shippingMethods}>
             <FormControl>
-                <RadioGroup sx={{ gap: '10px' }} defaultValue="Sundarban" row>
+                <RadioGroup
+                    sx={{ gap: '10px' }}
+                    defaultValue="Sundarban"
+                    row
+                    onChange={(e) => setShippingMethod(e.target.value)}
+                >
                     <FormControlLabel
                         label=""
                         value="Sundarban"
@@ -33,7 +38,7 @@ export default function ShippingMethod({ register }: any) {
                                 value="Paperfly"
                                 label="Paperfly"
                                 type="shippingMethod"
-                                additionalText="Shipping fee: 3$"
+                                additionalText="Shipping fee: 5$"
                             />
                         }
                     />
@@ -47,7 +52,7 @@ export default function ShippingMethod({ register }: any) {
                                 value="RedX"
                                 label="RedX"
                                 type="shippingMethod"
-                                additionalText="Shipping fee: 3$"
+                                additionalText="Shipping fee: 10$"
                             />
                         }
                     />

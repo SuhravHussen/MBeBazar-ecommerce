@@ -11,9 +11,16 @@ interface iProps {
     errors: FieldErrorsImpl<IFormInputs>;
     user: iUser;
     register: any;
+    setShippingMethod: (method: string) => void;
 }
 
-export default function ShippingDetails({ control, errors, user, register }: iProps) {
+export default function ShippingDetails({
+    control,
+    errors,
+    user,
+    register,
+    setShippingMethod,
+}: iProps) {
     return (
         <DetailsContainer heading="Shipping Details" number="02">
             <InputBox
@@ -37,7 +44,11 @@ export default function ShippingDetails({ control, errors, user, register }: iPr
                 icon={<GoLocation style={{ fontSize: '18px' }} />}
                 validation={(v: any) => v.trim().length > 4}
             />
-            <ShippingMethod register={register} control={control} />
+            <ShippingMethod
+                setShippingMethod={setShippingMethod}
+                register={register}
+                control={control}
+            />
         </DetailsContainer>
     );
 }
