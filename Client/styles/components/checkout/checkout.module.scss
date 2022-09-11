@@ -6,6 +6,9 @@
     display: flex;
     align-items: flex-start;
     gap: 20px;
+    .form {
+      width: 60%;
+    }
     .summary {
       flex-grow: 1;
       display: flex;
@@ -15,6 +18,20 @@
       top: 100px;
       margin-bottom: 10px;
       margin-top: 20px;
+    }
+  }
+
+  @media screen and (max-width: $md) {
+    .details {
+      flex-direction: column-reverse;
+      .form {
+        width: 100%;
+      }
+      .summary {
+        width: 100%;
+        position: relative;
+        top: 0;
+      }
     }
   }
 }

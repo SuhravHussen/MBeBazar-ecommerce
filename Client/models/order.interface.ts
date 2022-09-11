@@ -1,5 +1,5 @@
 export interface Order<T = string> {
-    _id: string;
+    _id?: string;
     bookingInfo: {
         name: string;
         address: string;
@@ -7,15 +7,15 @@ export interface Order<T = string> {
         totalPrice: number;
         shippingPrice: number;
         shippingMethod: 'Sundarban' | 'RedX' | 'Paperfly';
-        status: 'Pending' | 'Processing' | 'Cancelled' | 'Delivered';
+        status: 'pending' | 'processing' | 'cancelled' | 'delivered';
         payment: 'pending' | 'success' | 'failed';
         paymentMethod: 'COD' | 'CreditCard';
     };
-    user: string;
+    user?: string;
     items: {
         product: T;
         quantity: number;
         price: number;
     }[];
-    createdAt: string;
+    createdAt?: string;
 }

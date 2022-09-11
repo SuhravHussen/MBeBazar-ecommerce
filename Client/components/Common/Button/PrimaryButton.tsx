@@ -6,27 +6,27 @@ import styles from '../../../styles/components/common/button/primarybutton.modul
 interface iProps {
     text: string;
     icon?: any;
-    callback?: () => void;
     loading?: boolean;
     type?: 'button' | 'submit' | 'reset';
     style?: {};
+    onClick?: () => void;
 }
 
 export default function PrimaryButton({
     text,
     icon = null,
     loading = false,
-    callback,
     type = 'button',
     style,
+    onClick,
 }: iProps) {
     return (
         <button
             style={style}
             disabled={!!loading}
-            onClick={callback}
             type={type}
             className={styles.button}
+            onClick={onClick}
         >
             {loading ? (
                 <CircularProgress

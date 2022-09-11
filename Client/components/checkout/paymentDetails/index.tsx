@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
+import { Alert, FormControl, FormControlLabel, RadioGroup } from '@mui/material';
 import { BsCashStack, BsCreditCard } from 'react-icons/bs';
 
 import RadioInput from '../../Common/Inputs/Radio';
@@ -8,7 +8,7 @@ export default function PaymentDetails({ register }: any) {
     return (
         <DetailsContainer heading="Payment Details" number="03">
             <FormControl>
-                <RadioGroup sx={{ gap: '10px', margin: '10px' }} defaultValue="creditCard" row>
+                <RadioGroup sx={{ gap: '10px', margin: '10px' }} defaultValue="CreditCard" row>
                     <FormControlLabel
                         label=""
                         control={
@@ -29,7 +29,7 @@ export default function PaymentDetails({ register }: any) {
                                 register={register}
                                 icon={<BsCreditCard />}
                                 required
-                                value="creditCard"
+                                value="CreditCard"
                                 label="Credit Card"
                                 type="paymentMethod"
                             />
@@ -37,6 +37,10 @@ export default function PaymentDetails({ register }: any) {
                     />
                 </RadioGroup>
             </FormControl>
+            <Alert severity="info" sx={{ margin: '10px' }}>
+                Please note that you will be redirected to a secure payment gateway to complete your
+                payment. Use 4242 4242 4242 4242 as the card number, any future date for the expiry
+            </Alert>
         </DetailsContainer>
     );
 }
