@@ -40,7 +40,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".jsx", ".ts", ".tsx"]
       }
     ],
     "prettier/prettier": [
@@ -55,5 +55,13 @@
       }
     ]
   },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "coverage/",
+    "public/",
+    "pages/_document.js"
+  ],
   "plugins": ["prettier", "react", "react-hooks"]
 }

@@ -77,7 +77,7 @@ export default function Invoice() {
                             <div className={styles.bottom}>
                                 <div className={styles.column}>
                                     <h5>Date</h5>
-                                    <p>{new Date(order?.createdAt).toString()}</p>
+                                    <p>{new Date(order?.createdAt as string).toString()}</p>
                                 </div>
                                 <div className={styles.column}>
                                     <h5>INVOICE NO.</h5>

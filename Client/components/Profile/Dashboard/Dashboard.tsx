@@ -14,12 +14,12 @@ export default function Dashboard({ orders }: { orders: Order[] }) {
 
     useEffect(() => {
         setTotalOrders(orders.length);
-        setPenddingOrders(orders.filter((order) => order.bookingInfo.status === 'Pending').length);
+        setPenddingOrders(orders.filter((order) => order.bookingInfo.status === 'pending').length);
         setProcessingOrders(
-            orders.filter((order) => order.bookingInfo.status === 'Processing').length
+            orders.filter((order) => order.bookingInfo.status === 'processing').length
         );
         setCompletedOrder(
-            orders.filter((order) => order.bookingInfo.status === 'Delivered').length
+            orders.filter((order) => order.bookingInfo.status === 'delivered').length
         );
     }, [orders]);
 

@@ -9,7 +9,7 @@ export default function SearchSuggestions({
     setItems,
 }: {
     items: iProduct[];
-    setItems: ([]) => void;
+    setItems: React.Dispatch<React.SetStateAction<iProduct[]>>;
 }) {
     const wrapperRef = useRef(null);
     const isOutSide = useOutsideAlerter(wrapperRef);

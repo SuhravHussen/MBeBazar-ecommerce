@@ -3,7 +3,6 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 import * as React from 'react';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
-
 export default class MyDocument extends Document {
     render() {
         return (
@@ -67,6 +66,7 @@ MyDocument.getInitialProps = async (ctx) => {
             data-emotion={`${style.key} ${style.ids.join(' ')}`}
             key={style.key}
             // eslint-disable-next-line react/no-danger
+            const
             dangerouslySetInnerHTML={{ __html: style.css }}
         />
     ));

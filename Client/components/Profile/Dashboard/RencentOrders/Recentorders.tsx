@@ -36,7 +36,7 @@ const columns: Column[] = [
     },
 ];
 
-type statuses = 'Pending' | 'Cancelled' | 'Delivered' | 'Processing';
+type statuses = 'pending' | 'cancelled' | 'delivered' | 'processing';
 
 interface Data {
     ID: string;
@@ -61,8 +61,8 @@ export default function Recentorders({ orders }: { orders: Order[] }) {
     useEffect(() => {
         const recentOrders = orders.map((order) =>
             createData(
-                order._id,
-                new Date(order.createdAt).toLocaleDateString(),
+                order._id as string,
+                new Date(order.createdAt as string).toLocaleDateString(),
                 order.bookingInfo.paymentMethod,
                 order.bookingInfo.status,
                 order.bookingInfo.totalPrice
@@ -95,10 +95,10 @@ export default function Recentorders({ orders }: { orders: Order[] }) {
                                 {columns.map((column) => {
                                     const value = row[column.id];
                                     let color;
-                                    if (value === 'Pending') color = '#f97316';
-                                    else if (value === 'Processing') color = '#6388f1';
-                                    else if (value === 'Cancel') color = 'red';
-                                    else if (value === 'Delivered') color = 'myColor.main';
+                                    if (value === 'pending') color = '#f97316';
+                                    else if (value === 'processing') color = '#6388f1';
+                                    else if (value === 'cancel') color = 'red';
+                                    else if (value === 'delivered') color = 'myColor.main';
                                     return (
                                         <TableCell
                                             sx={{
