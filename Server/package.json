@@ -38,6 +38,7 @@
     "passport-local": "^1.0.0",
     "password-generate": "^1.1.1",
     "redis": "^4.1.0",
+    "stripe": "^10.8.0",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3",

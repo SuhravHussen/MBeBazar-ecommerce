@@ -23,4 +23,5 @@ export const {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
   COOKIE_SECRET,
+  STRIPE_SECRET_KEY,
 } = process.env;

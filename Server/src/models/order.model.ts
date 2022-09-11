@@ -26,18 +26,18 @@ const orderSchema = new Schema<Order>(
       shippingMethod: {
         type: String,
         required: [true, 'Shipping method is required'],
-        enum: ['COD', 'RedX', 'Paperfly'],
+        enum: ['Sundarban', 'RedX', 'Paperfly'],
       },
       status: {
         type: String,
         required: [true, 'Status is required'],
-        enum: ['Pending', 'Processing', 'Cancelled', 'Delivered'],
+        enum: ['pending', 'processing', 'cancelled', 'delivered'],
         default: 'Pending',
       },
       payment: {
         type: String,
         required: [true, 'Payment is required'],
-        enum: ['Pending', 'Success', 'Failed'],
+        enum: ['pending', 'success', 'failed'],
         default: 'Pending',
       },
       paymentMethod: {

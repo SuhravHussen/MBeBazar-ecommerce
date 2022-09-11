@@ -7,6 +7,7 @@ import ProductRoute from '@routes/product.route';
 import validateEnv from '@utils/validateEnv';
 import ReviewRoute from '@routes/review.route';
 import orderRoute from '@routes/order.route';
+import paymentRoute from './routes/stripepayment.route';
 validateEnv();
 
 const app = new App();
@@ -18,7 +19,15 @@ app.connectToRedis();
 app.initializeMiddlewares();
 
 // initialize routes
-app.initializeRoutes([new IndexRoute(), new AuthRoute(), new UsersRoute(), , new ProductRoute(), new ReviewRoute(), new orderRoute()] as Routes[]);
+app.initializeRoutes([
+  new IndexRoute(),
+  new AuthRoute(),
+  new UsersRoute(),
+  new ProductRoute(),
+  new ReviewRoute(),
+  new orderRoute(),
+  new paymentRoute(),
+] as Routes[]);
 
 // initialize swagger
 app.initializeSwagger();

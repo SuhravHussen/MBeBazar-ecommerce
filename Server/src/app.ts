@@ -78,7 +78,13 @@ class App {
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
-    this.app.use(express.json());
+    this.app.use((req, res, next) => {
+      if (req.originalUrl === '/payment/webhook') {
+        next();
+      } else {
+        express.json()(req, res, next);
+      }
+    });
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser(COOKIE_SECRET));
   }
