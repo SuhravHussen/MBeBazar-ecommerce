@@ -35,11 +35,13 @@ class AuthController {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
+        sameSite: 'none',
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
+        sameSite: 'none',
       });
 
       res.json(response);
