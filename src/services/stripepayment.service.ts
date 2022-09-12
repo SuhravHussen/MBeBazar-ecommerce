@@ -9,8 +9,8 @@ class paymentService {
       payment_method_types: ['card'],
       line_items: [...item],
       mode: 'payment',
-      success_url: 'http://localhost:3001/success',
-      cancel_url: 'http://localhost:3001/cancel',
+      success_url: `${process.env.ORIGIN}/success`,
+      cancel_url: `${process.env.ORIGIN}/cancel`,
       metadata: {
         bookingInfo: JSON.stringify(orderInfo),
         userID: userID,
