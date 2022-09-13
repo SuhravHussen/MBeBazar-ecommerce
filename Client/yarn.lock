@@ -4069,6 +4069,11 @@ react-laag@^2.0.3:
   dependencies:
     tiny-warning "^1.0.3"
 
+react-loading@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
+  integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
+
 react-qty-picker@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-qty-picker/-/react-qty-picker-1.0.6.tgz#b78d5093af863b1f48b199fb77d9c5147e97cdd3"

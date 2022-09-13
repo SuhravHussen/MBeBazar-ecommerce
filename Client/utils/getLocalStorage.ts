@@ -1,8 +1,15 @@
 const getLocalStorage = (key: string, type: 'array' | 'object') => {
-    const data = localStorage.getItem(key);
-    const parsedData = type === 'array' ? JSON.parse(data || '[]') : JSON.parse(data || '{}');
+  const data = localStorage.getItem(key);
+  let parsedData = null;
+  console.log(null === null);
 
-    return parsedData;
+  if (data === 'undefined' || data === null) return null;
+  else {
+    console.log(data);
+    parsedData = type === 'array' ? JSON.parse(data || '[]') : JSON.parse(data || '{}');
+  }
+
+  return parsedData;
 };
 
 export default getLocalStorage;

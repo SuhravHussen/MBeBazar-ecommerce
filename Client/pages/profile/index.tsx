@@ -2,14 +2,16 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
+import withAuth from '../../components/Common/PrivateRoute/WithAuth';
 import Layout from '../../components/Layout/Layout';
 import Dashboard from '../../components/Profile/Dashboard/Dashboard';
 import Recentorders from '../../components/Profile/Dashboard/RencentOrders/Recentorders';
 import ProfileLayout from '../../components/Profile/ProfileLayout';
 import logeOut from '../../utils/handleLogout';
 
-export default function index() {
+function index() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { replace } = useRouter();
   const { addToast } = useToasts();
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function index() {
         } else {
           const data = await response.json();
           setOrders(data.data);
+          setLoading(false);
         }
       } catch (e) {
         console.log(e);
@@ -43,9 +46,17 @@ export default function index() {
   return (
     <Layout>
       <ProfileLayout>
-        <Dashboard orders={orders} />
-        <Recentorders orders={orders} />
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <Dashboard orders={orders} />
+            <Recentorders orders={orders} />
+          </>
+        )}
       </ProfileLayout>
     </Layout>
   );
 }
+
+export default withAuth(index);

@@ -25,17 +25,21 @@ export default function Login({ handleScreen, handleModalClose }: { handleScreen
     setSpinner(true);
     setError('');
     try {
-      signIn('credentials', {
+      const response = await signIn('credentials', {
         redirect: false,
         email: data.email,
         password: data.password,
       });
-      const session = await getSession();
-      if (session?.user) {
-        localStorage.setItem('user', JSON.stringify(session.user));
-        handleModalClose();
+      if (response?.ok) {
+        const session = await getSession();
+        if (session?.user) {
+          localStorage.setItem('user', JSON.stringify(session.user));
+          handleModalClose();
+        } else {
+          setError('Invalid Credentials or something went wrong!');
+        }
       } else {
-        setError('Invalid Credentials or something went wrong!');
+        setError(' something went wrong!');
       }
     } catch (err) {
       setError('Something went wrong');
