@@ -9,6 +9,7 @@ const setCookie = (req, res, next) => {
       signed: true,
       sameSite: 'none',
       secure: true,
+      domain: process.env.COOKIE_DOMAIN,
     });
     res.cookie('refresh-token', req.tokens.refreshToken, {
       httpOnly: true,
@@ -16,6 +17,7 @@ const setCookie = (req, res, next) => {
       signed: true,
       sameSite: 'none',
       secure: true,
+      domain: process.env.COOKIE_DOMAIN,
     });
   }
   next();
