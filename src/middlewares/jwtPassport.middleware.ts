@@ -7,11 +7,15 @@ const setCookie = (req, res, next) => {
       httpOnly: true,
       maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
       signed: true,
+      sameSite: 'none',
+      secure: true,
     });
     res.cookie('refresh-token', req.tokens.refreshToken, {
       httpOnly: true,
       maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
       signed: true,
+      sameSite: 'none',
+      secure: true,
     });
   }
   next();

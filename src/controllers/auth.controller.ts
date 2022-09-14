@@ -35,11 +35,15 @@ class AuthController {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
+        sameSite: 'none',
+        secure: true,
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
+        sameSite: 'none',
+        secure: true,
       });
 
       res.json(response);
@@ -98,11 +102,15 @@ class AuthController {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
+        sameSite: 'none',
+        secure: true,
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
+        sameSite: 'none',
+        secure: true,
       });
 
       res.json({
