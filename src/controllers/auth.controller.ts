@@ -1,5 +1,5 @@
 import { updatePassword } from '@interfaces/auth.interface';
-import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE } from '@config/index';
+import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE, COOKIE_DOMAIN } from '@config/index';
 import { response } from '@/interfaces/response.interface';
 import { NextFunction, Request, Response } from 'express';
 import { RequestWithUser, TokenData } from '@interfaces/auth.interface';
@@ -37,7 +37,7 @@ class AuthController {
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
-        domain: 'onrender.com',
+        domain: COOKIE_DOMAIN,
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
@@ -45,7 +45,7 @@ class AuthController {
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
-        domain: 'onrender.com',
+        domain: COOKIE_DOMAIN,
       });
 
       res.json(response);
