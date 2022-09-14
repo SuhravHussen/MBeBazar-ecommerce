@@ -139,7 +139,7 @@ export default function MiddleHeader() {
               </IconButton>
             </Box>
             {/* logo */}
-            <span className={styles.logo}>
+            <span  className={styles.logo}>
               <Link href="/">
                 <Image src="/images/logos/MBeBAZAR.png" width={180} height={100} placeholder="blur" blurDataURL="/images/logos/MBeBAZAR.png" />
               </Link>
