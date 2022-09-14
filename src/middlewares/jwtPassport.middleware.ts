@@ -17,7 +17,6 @@ const setCookie = (req, res, next) => {
       signed: true,
       sameSite: 'none',
       secure: true,
-      domain: process.env.COOKIE_DOMAIN,
     });
   }
   next();
