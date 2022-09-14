@@ -37,6 +37,7 @@ class AuthController {
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
+        domain: '.onrender.com',
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
@@ -44,6 +45,7 @@ class AuthController {
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
+        domain: '.onrender.com',
       });
 
       res.json(response);
