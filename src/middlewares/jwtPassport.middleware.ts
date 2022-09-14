@@ -1,4 +1,4 @@
-import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE } from '@config/index';
+import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE, COOKIE_DOMAIN } from '@config/index';
 import passport from 'passport';
 
 const setCookie = (req, res, next) => {
@@ -9,7 +9,7 @@ const setCookie = (req, res, next) => {
       signed: true,
       sameSite: 'none',
       secure: true,
-      domain: process.env.COOKIE_DOMAIN,
+      domain: COOKIE_DOMAIN,
     });
     res.cookie('refresh-token', req.tokens.refreshToken, {
       httpOnly: true,
@@ -17,6 +17,7 @@ const setCookie = (req, res, next) => {
       signed: true,
       sameSite: 'none',
       secure: true,
+      domain: COOKIE_DOMAIN,
     });
   }
   next();

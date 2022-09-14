@@ -25,6 +25,7 @@ class PaymentController {
       const sig = req.headers['stripe-signature'];
       const endpointsecret = process.env.WEB_HOOK_SECRET;
       const resD: Order | undefined = await this.paymentService.webhook(payload, sig, endpointsecret);
+      console.log('response from webhook is', resD);
       if (resD) {
         const order = await this.orderService.addOrder(resD);
         console.log('order added', order);
