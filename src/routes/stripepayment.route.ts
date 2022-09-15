@@ -1,9 +1,9 @@
 import jwtPassport from '@/middlewares/jwtPassport.middleware';
 import { Router } from 'express';
 import { Routes } from '@interfaces/routes.interface';
-import bodyParser from 'body-parser';
-import PaymentController from '@/controllers/stripepayment.controller';
 
+import PaymentController from '@/controllers/stripepayment.controller';
+import express from 'express';
 class paymentRoute implements Routes {
   public path = '/payment';
   public router = Router();
@@ -15,7 +15,7 @@ class paymentRoute implements Routes {
 
   private initializeRoutes() {
     this.router.post('/', jwtPassport, this.controller.makePayment);
-    this.router.post('/webhook', bodyParser.raw({ type: 'application/json' }), this.controller.webhook);
+    this.router.post('/webhook', express.raw({ type: '*/*' }), this.controller.webhook);
   }
 }
 

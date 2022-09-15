@@ -80,7 +80,6 @@ class App {
     this.app.use(compression());
     this.app.use((req, res, next) => {
       if (req.originalUrl === '/payment/webhook') {
-        console.log('ORIGINAL URL IS :', req.originalUrl);
         next();
       } else {
         express.json()(req, res, next);
