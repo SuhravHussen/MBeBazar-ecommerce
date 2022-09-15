@@ -55,6 +55,7 @@
     "sass": "^1.43.3",
     "scss": "^0.2.4",
     "set-cookie-parser": "^2.5.1",
+    "sharp": "^0.31.0",
     "slick-carousel": "^1.8.1",
     "stripe": "^10.8.0"
   },

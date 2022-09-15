@@ -24,7 +24,7 @@ function index() {
           },
           credentials: 'include',
         });
-        if (response.status === 401) {
+        if (response.status >= 400) {
           const loggedOut = await logeOut();
           if (loggedOut) {
             addToast('Logged Out Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
@@ -34,11 +34,16 @@ function index() {
           }
         } else {
           const data = await response.json();
+
           setOrders(data.data);
           setLoading(false);
         }
       } catch (e) {
-        console.log(e);
+        addToast('Something went wrong', { appearance: 'error', autoDismiss: true, autoDismissTimeout: 2000 });
+        setTimeout(() => {
+          logeOut();
+          replace('/');
+        }, 2000);
       }
     };
     getOrderData();

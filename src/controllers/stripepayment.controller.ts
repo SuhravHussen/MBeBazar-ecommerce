@@ -4,6 +4,7 @@ import { RequestWithUser } from './../interfaces/auth.interface';
 import { Request, Response, NextFunction } from 'express';
 
 import paymentService from '@/services/stripepayment.service';
+import { WEB_HOOK_SECRET } from '@/config';
 
 class PaymentController {
   public paymentService = new paymentService();
@@ -23,14 +24,15 @@ class PaymentController {
     try {
       const payload = req.body;
       const sig = req.headers['stripe-signature'];
-      const endpointsecret = process.env.WEB_HOOK_SECRET;
+      const endpointsecret = WEB_HOOK_SECRET;
       const resD: Order | undefined = await this.paymentService.webhook(payload, sig, endpointsecret);
-      console.log('response from webhook is', resD);
+
       if (resD) {
         const order = await this.orderService.addOrder(resD);
-        console.log('order added', order);
+
         res.json({
           success: true,
+          order,
         });
       } else {
         res.json({

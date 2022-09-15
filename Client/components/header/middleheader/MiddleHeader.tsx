@@ -94,9 +94,7 @@ export default function MiddleHeader() {
       });
       const data = await res.json();
       setItems(data.data);
-    } catch (_e) {
-      console.log(e);
-    }
+    } catch (error) {}
   };
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -139,7 +137,7 @@ export default function MiddleHeader() {
               </IconButton>
             </Box>
             {/* logo */}
-            <span  className={styles.logo}>
+            <span className={styles.logo}>
               <Link href="/">
                 <Image src="/images/logos/MBeBAZAR.png" width={180} height={100} placeholder="blur" blurDataURL="/images/logos/MBeBAZAR.png" />
               </Link>

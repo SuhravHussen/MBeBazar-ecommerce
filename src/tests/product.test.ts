@@ -16,7 +16,6 @@ describe('Order Route', () => {
     it('response statusCode 200', async () => {
       const res = await request(app.getServer()).get('/product?category=Meat');
 
-      console.log(res.text);
       expect(res.status).toBe(200);
       app.closeMongoDB();
     });

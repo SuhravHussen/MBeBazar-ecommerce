@@ -25,4 +25,5 @@ export const {
   COOKIE_SECRET,
   STRIPE_SECRET_KEY,
   COOKIE_DOMAIN,
+  WEB_HOOK_SECRET,
 } = process.env;

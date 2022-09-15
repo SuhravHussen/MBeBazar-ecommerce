@@ -99,7 +99,6 @@ const getOptions = (req: any, res: any) => ({
         }
         return true;
       } catch (e) {
-        console.log(e);
         return false;
       }
     },
@@ -110,7 +109,6 @@ const getOptions = (req: any, res: any) => ({
         };
         return session;
       } catch (e) {
-        console.log(e);
         return false;
       }
     },

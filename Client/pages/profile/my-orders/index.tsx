@@ -20,9 +20,7 @@ function index() {
         });
         const data = await response.json();
         setOrders(data.data);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     };
     getOrderData();
   }, []);
