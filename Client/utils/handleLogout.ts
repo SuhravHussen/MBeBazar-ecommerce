@@ -9,12 +9,12 @@ const logeOut = async (): Promise<boolean> => {
       },
       credentials: 'include',
     }).then(res => res.json());
-    if (resData.error) {
+    if (resData.error === true) {
       return false;
     }
     localStorage.removeItem('user');
     localStorage.removeItem('session');
-    const loggedOut = await signOut({ redirect: false });
+    const loggedOut = await signOut();
     if (loggedOut) {
       return true;
     }

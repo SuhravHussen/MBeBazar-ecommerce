@@ -25,13 +25,12 @@ function index() {
           credentials: 'include',
         });
         if (response.status >= 400) {
-          const loggedOut = await logeOut();
-          if (loggedOut) {
-            addToast('Logged Out Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
+          setTimeout(() => {
+            logeOut();
             replace('/');
-          } else {
-            addToast('Something went wrong', { appearance: 'error', autoDismiss: true, autoDismissTimeout: 2000 });
-          }
+          }, 2000);
+          addToast('Sorry ! your session expired', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
+          replace('/');
         } else {
           const data = await response.json();
 

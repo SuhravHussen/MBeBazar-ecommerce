@@ -50,13 +50,10 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
 
   const handleLogeOut = async () => {
     try {
-      const loggedOut = await logeOut();
-      if (loggedOut) {
-        addToast('Logged Out Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
-        replace('/');
-      } else {
-        addToast('Something went wrong', { appearance: 'error', autoDismiss: true, autoDismissTimeout: 2000 });
-      }
+      setTimeout(() => {
+        logeOut();
+      }, 2000);
+      addToast('Logging Out', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
     } catch {
       addToast('Something went wrong', {
         appearance: 'error',
