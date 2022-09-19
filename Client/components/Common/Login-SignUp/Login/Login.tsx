@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
 import styles from '../../../../styles/components/common/login-signUp/login.module.scss';
+import PrimaryButton from '../../Button/PrimaryButton';
 import InputBox from '../InputBox';
 import OtherLogins from '../OtherLogins';
 
@@ -88,23 +89,7 @@ export default function Login({ handleScreen, handleModalClose }: { handleScreen
             }}
           />
           {authError && <Alert severity="error">{authError}</Alert>}
-          <button disabled={showSpinner} type="submit" className={styles.button}>
-            {showSpinner ? (
-              <CircularProgress
-                sx={{
-                  color: 'green',
-                  animationDuration: '150ms',
-                  [`& .${circularProgressClasses.circle}`]: {
-                    strokeLinecap: 'round',
-                  },
-                }}
-                thickness={5}
-                size={16}
-              />
-            ) : (
-              ' Login'
-            )}
-          </button>
+          <PrimaryButton text="login" loading={showSpinner} type="submit" />
         </div>
       </form>
       <h3>OR</h3>

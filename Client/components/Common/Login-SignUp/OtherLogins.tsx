@@ -2,6 +2,7 @@ import { signIn } from 'next-auth/react';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import styles from '../../../styles/components/common/login-signUp/otherlogin.module.scss';
+import PrimaryButton from '../Button/PrimaryButton';
 
 export default function OtherLogins({ handleScreen, screen }: { handleScreen: any; screen: string }) {
   const handleSocialLogin = async (method: 'google' | 'facebook') => {
@@ -20,12 +21,8 @@ export default function OtherLogins({ handleScreen, screen }: { handleScreen: an
   return (
     <div className={styles.moreLogin}>
       <div className={styles.otherLogins}>
-        <button onClick={() => handleSocialLogin('facebook')} className={styles.facebook} type="button">
-          <FaFacebookF /> <span>Login With Facebook</span>
-        </button>
-        <button onClick={() => handleSocialLogin('google')} className={styles.google} type="button">
-          <FcGoogle /> <span>Login With Google</span>
-        </button>
+        <PrimaryButton className={styles.facebook} text="Login With Facebook" icon={<FaFacebookF />} onClick={() => handleSocialLogin('facebook')} />
+        <PrimaryButton className={styles.google} text="Login With Google" icon={<FcGoogle />} onClick={() => handleSocialLogin('google')} />
       </div>
       <p>
         {screen === 'login' ? "Don't have an account?" : 'Already have an account?'}
