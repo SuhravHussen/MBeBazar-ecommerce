@@ -6,6 +6,7 @@ import {
   Fade,
   FiShoppingCart,
   Image,
+  Link,
   Rating,
   SectionHeader,
 
@@ -35,7 +36,9 @@ export default function DealsOftheDay({ dealsOfTheDay }: { dealsOfTheDay: iProdu
                 <Countdown />
               </div>
               <div className={styles.content}>
-                <h3>{p.title}</h3>
+                <Link href={'/product-details/' + p._id}>
+                  <h3>{p.title}</h3>
+                </Link>
                 <h4>
                   <Rating name="read-only" value={4.5} precision={0.1} readOnly />
                   <p>(32)</p>

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import FeaturedSk from '../../../skeletons/FeaturedSk';
 import styles from '../../../styles/components/Home/featured.module.scss';
-import { Fade, Image, SectionHeader } from '../../../utils/commonImports';
+import { Fade, Image, Link, SectionHeader } from '../../../utils/commonImports';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import Carousel from '../../Common/Carousel';
 
@@ -136,7 +136,9 @@ export default function Featured() {
                       placeholder="blur"
                       blurDataURL="/images/loading-min.jpg"
                     />
-                    <h4>{c.name}</h4>
+                    <Link href={'/products?category=' + c.name}>
+                      <h4>{c.name}</h4>
+                    </Link>
                     <p>30 items</p>
                   </div>
                 </div>
