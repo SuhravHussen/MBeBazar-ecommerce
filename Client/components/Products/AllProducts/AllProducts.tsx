@@ -6,7 +6,7 @@ import styles from '../../../styles/components/products/allProducts.module.scss'
 import { React, useEffect, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
 import QuickView from '../../Common/Card/QuickView';
-import Select from '../../Common/Select';
+
 import NoResult from './NoResult';
 
 export default function AllProducts({ data, query }: searchedProps) {
@@ -72,9 +72,9 @@ export default function AllProducts({ data, query }: searchedProps) {
         <p>
           We found <span>{data.totalDocs}</span> items for you!
         </p>
-        <div className={styles.filters}>
+        {/* <div className={styles.filters}>
           <Select handleChange={handleSort} options={options} />
-        </div>
+        </div> */}
       </div>
       <section className={styles.products}>
         {!loading &&

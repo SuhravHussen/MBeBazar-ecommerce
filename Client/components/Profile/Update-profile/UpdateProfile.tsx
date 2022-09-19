@@ -5,7 +5,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { useToasts } from 'react-toast-notifications';
 import styles from '../../../styles/components/profile/updateProfile/update-profile.module.scss';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import InputBox from '../../Common/Login-SignUp/InputBox';
+import InputBox from '../../Common/Inputs/InputBox';
 import Dropzone from './Dropzone';
 
 interface IFormInputs {

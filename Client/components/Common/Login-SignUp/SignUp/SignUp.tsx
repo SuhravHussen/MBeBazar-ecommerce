@@ -5,7 +5,7 @@ import { AiOutlineLock, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { useToasts } from 'react-toast-notifications';
 import styles from '../../../../styles/components/common/login-signUp/sign-up.module.scss';
 import PrimaryButton from '../../Button/PrimaryButton';
-import InputBox from '../InputBox';
+import InputBox from '../../Inputs/InputBox';
 import OtherLogins from '../OtherLogins';
 
 interface IFormInputs {

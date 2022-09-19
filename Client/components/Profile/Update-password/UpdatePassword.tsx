@@ -5,7 +5,7 @@ import { useToasts } from 'react-toast-notifications';
 import styles from '../../../styles/components/profile/update-password/updatePassword.module.scss';
 import { useState } from '../../../utils/commonImports';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
-import InputBox from '../../Common/Login-SignUp/InputBox';
+import InputBox from '../../Common/Inputs/InputBox';
 
 interface IFormInputs {
   'old password': string;

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
 import styles from '../../../../styles/components/common/login-signUp/login.module.scss';
 import PrimaryButton from '../../Button/PrimaryButton';
-import InputBox from '../InputBox';
+import InputBox from '../../Inputs/InputBox';
 import OtherLogins from '../OtherLogins';
 
 interface IFormInputs {
