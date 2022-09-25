@@ -2,7 +2,9 @@ import { Alert } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineUser } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
+import { updateUser } from '../../../Redux/Slices/userSlice';
 import styles from '../../../styles/components/profile/updateProfile/update-profile.module.scss';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import InputBox from '../../Common/Inputs/InputBox';
@@ -18,7 +20,7 @@ interface IFormInputs {
 export default function UpdateProfile() {
   const [avatar, setAvatar] = useState('');
   const [errorMessage, setErrorMsg] = useState('');
-
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     control,
@@ -46,30 +48,18 @@ export default function UpdateProfile() {
       if (resData.error) {
         setErrorMsg(resData?.message);
       } else {
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            _id: resData?.data?._id,
-            name: resData?.data?.name,
-            address: resData?.data?.address,
-            phone: resData?.data.phone,
-            avatar: resData?.data?.avatar,
-            toReview: resData?.data?.toReview,
-            email: resData?.data?.email,
-          }),
-        );
-        localStorage.setItem(
-          'session',
-          JSON.stringify({
-            _id: resData?.data?._id,
-            name: resData?.data?.name,
-            address: resData?.data?.address,
-            phone: resData?.data.phone,
-            avatar: resData?.data?.avatar,
-            toReview: resData?.data?.toReview,
-            email: resData?.data?.email,
-          }),
-        );
+        const updatedUser = {
+          _id: resData?.data?._id,
+          name: resData?.data?.name,
+          address: resData?.data?.address,
+          phone: resData?.data.phone,
+          avatar: resData?.data?.avatar,
+          toReview: resData?.data?.toReview,
+          email: resData?.data?.email,
+        };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('session', JSON.stringify(updatedUser));
+        dispatch(updateUser(updatedUser));
         addToast('Profile updated successfully', {
           appearance: 'success',
         });

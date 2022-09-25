@@ -7,6 +7,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Dispatch, SetStateAction } from 'react';
 import { GoSignIn } from 'react-icons/go';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../../../Redux/Slices/cartSlice';
 
 interface iMobileMenu {
   user: any;
@@ -16,10 +18,20 @@ interface iMobileMenu {
   handleCart: Dispatch<SetStateAction<boolean>>;
   handleProfile: any;
   setNotiAnchorEL: Dispatch<SetStateAction<HTMLElement | null>>;
+  cartItemLength: number;
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const RenderMobileMenu = ({ anchor, open, handleMenuClose, handleCart, handleProfile, user, setNotiAnchorEL }: iMobileMenu) => (
+export const RenderMobileMenu = ({
+  anchor,
+  open,
+  handleMenuClose,
+  handleCart,
+  handleProfile,
+  user,
+  setNotiAnchorEL,
+  cartItemLength,
+}: iMobileMenu) => (
   <Menu
     anchorEl={anchor}
     anchorOrigin={{
@@ -53,7 +65,7 @@ export const RenderMobileMenu = ({ anchor, open, handleMenuClose, handleCart, ha
       }}
     >
       <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
-        <Badge badgeContent={17} color="error">
+        <Badge badgeContent={cartItemLength} color="error">
           <ShoppingCartOutlinedIcon />
         </Badge>
       </IconButton>

@@ -5,7 +5,8 @@ import handleAddToCart from '../../../utils/addToCart';
 import { Fade, FiShoppingCart, Image, Link, Rating } from '../../../utils/commonImports';
 import PrimaryButton from '../Button/PrimaryButton';
 import HoverIcons from './HoverIcons';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../Redux/Slices/cartSlice';
 type iProps = {
   product: iProduct;
   index: number;
@@ -15,7 +16,7 @@ type iProps = {
 
 export default function Card({ product, index, setQuickViewDetails, setModalOpen }: iProps) {
   const { addToast } = useToasts();
-
+  const dispatch = useDispatch();
   return (
     <Fade className={styles.singleProduct} cascade>
       <div>
@@ -43,7 +44,8 @@ export default function Card({ product, index, setQuickViewDetails, setModalOpen
             text="Add"
             type="button"
             onClick={() => {
-              handleAddToCart(product);
+              const cartItems = handleAddToCart(product);
+              dispatch(addToCart(cartItems));
               addToast('Product added to cart', {
                 appearance: 'success',
                 autoDismiss: true,

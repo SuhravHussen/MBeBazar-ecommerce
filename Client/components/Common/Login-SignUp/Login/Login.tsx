@@ -3,6 +3,8 @@ import { getSession, signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../../../Redux/Slices/userSlice';
 import styles from '../../../../styles/components/common/login-signUp/login.module.scss';
 import PrimaryButton from '../../Button/PrimaryButton';
 import InputBox from '../../Inputs/InputBox';
@@ -21,6 +23,7 @@ export default function Login({ handleScreen, handleModalClose }: { handleScreen
   } = useForm<IFormInputs>();
   const [showSpinner, setSpinner] = useState(false);
   const [authError, setError] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: any) => {
     setSpinner(true);
@@ -35,6 +38,7 @@ export default function Login({ handleScreen, handleModalClose }: { handleScreen
         const session = await getSession();
         if (session?.user) {
           localStorage.setItem('user', JSON.stringify(session.user));
+          dispatch(addUser(session.user));
           handleModalClose();
         } else {
           setError('Invalid Credentials or something went wrong!');

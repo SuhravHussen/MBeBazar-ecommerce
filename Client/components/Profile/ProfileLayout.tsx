@@ -10,7 +10,9 @@ import { FaClipboardList } from 'react-icons/fa';
 import { FiSettings, FiUnlock } from 'react-icons/fi';
 import { IoMdExit } from 'react-icons/io';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
+import { removeUser } from '../../Redux/Slices/userSlice';
 import styles from '../../styles/components/profile/profileLayout.module.scss';
 import { Link, React } from '../../utils/commonImports';
 import logeOut from '../../utils/handleLogout';
@@ -18,6 +20,7 @@ import logeOut from '../../utils/handleLogout';
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   const { addToast } = useToasts();
   const { route, replace } = useRouter();
+  const dispatch = useDispatch();
   type menuType = {
     text: string;
     icon: any;
@@ -52,6 +55,8 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
     try {
       setTimeout(() => {
         logeOut();
+        dispatch(removeUser());
+        replace('/');
       }, 2000);
       addToast('Logging Out', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
     } catch {

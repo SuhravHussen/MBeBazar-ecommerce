@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { GoCloudUpload } from 'react-icons/go';
+import { useSelector } from 'react-redux';
+import { iUser } from '../../../models/user.interface';
+import { selectUser } from '../../../Redux/Slices/userSlice';
+import { AppState } from '../../../Redux/Store/store';
 
 export default function Dropzone({ setAvatar }: { setAvatar: any }) {
   const image = useRef<HTMLImageElement>(null);
   const [errors, setErrors] = useState('');
+  const user = useSelector(selectUser);
+
   const sizeCheck = (file: any) => {
     if (file.size > 700000) {
       return {
@@ -16,8 +22,8 @@ export default function Dropzone({ setAvatar }: { setAvatar: any }) {
   };
   useEffect(() => {
     if (image.current) {
-      const userImage = JSON.parse(localStorage.getItem('user') || '')?.avatar;
-      image.current.src = userImage || '/images/default/user.png';
+      const userImage = user?.avatar ? user.avatar : '/images/avatars/default.png';
+      image.current.src = userImage;
     }
   }, []);
 

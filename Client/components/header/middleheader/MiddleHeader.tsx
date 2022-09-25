@@ -25,6 +25,10 @@ import CartDrawer, { iCart } from './Cart/CartDrawer';
 import SearchSuggestions from './SearchSuggestions';
 import { RenderMobileMenu } from './utils/RenderMenu';
 import RenderNotification from './utils/RenderNotification';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from '../../../Redux/Store/store';
+import { selectCartItems } from '../../../Redux/Slices/cartSlice';
+import { selectUser } from '../../../Redux/Slices/userSlice';
 
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
@@ -42,32 +46,11 @@ export default function MiddleHeader() {
   const [notiAnchorEL, setNotiAnchorEL] = React.useState<HTMLElement | null>(null);
   const [items, setItems] = React.useState<iProduct[]>([]);
   const [search, setSearch] = React.useState('');
-  const [user, setUser] = React.useState<null | iUser>(null);
-  const [cart, setCart] = React.useState<iCart[]>([]);
+
   const { data: session } = useSession();
   // user
-
-  React.useEffect(() => {
-    const userJson = localStorage.getItem('user');
-
-    if (!userJson || userJson === 'undefined') {
-      localStorage.setItem('user', JSON.stringify(session?.user));
-      // @ts-ignore
-      setUser(session?.user);
-    } else {
-      const userData = JSON.parse(userJson);
-      if (userData._id) {
-        setUser(userData);
-      } else {
-        setUser(null);
-      }
-    }
-
-    const cartProduct = localStorage.getItem('cartItems');
-    if (cartProduct) {
-      setCart(JSON.parse(cartProduct));
-    }
-  }, [session]);
+  const cartItems = useSelector(selectCartItems);
+  const user = useSelector(selectUser);
 
   // open or close drawer
   const toggleDrawer = () => {
@@ -111,7 +94,7 @@ export default function MiddleHeader() {
     <>
       {/* drawer/modals  */}
       {width < 960 && <MyDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />}
-      <CartDrawer cart={cart} open={cartOpen} setOpen={setCartOpen} />
+      <CartDrawer loginOpen={setLoginDialogueOpen} cart={cartItems} open={cartOpen} setOpen={setCartOpen} />
       <ResponsiveDialog open={loginDialogueOpen} setOpen={setLoginDialogueOpen} />
       <Box className={styles.dekstopNavContainer} sx={{ flexGrow: 1 }}>
         {/* app bar */}
@@ -166,7 +149,7 @@ export default function MiddleHeader() {
                 </Badge>
               </IconButton>
               <IconButton size="large" color="inherit">
-                <Badge badgeContent={cart.length} color="success">
+                <Badge badgeContent={cartItems?.length} color="success">
                   <ShoppingCartOutlinedIcon className={styles.icons} onClick={() => setCartOpen(true)} />
                 </Badge>
               </IconButton>
@@ -199,6 +182,7 @@ export default function MiddleHeader() {
           handleMenuClose={() => handleOpenClose(setMobileMoreAnchorEl, null)}
           setNotiAnchorEL={setNotiAnchorEL}
           handleProfile={() => setLoginDialogueOpen(true)}
+          cartItemLength={cartItems?.length}
         />
         <RenderNotification
           anchorEl={notiAnchorEL}
