@@ -1,6 +1,8 @@
 import LandingPage from '../components/home/LandingPage';
 import Layout from '../components/Layout/Layout';
 import { iProduct } from '../models/product.interface';
+import { productApi } from '../Redux/services/Products/services';
+import { wrapper } from '../Redux/Store/store';
 
 const Home = ({
     mostSell,
@@ -13,26 +15,24 @@ const Home = ({
 }) => (
     <Layout>
         <LandingPage mostSell={mostSell} popular={popular} dealsOfTheDay={dealsOfTheDay} />
+        <h1>hello</h1>
     </Layout>
 );
 export default Home;
 
-export async function getStaticProps() {
-    const popular = `${process.env.BASE_URL}/product/popular`;
-    const mostSell = `${process.env.BASE_URL}/product/mostSell`;
-    const dealsOfTheDay = `${process.env.BASE_URL}/product/deals-of-the-day`;
+export const getStaticProps = wrapper.getServerSideProps((store)=> async ()=>{
+    const {dispatch} = store;
 
-    const popularProducts = await fetch(popular).then((res) => res.json());
-    const mostSellProducts = await fetch(mostSell).then((res) => res.json());
-    const dealsOfTheDayProducts = await fetch(dealsOfTheDay).then((res) => res.json());
+      const popularProducts = await dispatch(productApi.endpoints.getPopularProducts.initiate())
+      const mostSellProducts = await dispatch(productApi.endpoints.getMostSellProducts.initiate())
+      const dealsOfTheDayProducts = await dispatch(productApi.endpoints.getDealsOfTheDay.initiate())
 
-    // Pass data to the page via props
     return {
         props: {
-            popular: popularProducts.data,
-            mostSell: mostSellProducts.data,
-            dealsOfTheDay: dealsOfTheDayProducts.data,
+            popular: popularProducts.data?.data || [],
+            mostSell: mostSellProducts.data?.data || [],
+            dealsOfTheDay: dealsOfTheDayProducts.data?.data || [],
         },
         revalidate: 300,
     };
-}
+})
