@@ -15,7 +15,7 @@ const Home = ({
 }) => (
     <Layout>
         <LandingPage mostSell={mostSell} popular={popular} dealsOfTheDay={dealsOfTheDay} />
-        <h1>hello</h1>
+       
     </Layout>
 );
 export default Home;
@@ -26,7 +26,7 @@ export const getStaticProps = wrapper.getServerSideProps((store)=> async ()=>{
       const popularProducts = await dispatch(productApi.endpoints.getPopularProducts.initiate())
       const mostSellProducts = await dispatch(productApi.endpoints.getMostSellProducts.initiate())
       const dealsOfTheDayProducts = await dispatch(productApi.endpoints.getDealsOfTheDay.initiate())
-
+  
     return {
         props: {
             popular: popularProducts.data?.data || [],
