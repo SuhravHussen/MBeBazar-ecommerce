@@ -13,16 +13,25 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
 import { SessionProvider } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
 import Loading from '../components/routeChange/Loading';
+import { addToCart } from '../Redux/Slices/cartSlice';
+import { addUser } from '../Redux/Slices/userSlice';
+import { wrapper } from '../Redux/Store/store';
 import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
 import '../styles/globals.scss';
 import '../styles/overRides.scss';
-import { wrapper } from '../Redux/Store/store';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../Redux/Slices/cartSlice';
-import { addUser } from '../Redux/Slices/userSlice';
+const { default: AbortController } = require("abort-controller");
+const { default: fetch, Headers, Request, Response } = require("node-fetch");
 
+Object.assign(globalThis, {
+  fetch,
+  Headers,
+  Request,
+  Response,
+  AbortController,
+});
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
