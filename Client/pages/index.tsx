@@ -15,12 +15,11 @@ const Home = ({
 }) => (
     <Layout>
         <LandingPage mostSell={mostSell} popular={popular} dealsOfTheDay={dealsOfTheDay} />
-       
     </Layout>
 );
 export default Home;
 
-export const getStaticProps = wrapper.getServerSideProps((store)=> async ()=>{
+export const getStaticProps = wrapper.getStaticProps((store)=> async ()=>{
     const {dispatch} = store;
 
       const popularProducts = await dispatch(productApi.endpoints.getPopularProducts.initiate())

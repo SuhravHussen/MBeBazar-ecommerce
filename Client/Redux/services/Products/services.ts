@@ -12,6 +12,9 @@ export const  productApi = api.injectEndpoints({
         getDealsOfTheDay : builder.query<ProductsRes, void >({
             query: () => `/product/deals-of-the-day`,
         }),
+        getProductDetails : builder.query<ProductsRes, string >({
+            query: (id) => `/product/${id}`,
+        }),
 })
 });
 

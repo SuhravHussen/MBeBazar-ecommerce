@@ -1,7 +1,11 @@
 import { IoIosArrowForward } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
+import { useToasts } from 'react-toast-notifications';
 
 import { iProduct } from '../../../models/product.interface';
+import { addToCart } from '../../../Redux/Slices/cartSlice';
 import styles from '../../../styles/components/Home/dealsOfTheDay/dealsOfTheDay.module.scss';
+import handleAddToCart from '../../../utils/addToCart';
 import {
   Fade,
   FiShoppingCart,
@@ -11,14 +15,15 @@ import {
   SectionHeader,
 
   // eslint-disable-next-line prettier/prettier
-  useState,
+  useState
 } from '../../../utils/commonImports';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
 import Countdown from './Countdown';
 
 export default function DealsOftheDay({ dealsOfTheDay }: { dealsOfTheDay: iProduct[] }) {
   const [products] = useState<iProduct[]>(dealsOfTheDay);
-
+  const dispatch = useDispatch();
+  const {addToast} = useToasts();
   return (
     <div className={styles.dealsContainer}>
       <SectionHeader>
@@ -51,7 +56,11 @@ export default function DealsOftheDay({ dealsOfTheDay }: { dealsOfTheDay: iProdu
                   <h2>${p.offerPrice}</h2>
                   <del>${p.price}</del>
 
-                  <PrimaryButton text="Add" icon={<FiShoppingCart />} />
+                  <PrimaryButton onClick={()=>{
+                        const items = handleAddToCart(p, 1);
+                        dispatch(addToCart(items));
+                        addToast('Item added to cart', {appearance: 'success', autoDismiss: true , autoDismissTimeout: 1500})
+                  }} text="Add" icon={<FiShoppingCart />} />
                 </div>
               </div>
             </div>
