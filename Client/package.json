@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=16"
+    "node": "17.4.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "install": "yarn install --ignore-engines",
+    "add": "yarn add --ignore-engines",
     "start": "next start",
     "lint": "yarn add -D prettier && yarn add -D babel-eslint && npx install-peerdeps --dev eslint-config-airbnb && yarn add -D eslint-config-prettier eslint-plugin-prettier"
   },
