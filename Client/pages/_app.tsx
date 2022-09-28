@@ -12,7 +12,9 @@ import 'slick-carousel/slick/slick-theme.css';
 // eslint-disable-next-line import/no-absolute-path
 import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
+import { AbortController } from 'abort-controller';
 import { SessionProvider } from 'next-auth/react';
+import fetch, { Headers, Request, Response } from 'node-fetch';
 import { useDispatch } from 'react-redux';
 import Loading from '../components/routeChange/Loading';
 import { addToCart } from '../Redux/Slices/cartSlice';
@@ -22,8 +24,6 @@ import createEmotionCache from '../src/createEmotionCache';
 import theme from '../src/theme';
 import '../styles/globals.scss';
 import '../styles/overRides.scss';
-const { default: AbortController } = require("abort-controller");
-const { default: fetch, Headers, Request, Response } = require("node-fetch");
 
 Object.assign(globalThis, {
   fetch,
