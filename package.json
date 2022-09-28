@@ -16,6 +16,7 @@
     "test": "jest --forceExit --detectOpenHandles "
   },
   "dependencies": {
+    "abort-controller": "^3.0.0",
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "bcrypt": "^5.0.1",
@@ -35,6 +36,7 @@
     "mongoose-paginate-ts": "^1.2.6",
     "mongoose-paginate-v2": "^1.6.3",
     "morgan": "^1.10.0",
+    "node-fetch": "^3.2.10",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
