@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick.css';
 // import Loader from '../components/loader/Loader';
 import { SessionProvider } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
+import Layout from '../components/Layout/Layout';
 import Loading from '../components/routeChange/Loading';
 import { addToCart } from '../Redux/Slices/cartSlice';
 import { addUser } from '../Redux/Slices/userSlice';
@@ -84,20 +85,22 @@ function MyApp(props: any) {
         <Head>
           <title>MBeBAZAR - By Grocery Online </title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-  <meta name="description" content="MBeBAZAR - Buy Grocery Items Online" />
-  <meta name="theme-color" content="#000" />
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+          <meta name="description" content="MBeBAZAR - Buy Grocery Items Online" />
+          <meta name="theme-color" content="#000" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         </Head>
         <ThemeProvider theme={theme}>
           <Loading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <SessionProvider session={session}>
+            <Layout>
             <Component {...pageProps} />
+            </Layout>
           </SessionProvider>
         </ThemeProvider>
       </CacheProvider>

@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import Layout from '../../components/Layout/Layout';
 import AllProducts from '../../components/Products/AllProducts/AllProducts';
 import NoResults from '../../components/Products/AllProducts/NoResult';
 import ProductsBanner from '../../components/Products/ProductsBanner';
@@ -22,10 +21,10 @@ export interface searchedProps {
 
 export default function Type({ data, query }: searchedProps) {
     return (
-        <Layout>
+        <>
             <ProductsBanner />
             {data.totalDocs > 0 ? <AllProducts data={data} query={query} /> : <NoResults />}
-        </Layout>
+        </>
     );
 }
 

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from 'react';
 import withAuth from '../../../components/Common/PrivateRoute/WithAuth';
-import Layout from '../../../components/Layout/Layout';
 import MyOrders from '../../../components/Profile/MyOrders/MyOrders';
 import ProfileLayout from '../../../components/Profile/ProfileLayout';
 
@@ -25,11 +24,11 @@ function index() {
     getOrderData();
   }, []);
   return (
-    <Layout>
+ 
       <ProfileLayout>
         <MyOrders orders={orders} />
       </ProfileLayout>
-    </Layout>
+ 
   );
 }
 

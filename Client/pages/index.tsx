@@ -1,5 +1,4 @@
 import LandingPage from '../components/home/LandingPage';
-import Layout from '../components/Layout/Layout';
 import { iProduct } from '../models/product.interface';
 import { productApi } from '../Redux/services/Products/services';
 import { wrapper } from '../Redux/Store/store';
@@ -13,9 +12,9 @@ const Home = ({
     popular: iProduct[];
     dealsOfTheDay: iProduct[];
 }) => (
-    <Layout>
+    <>
         <LandingPage mostSell={mostSell} popular={popular} dealsOfTheDay={dealsOfTheDay} />
-    </Layout>
+    </>
 );
 export default Home;
 
