@@ -82,8 +82,15 @@ function MyApp(props: any) {
     <ToastProvider>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>My page</title>
+          <title>MBeBAZAR - By Grocery Online </title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="description" content="MBeBAZAR - Buy Grocery Items Online" />
+  <meta name="theme-color" content="#000" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         </Head>
         <ThemeProvider theme={theme}>
           <Loading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />

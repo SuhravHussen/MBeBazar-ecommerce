@@ -24,14 +24,18 @@ interface IProps {
 }
 
 export default function CartDrawer({ open, setOpen, cart, loginOpen }: IProps) {
+
   const [total, setTotal] = useState(0);
   const user = useSelector(selectUser);
+  
   const handleCheckOut = () => {
-    if (user?._id) {
-      router.push('/checkout');
-    } else {
-      loginOpen(true);
-    }
+    if ( cart && cart.length > 0) {
+      if (user?._id ) {
+        router.push('/checkout');
+      }else{
+         loginOpen(true);
+      }
+    } 
   };
 
   useEffect(() => {

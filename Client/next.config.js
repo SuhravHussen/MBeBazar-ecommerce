@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
-
-module.exports = {
+const withPWA  = require("next-pwa");
+module.exports = WithPWA(
+  {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
@@ -23,4 +24,10 @@ module.exports = {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
 };
+)

@@ -113,7 +113,7 @@ export default function Featured() {
           <FiArrowRight className={styles.icon} onClick={() => slider?.current?.slickNext()} />
         </div>
       </SectionHeader>
-      <Fade className={styles.carousel}>
+      <Fade className={styles.carousel} triggerOnce>
         <Carousel myref={slider} {...settings}>
           {categories.length > 0
             ? categories.map((c, i) => (
@@ -148,7 +148,7 @@ export default function Featured() {
                 .map(i => <FeaturedSk key={i} />)}
         </Carousel>
       </Fade>
-      <Fade>
+      <Fade  triggerOnce>
         <div className={styles.cards}>
           <div className={`${styles.card} ${styles.card1}`}>
             <h1>Every Fresh &apos; Clean with Our Products</h1>

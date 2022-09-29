@@ -1,12 +1,12 @@
+import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 import { iProduct } from '../../../models/product.interface';
+import { addToCart } from '../../../Redux/Slices/cartSlice';
 import styles from '../../../styles/components/common/card/card.module.scss';
 import handleAddToCart from '../../../utils/addToCart';
 import { Fade, FiShoppingCart, Image, Link, Rating } from '../../../utils/commonImports';
 import PrimaryButton from '../Button/PrimaryButton';
 import HoverIcons from './HoverIcons';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../Redux/Slices/cartSlice';
 type iProps = {
   product: iProduct;
   index: number;
@@ -18,7 +18,7 @@ export default function Card({ product, index, setQuickViewDetails, setModalOpen
   const { addToast } = useToasts();
   const dispatch = useDispatch();
   return (
-    <Fade className={styles.singleProduct} cascade>
+    <Fade triggerOnce className={styles.singleProduct} cascade>
       <div>
         {product?.onSale && <span className={styles?.onSale}>On Sale</span>}
         <div className={styles.image}>

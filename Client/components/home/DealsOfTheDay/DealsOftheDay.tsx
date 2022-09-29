@@ -34,7 +34,7 @@ export default function DealsOftheDay({ dealsOfTheDay }: { dealsOfTheDay: iProdu
       </SectionHeader>
       <div className={styles.deals}>
         {products.slice(0, 4).map(p => (
-          <Fade className={styles.singleDealFade} direction="left" key={p._id}>
+          <Fade className={styles.singleDealFade} triggerOnce direction="left" key={p._id}>
             <div className={styles.singleDeal}>
               <div className={styles.image}>
                 <Image src={p.images[0]} layout="fill" placeholder="blur" blurDataURL="/images/dealsOfDay/dealofDay1.png" />

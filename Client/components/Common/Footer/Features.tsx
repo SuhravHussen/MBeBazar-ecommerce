@@ -44,7 +44,7 @@ export default function Features() {
     return (
         <div className={styles.featuresContainer}>
             {features.map((feature) => (
-                <Fade direction="up" className={styles.fade} key={feature.title}>
+                <Fade direction="up" triggerOnce className={styles.fade} key={feature.title}>
                     <div className={styles.feature}>
                         <Image src={feature.image} alt={feature.title} height={50} width={50} />
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 import styles from '../../styles/components/common/quantityPicker.module.scss';
 
@@ -15,25 +15,26 @@ export default function QuantityPicker({
     callback: (number: number) => void;
 }) {
     const [quantity, setQuantity] = useState(defaultValue);
-    const ref = useRef(false);
-    useEffect(() => {
-        if (!ref.current) ref.current = true;
-        if (ref.current) {
-            callback(quantity);
-        }
-    }, [callback, quantity]);
 
     // increase value
     function increase() {
         if (quantity !== max) {
-            setQuantity((prev) => prev + 1);
+            setQuantity((prev) =>{
+                callback(prev + 1);
+                return prev + 1;
+            });
+           
         }
     }
 
     // decrease value
     function decrease() {
         if (quantity > 1) {
-            setQuantity((prev) => prev - 1);
+            setQuantity((prev) => {
+                callback(prev - 1);
+                return prev - 1;
+            });
+          
         }
     }
 

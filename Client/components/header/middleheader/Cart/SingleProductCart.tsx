@@ -1,6 +1,6 @@
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../../../../Redux/Slices/cartSlice';
+import { addToCart, removeFromCart } from '../../../../Redux/Slices/cartSlice';
 import styles from '../../../../styles/components/middleNav/cartSingleProduct.module.scss';
 import { Image, useState } from '../../../../utils/commonImports';
 import getLocalStorage from '../../../../utils/getLocalStorage';
@@ -12,7 +12,7 @@ export default function SingleProductCart({ product }: { product: iCart }) {
   const [quantity, setProductQuantity] = useState(product.quantity);
 
   const dispatch = useDispatch();
-
+ 
   return (
     <div className={styles.singleProduct}>
       <div className={styles.column1}>
@@ -32,7 +32,10 @@ export default function SingleProductCart({ product }: { product: iCart }) {
           defaultValue={quantity}
           className={styles.quantityPicker}
           max={15}
-          callback={value => handleQuantity(value, setProductQuantity, product._id)}
+          callback={value =>{
+            const updatedCard = handleQuantity(value, setProductQuantity, product._id)
+            dispatch(addToCart(updatedCard))
+          }}
         />
       </div>
       <div

@@ -1,6 +1,8 @@
 import { FiShoppingCart } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 import { iProduct } from '../../models/product.interface';
+import { addToCart } from '../../Redux/Slices/cartSlice';
 import styles from '../../styles/components/common/details.module.scss';
 import handleAddToCart from '../../utils/addToCart';
 import { getPercentage } from '../../utils/calculations';
@@ -14,11 +16,14 @@ type IProps = {
 export default function Details({ details }: IProps) {
     const [quantity, setQuantity] = useState(1);
     const { addToast } = useToasts();
+    const dispatch = useDispatch();
     useEffect(() => {
         const cartItems = getLocalStorage('cartItems', 'array');
-        const product = cartItems.find((p: iProduct) => p._id === details._id);
-        if (product) {
-            setQuantity(product.quantity);
+        if (cartItems) {
+            const item = cartItems.find((item: iProduct) => item._id === details._id);
+            if (item) {
+                setQuantity(item.quantity);
+            }
         }
     }, [details._id]);
 
@@ -51,7 +56,8 @@ export default function Details({ details }: IProps) {
                 />
                 <button
                     onClick={() => {
-                        handleAddToCart(details, quantity);
+                      const cartItems =   handleAddToCart(details, quantity);
+                      dispatch(addToCart(cartItems));
                         addToast('Product added to cart', {
                             appearance: 'success',
                             autoDismiss: true,

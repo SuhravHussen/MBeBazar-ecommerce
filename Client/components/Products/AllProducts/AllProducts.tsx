@@ -1,12 +1,14 @@
+
 import Pagination from '@mui/material/Pagination';
+
+// @ts-ignore
 import { iProduct } from '../../../models/product.interface';
 import { searchedProps } from '../../../pages/products';
 import ProductSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/products/allProducts.module.scss';
-import { React, useEffect, useState } from '../../../utils/commonImports';
+import { React, useEffect, useRef, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
 import QuickView from '../../Common/Card/QuickView';
-
 import NoResult from './NoResult';
 
 export default function AllProducts({ data, query }: searchedProps) {
@@ -22,7 +24,7 @@ export default function AllProducts({ data, query }: searchedProps) {
   const handleSort = (v: {}) => {};
 
   // eslint-disable-next-line no-undef
-
+ const ref = useRef(null as any);
   const options = [
     { value: 'Featured', label: 'Featured' },
     { value: 'Low to High', label: 'Low to High' },
@@ -47,6 +49,7 @@ export default function AllProducts({ data, query }: searchedProps) {
       setTotalPage(resData.data.totalPages);
       setPage(resData.data.page);
       setLoading(false);
+      ref.current && ref.current.scrollIntoView({ behavior: 'smooth' })
     } catch (e) {
       setError(true);
     }
@@ -64,8 +67,12 @@ export default function AllProducts({ data, query }: searchedProps) {
     setProducts(data.docs);
   }, [data]);
 
+
+ 
+
+
   return (
-    <div className={styles.allProducts}>
+    <div ref={ref} className={styles.allProducts}>
       <QuickView open={modalOpen} setOpen={setModalOpen} details={products[quickViewDetails]} />
 
       <div className={styles.header}>

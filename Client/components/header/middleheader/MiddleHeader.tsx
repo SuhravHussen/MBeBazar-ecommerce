@@ -13,22 +13,20 @@ import { Sling as Hamburger } from 'hamburger-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { iProduct } from '../../../models/product.interface';
-import { iUser } from '../../../models/user.interface';
+import { selectCartItems } from '../../../Redux/Slices/cartSlice';
+import { addUser, selectUser } from '../../../Redux/Slices/userSlice';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
 import { dynamic, Image, Link } from '../../../utils/commonImports';
 import { useWindowDimensions } from '../../../utils/customHooks';
 import debounceSearch from '../../../utils/debounce';
 import ResponsiveDialog from '../../Common/Login-SignUp/Dialog';
 import { Search, SearchIconWrapper, StyledInputBase } from '../../styled/middleNav';
-import CartDrawer, { iCart } from './Cart/CartDrawer';
+import CartDrawer from './Cart/CartDrawer';
 import SearchSuggestions from './SearchSuggestions';
 import { RenderMobileMenu } from './utils/RenderMenu';
 import RenderNotification from './utils/RenderNotification';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../../../Redux/Store/store';
-import { selectCartItems } from '../../../Redux/Slices/cartSlice';
-import { selectUser } from '../../../Redux/Slices/userSlice';
 
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
@@ -46,11 +44,21 @@ export default function MiddleHeader() {
   const [notiAnchorEL, setNotiAnchorEL] = React.useState<HTMLElement | null>(null);
   const [items, setItems] = React.useState<iProduct[]>([]);
   const [search, setSearch] = React.useState('');
+  const dispatch = useDispatch()
+   
 
-  const { data: session } = useSession();
-  // user
+
+  // user infos
   const cartItems = useSelector(selectCartItems);
   const user = useSelector(selectUser);
+const {data : sessionData } = useSession()
+
+  //it will add user to redux after social login  
+  if(!user && sessionData?.user){
+    localStorage.setItem('user', JSON.stringify(sessionData.user));
+    dispatch(addUser(sessionData.user));
+  }
+
 
   // open or close drawer
   const toggleDrawer = () => {
