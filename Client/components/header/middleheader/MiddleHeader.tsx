@@ -9,12 +9,13 @@ import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
-import { Sling as Hamburger } from 'hamburger-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
 import { iProduct } from '../../../models/product.interface';
+import { useGetProductSuggestionsMutation } from '../../../Redux/services/Products/services';
 import { selectCartItems } from '../../../Redux/Slices/cartSlice';
 import { addUser, selectUser } from '../../../Redux/Slices/userSlice';
 import styles from '../../../styles/components/middleNav/dekstopmiddlenav.module.scss';
@@ -27,7 +28,6 @@ import CartDrawer from './Cart/CartDrawer';
 import SearchSuggestions from './SearchSuggestions';
 import { RenderMobileMenu } from './utils/RenderMenu';
 import RenderNotification from './utils/RenderNotification';
-
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
 export default function MiddleHeader() {
@@ -72,19 +72,20 @@ const {data : sessionData } = useSession()
     callback(param);
   };
 
+
+  // search suggestions
+  const [getSearchSuggestion] = useGetProductSuggestionsMutation();
   const searchSuggestionsHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setSearch(e.target.value);
-      const searchArr = e.target.value.split(' ');
-      const res = await fetch(`${process.env.BASE_URL}/product/search-suggestions`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({ tags: searchArr }),
-      });
-      const data = await res.json();
-      setItems(data.data);
+      const searchArr : string[]  = e.target.value.split(' ');
+      const data = await getSearchSuggestion(searchArr)
+    
+      if( 'data' in data &&  data.data){
+        setItems(data.data.data);
+      }else{
+        setItems([]);
+      }
     } catch (error) {}
   };
 
@@ -111,20 +112,7 @@ const {data : sessionData } = useSession()
             {/* drawer icon */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
               <IconButton size="large" edge="start" sx={{ mr: 2, color: 'myColor.main' }}>
-                <Hamburger
-                  size={28}
-                  rounded
-                  toggled={hamburgerOpen}
-                  toggle={() => setHamburgurOpen(true)}
-                  onToggle={t => {
-                    if (t) {
-                      setTimeout(() => {
-                        toggleDrawer();
-                        setHamburgurOpen(false);
-                      }, 270);
-                    }
-                  }}
-                />
+               <GiHamburgerMenu onClick={toggleDrawer}/>
               </IconButton>
             </Box>
             {/* logo */}

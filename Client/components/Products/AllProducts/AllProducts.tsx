@@ -4,24 +4,25 @@ import Pagination from '@mui/material/Pagination';
 // @ts-ignore
 import { iProduct } from '../../../models/product.interface';
 import { searchedProps } from '../../../pages/products';
+import { useGetAllProductsBySearchMutation } from '../../../Redux/services/Products/services';
 import ProductSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/products/allProducts.module.scss';
-import { React, useEffect, useRef, useState } from '../../../utils/commonImports';
+import { React, useRef, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
 import QuickView from '../../Common/Card/QuickView';
 import NoResult from './NoResult';
 
 export default function AllProducts({ data, query }: searchedProps) {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(data.page);
   const [totalPage, setTotalPage] = useState<number>(data.totalPages);
-  const [hasNextPage, setHasNextPage] = useState<boolean>();
-  const [hasPrevPage, setHasPrevPage] = useState<boolean>();
-  const [products, setProducts] = useState<iProduct[]>([]);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(data.hasNextPage);
+  const [hasPrevPage, setHasPrevPage] = useState<boolean>(data.hasPrevPage);
+  const [products, setProducts] = useState<iProduct[]>(data.docs);
   const [quickViewDetails, setQuickViewDetails] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const handleSort = (v: {}) => {};
+
+  const [searchProduct , {isLoading , isError}] = useGetAllProductsBySearchMutation()
 
   // eslint-disable-next-line no-undef
  const ref = useRef(null as any);
@@ -32,43 +33,26 @@ export default function AllProducts({ data, query }: searchedProps) {
   ];
 
   const fetchProducts = async (pageNumber: number) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${process.env.BASE_URL}/product/full-search?page=${pageNumber}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: query }),
-      });
-      const resData = await response.json();
-
-      setProducts(resData.data.docs);
-      setHasNextPage(resData.data.hasNextPage);
-      setHasPrevPage(resData.data.hasPrevPage);
-      setTotalPage(resData.data.totalPages);
-      setPage(resData.data.page);
-      setLoading(false);
+    const res = await searchProduct({
+        search: query,
+        page: pageNumber,
+      })
+   
+    if( 'data' in res){  
+      setPage(pageNumber);
+      const data = res.data.data;
+      setProducts(data.docs);
+      setHasNextPage(data.hasNextPage);
+      setHasPrevPage(data.hasPrevPage);
+      setTotalPage(data.totalPages);
+     
       ref.current && ref.current.scrollIntoView({ behavior: 'smooth' })
-    } catch (e) {
-      setError(true);
     }
   };
   // eslint-disable-next-line no-undef
   const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
     fetchProducts(value);
   };
-
-  useEffect(() => {
-    setPage(data.page);
-    setTotalPage(data.totalPages);
-    setHasNextPage(data.hasNextPage);
-    setHasPrevPage(data.hasPrevPage);
-    setProducts(data.docs);
-  }, [data]);
-
-
- 
 
 
   return (
@@ -84,16 +68,16 @@ export default function AllProducts({ data, query }: searchedProps) {
         </div> */}
       </div>
       <section className={styles.products}>
-        {!loading &&
+        {!isLoading &&
           products.map((p: any, i: number) => (
             <Card key={p._id} setQuickViewDetails={setQuickViewDetails} setModalOpen={setModalOpen} index={i} product={p} />
           ))}
-        {loading &&
+        {isLoading &&
           Array(5)
             .fill(null)
             // eslint-disable-next-line react/no-array-index-key
             .map((_, i) => <ProductSk key={i} />)}
-        {!loading && products.length < 1 && <NoResult />}
+        {!isLoading && products.length < 1 && <NoResult />}
       </section>
       {data.totalDocs > 0 && (
         <Pagination
@@ -106,7 +90,7 @@ export default function AllProducts({ data, query }: searchedProps) {
           hidePrevButton={!hasPrevPage}
         />
       )}
-      {error && <p>Something went wrong</p>}
+      {isError && <p>Something went wrong</p>}
     </div>
   );
 }

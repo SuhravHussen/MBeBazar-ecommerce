@@ -8,21 +8,35 @@ import { Sling as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import { catagories } from './catagories';
 
+import { useRouter } from 'next/router';
 import styles from '../../../../styles/components/middleNav/drawer.module.scss';
 import MyList from './List';
 
 interface props {
     drawerOpen: boolean;
-
     toggleDrawer: () => void;
 }
 
+
 export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
+
+    const router  = useRouter()
     return (
         <Drawer open={drawerOpen} elevation={1} onClose={toggleDrawer}>
             <div className={styles.drawerContainer}>
                 <div className={styles.header}>
-                    <Image src="/images/logos/MBeBAZAR.png" width={130} height={90} />
+            
+                 <p style={{
+                    cursor: 'pointer',
+                 }}
+                 onClick={() => {
+                    router.push('/')
+                    toggleDrawer()
+                 }}
+                 >
+                 <Image  src="/images/logos/MBeBAZAR.png" width={130} height={90} />
+                 </p>
+          
                     <span className={styles.icon}>
                         <Hamburger
                             size={20}

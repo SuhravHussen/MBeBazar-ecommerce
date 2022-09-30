@@ -44,10 +44,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store)=> async (ct
     const { id } = ctx.query;
      const product = await dispatch(productApi.endpoints.getProductDetails.initiate(id as string))
      const reviews = await dispatch(productApi.endpoints.getProductReviews.initiate(id as string))
-     console.log("id is ",id)
-     console.log("product is ",product.data?.data?.product)
-      console.log("related Product is ",product.data?.data?.relatedProduct)
-        console.log("review",reviews.data?.data)
+
     return {
         props: {
             product: product.data?.data?.product || {},
