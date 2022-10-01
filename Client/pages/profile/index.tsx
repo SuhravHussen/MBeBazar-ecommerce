@@ -6,6 +6,7 @@ import withAuth from '../../components/Common/PrivateRoute/WithAuth';
 import Dashboard from '../../components/Profile/Dashboard/Dashboard';
 import Recentorders from '../../components/Profile/Dashboard/RencentOrders/Recentorders';
 import ProfileLayout from '../../components/Profile/ProfileLayout';
+import { useGetUserOrdersQuery } from '../../Redux/services/Profile/services';
 import logeOut from '../../utils/handleLogout';
 
 function index() {
@@ -13,6 +14,12 @@ function index() {
   const [loading, setLoading] = useState(true);
   const { replace } = useRouter();
   const { addToast } = useToasts();
+
+
+  const {data , error } = useGetUserOrdersQuery()
+
+  console.log(data, 'is the data')
+  console.log(error, 'is the error') 
   useEffect(() => {
     const getOrderData = async () => {
       try {

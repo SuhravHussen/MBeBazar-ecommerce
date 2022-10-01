@@ -34,8 +34,8 @@ export class PassportLogin {
       const isValid = await userData.comparePassword(password);
 
       if (isValid) {
-        avatar in userData ? (avatar = avatar) : (avatar = null);
-        address in userData ? (address = address) : (address = null);
+        'avatar' in userData ? (avatar = userData.avatar as string) : (avatar = null);
+        'address' in userData ? (address = userData.address as string) : (address = null);
         const user = {
           name: userData.name,
           _id: userData._id,

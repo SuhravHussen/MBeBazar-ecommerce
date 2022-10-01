@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineUser } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
+import { useUpdateProfileMutation } from '../../../Redux/services/Profile/services';
 import { updateUser } from '../../../Redux/Slices/userSlice';
 import styles from '../../../styles/components/profile/updateProfile/update-profile.module.scss';
 import PrimaryButton from '../../Common/Button/PrimaryButton';
@@ -27,25 +28,29 @@ export default function UpdateProfile() {
     formState: { errors },
   } = useForm<IFormInputs>();
   const { addToast } = useToasts();
+
+
+  const [updateProfile , {isLoading}] = useUpdateProfileMutation()
+
+
   const onSubmit = async (data: any) => {
-    setErrorMsg('');
-    try {
+   try{
+      setErrorMsg('');
       const updatedProfile: any = new FormData();
       if (data.name) updatedProfile.append('name', data.name);
       if (data.address) updatedProfile.append('address', data.address);
       if (data.phone) updatedProfile.append('phone', data.phone);
       if (avatar) updatedProfile.append('files', avatar);
-
-      const resData = await fetch(`${process.env.BASE_URL}/users/updateProfile`, {
-        method: 'POST',
-        headers: {
-          enctype: 'multipart/form-data',
-        },
-        body: updatedProfile,
-        credentials: 'include',
-      }).then(res => res.json());
-
-      if (resData.error) {
+    
+      const res : any= await updateProfile(updatedProfile)
+      if ('error' in res ) {
+        console.log(res, 'is the res')
+        setErrorMsg(res?.error?.data?.message ?? 'Something went wrong ! please check your internet connection');
+      } 
+      let resData 
+      if('data' in res){
+        resData = res.data
+        if (resData.error) {
         setErrorMsg(resData?.message);
       } else {
         const updatedUser = {
@@ -64,9 +69,11 @@ export default function UpdateProfile() {
           appearance: 'success',
         });
       }
-    } catch {
-      setErrorMsg('Something went wrong');
+      } 
+    }catch(err){
+      setErrorMsg("Something went wrong! please try again with internet connection")
     }
+    
   };
 
   return (
@@ -114,7 +121,8 @@ export default function UpdateProfile() {
           </div>
         </div>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-        <PrimaryButton type="submit" text="Update" />
+   
+        <PrimaryButton loading={isLoading} type="submit" text="Update"  />
       </form>
     </div>
   );

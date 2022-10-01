@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
+import CredentialProvider from 'next-auth/providers/credentials';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GoogleProvider from 'next-auth/providers/google';
-import CredentialProvider from 'next-auth/providers/credentials';
 
 const getOptions = (req: any, res: any) => ({
   // Configure one or more authentication providers
@@ -23,7 +23,7 @@ const getOptions = (req: any, res: any) => ({
 
         const data = await response.json();
         // Returning token to set in session
-
+        console.log(data) 
         return {
           cookies: cookies,
           ...data.data.user,
@@ -88,6 +88,7 @@ const getOptions = (req: any, res: any) => ({
           };
         } else {
           res.setHeader('Set-Cookie', user?.cookies);
+          console.log(user)
           user.name = {
             name: user?.name,
             email: user?.email,
