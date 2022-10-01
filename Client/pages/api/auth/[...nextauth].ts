@@ -23,7 +23,6 @@ const getOptions = (req: any, res: any) => ({
 
         const data = await response.json();
         // Returning token to set in session
-        console.log(data) 
         return {
           cookies: cookies,
           ...data.data.user,
@@ -88,7 +87,6 @@ const getOptions = (req: any, res: any) => ({
           };
         } else {
           res.setHeader('Set-Cookie', user?.cookies);
-          console.log(user)
           user.name = {
             name: user?.name,
             email: user?.email,

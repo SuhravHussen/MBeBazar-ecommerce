@@ -4,7 +4,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { FaClipboardList } from 'react-icons/fa';
 import { FiSettings, FiUnlock } from 'react-icons/fi';
@@ -56,7 +55,6 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
       setTimeout(() => {
         logeOut();
         dispatch(removeUser());
-        replace('/');
       }, 2000);
       addToast('Logging Out', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 2000 });
     } catch {

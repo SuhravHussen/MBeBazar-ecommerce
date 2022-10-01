@@ -16,7 +16,7 @@ export const  profileApi = profile.injectEndpoints({
                 credentials: 'include',    
             }),
         }),
-        getUserOrders : builder.query<ProfileRes , void>({
+        getUserOrders : builder.query<any , void>({
             query: () => ({
                 url: `/users/orders`,
                 credentials: 'include',
