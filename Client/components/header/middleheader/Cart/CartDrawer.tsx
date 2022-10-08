@@ -4,7 +4,7 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import { Divider } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import router from 'next/router';
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, Fragment, memo, SetStateAction, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { iProduct } from '../../../../models/product.interface';
 import { selectUser } from '../../../../Redux/Slices/userSlice';
@@ -23,7 +23,7 @@ interface IProps {
   loginOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function CartDrawer({ open, setOpen, cart, loginOpen }: IProps) {
+ function CartDrawer({ open, setOpen, cart, loginOpen }: IProps) {
 
   const [total, setTotal] = useState(0);
   const user = useSelector(selectUser);
@@ -78,3 +78,5 @@ export default function CartDrawer({ open, setOpen, cart, loginOpen }: IProps) {
     </Drawer>
   );
 }
+
+export default memo(CartDrawer);

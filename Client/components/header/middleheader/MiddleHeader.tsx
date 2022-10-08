@@ -30,7 +30,7 @@ import { RenderMobileMenu } from './utils/RenderMenu';
 import RenderNotification from './utils/RenderNotification';
 const MyDrawer = dynamic(() => import('./Drawer/Drawer'));
 
-export default function MiddleHeader() {
+ function MiddleHeader() {
   // states
 
   const { width } = useWindowDimensions();
@@ -191,3 +191,5 @@ const {data : sessionData } = useSession()
     </>
   );
 }
+
+export default React.memo(MiddleHeader)

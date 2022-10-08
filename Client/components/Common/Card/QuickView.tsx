@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import ReactImageMagnify from 'react-image-magnify';
 import { useToasts } from 'react-toast-notifications';
@@ -22,7 +23,9 @@ type iProps = {
     details: iProduct;
 };
 
-export default function QuickView({ open, setOpen, details }: iProps) {
+
+
+ function QuickView({ open, setOpen, details }: iProps) {
     const [nav1, setNav1] = useState<any>();
     const [nav2, setNav2] = useState();
     const [quantity, setProductQuantity] = useState(1);
@@ -187,3 +190,5 @@ export default function QuickView({ open, setOpen, details }: iProps) {
         </MyModal>
     );
 }
+
+export default memo(QuickView)

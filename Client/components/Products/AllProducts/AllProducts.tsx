@@ -7,30 +7,39 @@ import { searchedProps } from '../../../pages/products';
 import { useGetAllProductsBySearchMutation } from '../../../Redux/services/Products/services';
 import ProductSk from '../../../skeletons/PopularSk';
 import styles from '../../../styles/components/products/allProducts.module.scss';
-import { React, useRef, useState } from '../../../utils/commonImports';
+import { React, useEffect, useRef, useState } from '../../../utils/commonImports';
 import Card from '../../Common/Card/Card';
 import QuickView from '../../Common/Card/QuickView';
 import NoResult from './NoResult';
 
 export default function AllProducts({ data, query }: searchedProps) {
   const [page, setPage] = useState<number>(data.page);
-  const [totalPage, setTotalPage] = useState<number>(data.totalPages);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(data.hasNextPage);
-  const [hasPrevPage, setHasPrevPage] = useState<boolean>(data.hasPrevPage);
+  const [totalPage, setTotalPage] = useState<number>();
+  const [hasNextPage, setHasNextPage] = useState<boolean>();
+  const [hasPrevPage, setHasPrevPage] = useState<boolean>();
   const [products, setProducts] = useState<iProduct[]>(data.docs);
   const [quickViewDetails, setQuickViewDetails] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+
 
   const [searchProduct , {isLoading , isError}] = useGetAllProductsBySearchMutation()
 
+  useEffect(() => {
+  setPage(data.page);
+  setTotalPage(data.totalPages);
+  setHasNextPage(data.hasNextPage);
+  setHasPrevPage(data.hasPrevPage);
+  setProducts(data.docs);
+  }, []);
+
+
   // eslint-disable-next-line no-undef
  const ref = useRef(null as any);
-  const options = [
-    { value: 'Featured', label: 'Featured' },
-    { value: 'Low to High', label: 'Low to High' },
-    { value: 'High to Low', label: 'High to Low' },
-  ];
+  // const options = [
+  //   { value: 'Featured', label: 'Featured' },
+  //   { value: 'Low to High', label: 'Low to High' },
+  //   { value: 'High to Low', label: 'High to Low' },
+  // ];
 
   const fetchProducts = async (pageNumber: number) => {
     const res = await searchProduct({

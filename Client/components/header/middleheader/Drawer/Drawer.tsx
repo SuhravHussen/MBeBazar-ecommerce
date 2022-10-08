@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { catagories } from './catagories';
 
 import { useRouter } from 'next/router';
+import { memo } from 'react';
 import styles from '../../../../styles/components/middleNav/drawer.module.scss';
 import MyList from './List';
 
@@ -18,7 +19,7 @@ interface props {
 }
 
 
-export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
+ function MyDrawer({ drawerOpen, toggleDrawer }: props) {
 
     const router  = useRouter()
     return (
@@ -107,3 +108,5 @@ export default function MyDrawer({ drawerOpen, toggleDrawer }: props) {
         </Drawer>
     );
 }
+
+export default memo(MyDrawer)
