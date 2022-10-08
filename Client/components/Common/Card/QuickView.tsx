@@ -1,8 +1,10 @@
 import { memo } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import ReactImageMagnify from 'react-image-magnify';
+import { useDispatch } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 import { iProduct } from '../../../models/product.interface';
+import { addToCart } from '../../../Redux/Slices/cartSlice';
 import styles from '../../../styles/components/Home/quickview.module.scss';
 import handleAddToCart from '../../../utils/addToCart';
 import { getPercentage } from '../../../utils/calculations';
@@ -30,7 +32,7 @@ type iProps = {
     const [nav2, setNav2] = useState();
     const [quantity, setProductQuantity] = useState(1);
     const { addToast } = useToasts();
-
+    const dispatch =   useDispatch()
     const settings1 = {
         infinite: true,
         speed: 500,
@@ -166,7 +168,9 @@ type iProps = {
                         />
                         <button
                             onClick={() => {
-                                handleAddToCart(details, quantity);
+                                
+                               const cartItems = handleAddToCart(details, quantity);
+                                dispatch(addToCart(cartItems))
                                 addToast('Product added to cart', {
                                     appearance: 'success',
                                     autoDismiss: true,
