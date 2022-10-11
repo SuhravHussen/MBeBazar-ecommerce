@@ -1,6 +1,7 @@
 import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { createWrapper } from 'next-redux-wrapper';
+import { order } from '../services/Order/api';
 import { productApi } from '../services/Products/api';
 import { profile } from '../services/Profile/api';
 import cartSlice from '../Slices/cartSlice';
@@ -11,13 +12,14 @@ const reducers = combineReducers({
   user: userSlice,
   [productApi.reducerPath]: productApi.reducer,
   [profile.reducerPath]: profile.reducer,
+  [order.reducerPath] : order.reducer,
 });
 
 const makeStore = () =>
   configureStore({
     reducer: reducers,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(productApi.middleware , profile.middleware ),
+      getDefaultMiddleware().concat(productApi.middleware , profile.middleware , order.middleware),
     devTools: true,
   });
 setupListeners(makeStore().dispatch);

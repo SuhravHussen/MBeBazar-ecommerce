@@ -2,9 +2,13 @@ import { Alert } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { iUser } from '../../models/user.interface';
+import { useAddOrderMutation } from '../../Redux/services/Order/services';
+import { order } from '../../Redux/services/types/orderResType';
+import { selectCartItems } from '../../Redux/Slices/cartSlice';
+import { selectUser } from '../../Redux/Slices/userSlice';
 import styles from '../../styles/components/checkout/checkout.module.scss';
-import getLocalStorage from '../../utils/getLocalStorage';
 import getStripe from '../../utils/getStripe';
 import logeOut from '../../utils/handleLogout';
 import PrimaryButton from '../Common/Button/PrimaryButton';
@@ -25,12 +29,16 @@ export interface IFormInputs {
 }
 
 export default function Checkout() {
-  const [cart, setCart] = useState<iCart[]>([]);
-  const [user, setUser] = useState<iUser>({} as iUser);
+
   const [shippingMethod, setShippingMethod] = useState('Sundarban');
   const [subTotal, setSubTotal] = useState(0);
   const [shippingCost, setShippingCost] = useState(0);
   const [error, setError] = useState(false);
+  const [loading , setLoading] = useState(false);
+
+  const cart  : iCart[]= useSelector(selectCartItems)
+  const userData = useSelector(selectUser)
+
   const {
     handleSubmit,
     control,
@@ -38,6 +46,9 @@ export default function Checkout() {
     register,
     formState: { errors },
   } = useForm<IFormInputs>();
+
+
+  console.log(userData?._id)
 
   const router = useRouter();
   useEffect(() => {
@@ -57,23 +68,18 @@ export default function Checkout() {
   }, [cart, shippingMethod]);
 
   useEffect(() => {
-    const cartItems = getLocalStorage('cartItems', 'array');
-    const userData = getLocalStorage('user', 'object');
-    if (cartItems.length > 0) {
-      setCart(cartItems);
-      setUser(userData);
-    } else {
-      router.replace('/');
-    }
-    if (userData.name) setValue('name', userData.name);
-    if (userData.email) setValue('email', userData.email);
-    if (userData.phone) setValue('phone', userData.phone);
+    if (userData?.name) setValue('name', userData.name);
+    if (userData?.email) setValue('email', userData.email);
+    if (userData?.phone) setValue('phone', userData.phone);
     // if (userData.address) setValue('address', userData.address);
-  }, [router, setValue]);
+  }, [userData]);
 
   const stripePromise = getStripe();
+ const [addOrder , {isLoading , isError}] = useAddOrderMutation()
 
-  const createCheckOutSession = async (
+
+
+const createCheckOutSession = async (
     items: {
       price_data: {
         currency: string;
@@ -90,7 +96,6 @@ export default function Checkout() {
   ) => {
     try {
       const stripe = await stripePromise;
-
       const checkoutSession = await fetch(`${process.env.BASE_URL}/payment`, {
         method: 'POST',
         headers: {
@@ -102,7 +107,6 @@ export default function Checkout() {
           orderInfo,
         }),
       }).then(res => res.json());
-
       if (checkoutSession.error) {
         setError(true);
         setTimeout(() => {
@@ -113,7 +117,6 @@ export default function Checkout() {
         const result = await stripe.redirectToCheckout({
           sessionId: checkoutSession.id,
         });
-
         if (result.error) {
           setError(true);
         }
@@ -124,9 +127,20 @@ export default function Checkout() {
       router.replace('/');
     }
   };
-  const onSubmit = (d: IFormInputs) => {
+
+  
+ useEffect(() => {
+   if(isError){
+    setError(true)
+   }
+  setLoading(isLoading)
+  }, [isError , isLoading])
+
+
+  // submit order
+  const onSubmit = async (d: IFormInputs) => {
     setError(false);
-    const items = cart.map(item => ({
+     const items = cart.map(item => ({
       price_data: {
         currency: 'usd',
         unit_amount: item.total * 100,
@@ -143,32 +157,51 @@ export default function Checkout() {
       },
 
       quantity: item.quantity,
-    }));
-
-    const orderInfo = {
-      bookingInfo: {
-        name: d.name,
-        address: `${d['street address']}, ${d.city}`,
-        phone: d.phone,
-        totalPrice: Number((subTotal + shippingCost).toFixed(2)),
-        shippingMethod: d.shippingMethod,
-        paymentMethod: d.paymentMethod,
-        shippingPrice: shippingCost,
-        status: 'pending',
-        payment: 'pending',
+     }));
+     const orderInfo = {
+       bookingInfo: {
+         name: d.name,
+         address: `${d['street address']}, ${d.city}`,
+         phone: d.phone,
+         totalPrice: Number((subTotal + shippingCost).toFixed(2)),
+         shippingMethod: d.shippingMethod,
+         paymentMethod: d.paymentMethod,
+         shippingPrice: shippingCost,
+         status: 'pending',
+         payment: 'success',
       },
     };
-    createCheckOutSession(items, orderInfo);
+    if(d.paymentMethod === 'CreditCard') {
+     createCheckOutSession(items, orderInfo);
+    }else{
+      const orderedItems = cart.map(item => ({
+       product :item._id,
+       quantity: item.quantity,
+       price: item.total,
+      }))
+      const bookingData : order = {
+           ...orderInfo,
+           items : orderedItems,
+           user : userData?._id
+      } as order
+      bookingData.bookingInfo.payment = 'pending'
+      const res = await addOrder(bookingData).unwrap()
+      if(!res.error){
+        router.push('/success')
+      }else{
+        setError(true)
+      }
+    }
   };
 
   return (
     <div className={styles.checkoutContainer}>
       <div className={styles.details}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <PersonalDetails user={user} errors={errors} control={control} />
-          <ShippingDetails register={register} errors={errors} control={control} user={user} setShippingMethod={setShippingMethod} />
+          <PersonalDetails user={userData as iUser} errors={errors} control={control} />
+          <ShippingDetails register={register} errors={errors} control={control} user={userData as iUser} setShippingMethod={setShippingMethod} />
           <PaymentDetails register={register} />
-          <PrimaryButton type="submit" style={{ width: '100%' }} text="Confirm" />
+          <PrimaryButton loading={loading} type="submit" style={{ width: '100%' }} text="Confirm" />
         </form>
         <div className={styles.summary}>
           <OrderSummary products={cart} totalPrice={subTotal + shippingCost} shippingCost={shippingCost} />
