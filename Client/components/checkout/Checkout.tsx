@@ -1,4 +1,5 @@
 import { Alert } from '@mui/material';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -48,8 +49,6 @@ export default function Checkout() {
   } = useForm<IFormInputs>();
 
 
-  console.log(userData?._id)
-
   const router = useRouter();
   useEffect(() => {
     let total = 0;
@@ -75,7 +74,7 @@ export default function Checkout() {
   }, [userData]);
 
   const stripePromise = getStripe();
- const [addOrder , {isLoading , isError}] = useAddOrderMutation()
+ const [addOrder , { isError}] = useAddOrderMutation()
 
 
 
@@ -111,6 +110,7 @@ const createCheckOutSession = async (
         setError(true);
         setTimeout(() => {
           logeOut();
+          signOut();
           router.replace('/');
         }, 3000);
       } else {
@@ -126,19 +126,25 @@ const createCheckOutSession = async (
       logeOut();
       router.replace('/');
     }
+    finally{
+      setLoading(false)
+    }
   };
 
+  useEffect(() => {
+    console.log(loading)
+  }, [loading])
   
  useEffect(() => {
    if(isError){
     setError(true)
    }
-  setLoading(isLoading)
-  }, [isError , isLoading])
+  }, [isError])
 
 
   // submit order
   const onSubmit = async (d: IFormInputs) => {
+    setLoading(true)
     setError(false);
      const items = cart.map(item => ({
       price_data: {
@@ -185,13 +191,14 @@ const createCheckOutSession = async (
            user : userData?._id
       } as order
       bookingData.bookingInfo.payment = 'pending'
-      const res = await addOrder(bookingData).unwrap()
+      const res = await addOrder(bookingData).unwrap().finally(() => setLoading(false))
       if(!res.error){
         router.push('/success')
       }else{
         setError(true)
       }
     }
+    
   };
 
   return (
