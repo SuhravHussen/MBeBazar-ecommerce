@@ -30,7 +30,7 @@ export default function AllProducts({ data, query }: searchedProps) {
   setHasNextPage(data.hasNextPage);
   setHasPrevPage(data.hasPrevPage);
   setProducts(data.docs);
-  }, []);
+  }, [data]);
 
 
   // eslint-disable-next-line no-undef
