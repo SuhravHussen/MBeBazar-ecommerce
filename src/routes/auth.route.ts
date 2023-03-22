@@ -26,7 +26,6 @@ class AuthRoute implements Routes {
         failureRedirect: '/login/failed',
       }),
       (req, res) => {
-        res.cookie('ds', 'sds');
         res.json({ message: 'Logged in successfully', data: [], error: false });
       },
     );

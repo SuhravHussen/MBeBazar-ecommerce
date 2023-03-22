@@ -7,7 +7,7 @@ class IndexController {
         httpOnly: true,
         signed: true,
       });
-      res.json('WELCOME TO MBeBAZAR API');
+      res.json('WELCOME TO MBeBAZAR API v1');
     } catch (error) {
       next(error);
     }
