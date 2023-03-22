@@ -36,9 +36,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store)=> async (ct
     const res = await dispatch(productApi.endpoints.getAllProductsBySearch.initiate({
         search: ctx.query.category as string,
     }))
-    
-    console.log(res)
-
     let data 
     if( 'data' in res){
         data = res.data.data
