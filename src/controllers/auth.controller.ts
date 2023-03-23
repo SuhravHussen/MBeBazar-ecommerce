@@ -31,6 +31,8 @@ class AuthController {
         },
         error: false,
       };
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Expires', '0');
       res.cookie('jwt-token', tokens.token, {
         httpOnly: true,
         signed: true,
