@@ -31,14 +31,14 @@ class AuthController {
         },
         error: false,
       };
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Expires', '0');
+
       res.cookie('jwt-token', tokens.token, {
         httpOnly: true,
         signed: true,
         maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
+        domain: 'mbebazarbackend.onrender.com',
       });
       res.cookie('refresh-token', tokens.refreshToken, {
         httpOnly: true,
@@ -46,6 +46,7 @@ class AuthController {
         maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
         sameSite: 'none',
         secure: true,
+        domain: 'mbebazarbackend.onrender.com',
       });
 
       res.json(response);
