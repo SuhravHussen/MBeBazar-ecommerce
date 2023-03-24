@@ -14,7 +14,11 @@ class PaymentController {
       const { item, orderInfo } = req.body;
       const userID = req.user._id;
       const payment = await this.paymentService.makePayment(item, orderInfo, userID);
-      res.json(payment);
+      res.json({
+        payment,
+        tokenChanged: req?.tokenChanged || false,
+        tokens: req?.tokens || null,
+      });
     } catch (e) {
       next(e);
     }
@@ -40,7 +44,6 @@ class PaymentController {
         });
       }
     } catch (e) {
-      console.log(e);
       next(e);
     }
   };

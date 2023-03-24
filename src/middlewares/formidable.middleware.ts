@@ -17,6 +17,7 @@ export const fromidableMiddleware = (req: RequestWithUser, res: Response, next: 
 
         req.body = fields;
         req.file = files;
+        req.isFormData = true;
         next();
       });
     } else {

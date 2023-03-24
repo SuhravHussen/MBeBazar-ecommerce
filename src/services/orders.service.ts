@@ -6,7 +6,9 @@ class orderService {
   public model = orderModel;
   public userModel = userModel;
   public async addOrder(orderData: Order): Promise<Order> {
-    const data: Order = await this.model.create(orderData);
+    const removedTokens = { ...orderData };
+    delete removedTokens.tokens;
+    const data: Order = await this.model.create(removedTokens);
     const toReview = orderData.items.map(item => {
       return item.product;
     });

@@ -16,6 +16,7 @@ class paymentService {
         userID: userID,
       },
     });
+
     return session;
   }
 
@@ -48,9 +49,7 @@ class paymentService {
 
         return orderInfo;
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 }
 

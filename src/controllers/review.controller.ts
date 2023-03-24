@@ -21,9 +21,12 @@ class reviewController {
         product,
       };
       const data: response = await this.reviewService.addReview(review);
-      res.json(data);
+      res.json({
+        ...data,
+        tokenChanged: req?.tokenChanged || false,
+        tokens: req?.tokens || null,
+      });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -35,7 +38,6 @@ class reviewController {
       const data: response = await this.reviewService.getReviews(productId);
       res.json(data);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -47,7 +49,6 @@ class reviewController {
       const data: response = await this.reviewService.getAvgRating(productId);
       res.json(data);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };

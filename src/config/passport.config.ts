@@ -9,6 +9,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 import LocalStrategy from 'passport-local';
 import GoogleStrategy from 'passport-google-oauth20';
 import passwordGenerator from 'password-generate';
+import Jwt from 'jsonwebtoken';
 // login with email and pass
 export class PassportLogin {
   user = userModel;
@@ -63,23 +64,33 @@ export class PassportLogin {
 
 // jwt authentication
 export class passportJwt {
-  private cookieExtractor = req => {
-    console.log('req', req);
-
-    console.log('jwt', req.signedCookies['jwt-token']);
-    console.log('refresh', req.signedCookies['refresh-token']);
-    if (req.signedCookies === undefined) return null;
-    if (!req.signedCookies) return null;
+  private cookieExtractor = async req => {
     let token = null;
+    try {
+      if (req.body.tokens === undefined) return null;
+      if (!req.body.tokens) return null;
 
-    if (req && req.signedCookies['jwt-token']) {
-      token = req.signedCookies['jwt-token'];
-    } else if (req && req.signedCookies['refresh-token']) {
-      token = req.signedCookies['refresh-token'];
-      req.refreshToken = req.signedCookies['refresh-token'];
+      const jwt = req.body.tokens['jwt-token'] || '';
+      const refreshToken = req.body.tokens['refresh-token'] || '';
+      Jwt.verify(jwt, SECRET_KEY as string, err => {
+        if (err) {
+          Jwt.verify(refreshToken, SECRET_KEY as string, err => {
+            if (!err) {
+              token = refreshToken;
+              req.refreshToken = refreshToken;
+            }
+          });
+        } else token = jwt;
+      });
+    } catch (e) {
+      console.log(e);
     }
-
-    console.log('returning token', token);
+    Jwt.verify(token || '', SECRET_KEY as string, err => {
+      if (err) {
+        console.log('err', err);
+      }
+      console.log('token', token);
+    });
     return token;
   };
 
@@ -90,6 +101,8 @@ export class passportJwt {
   };
 
   private jwtCallBack = async (req, payload, done) => {
+    console.log('coming');
+    console.log('payload', payload);
     try {
       if (req.refreshToken) {
         const verified = await redisClient.get(payload._id);

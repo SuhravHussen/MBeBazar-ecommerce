@@ -4,7 +4,7 @@ import { JSONSchemaType } from 'ajv';
 export const orderDto: JSONSchemaType<Order> = {
   type: 'object',
   required: ['bookingInfo', 'user', 'items'],
-  additionalProperties: false,
+  additionalProperties: true,
   properties: {
     user: {
       type: 'string',
@@ -63,6 +63,18 @@ export const orderDto: JSONSchemaType<Order> = {
           price: {
             type: 'integer',
           },
+        },
+      },
+    },
+    tokens: {
+      type: 'object',
+      nullable: true,
+      properties: {
+        'refresh-token': {
+          type: 'string',
+        },
+        'jwt-token': {
+          type: 'string',
         },
       },
     },

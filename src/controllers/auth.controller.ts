@@ -1,5 +1,4 @@
 import { updatePassword } from '@interfaces/auth.interface';
-import { JWT_TOKEN_EXPIRE, JWT_REFRESH_EXPIRE } from '@config/index';
 import { response } from '@/interfaces/response.interface';
 import { NextFunction, Request, Response } from 'express';
 import { RequestWithUser, TokenData } from '@interfaces/auth.interface';
@@ -15,7 +14,6 @@ class AuthController {
 
       res.json(userData);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -23,6 +21,7 @@ class AuthController {
   public logIn = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const tokens: TokenData = await this.authService.login(req.user);
+
       const response: response = {
         message: 'Logged in successfully',
         data: {
@@ -31,21 +30,6 @@ class AuthController {
         },
         error: false,
       };
-
-      res.cookie('jwt-token', tokens.token, {
-        httpOnly: true,
-        signed: true,
-        maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
-        sameSite: 'none',
-        secure: true,
-      });
-      res.cookie('refresh-token', tokens.refreshToken, {
-        httpOnly: true,
-        signed: true,
-        maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
-        sameSite: 'none',
-        secure: true,
-      });
 
       res.json(response);
     } catch (e) {
@@ -80,7 +64,11 @@ class AuthController {
       };
 
       const userData = await this.authService.updatePassword(data);
-      res.json(userData);
+      res.json({
+        ...userData,
+        tokenChanged: req?.tokenChanged || false,
+        tokens: req?.tokens || null,
+      });
     } catch (error) {
       next(error);
     }
@@ -99,25 +87,12 @@ class AuthController {
         toReview: user?.toReview,
       });
 
-      res.cookie('jwt-token', tokens.token, {
-        httpOnly: true,
-        signed: true,
-        maxAge: parseInt(JWT_TOKEN_EXPIRE as string) * 1000,
-        sameSite: 'none',
-        secure: true,
-      });
-      res.cookie('refresh-token', tokens.refreshToken, {
-        httpOnly: true,
-        signed: true,
-        maxAge: parseInt(JWT_REFRESH_EXPIRE as string) * 1000,
-        sameSite: 'none',
-
-        secure: true,
-      });
-
       res.json({
         message: 'Logged in successfully',
-        data: user,
+        data: {
+          tokens,
+          user,
+        },
         error: false,
       });
     } catch (error) {

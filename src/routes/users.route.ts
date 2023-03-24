@@ -15,9 +15,9 @@ class UsersRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get('/orders', jwtPassport, this.usersController.getUserOrders);
+    this.router.post('/orders', jwtPassport, this.usersController.getUserOrders);
     this.router.get('/:id', jwtPassport, this.usersController.getUser);
-    this.router.post('/updateProfile', jwtPassport, fromidableMiddleware, this.usersController.updateProfile);
+    this.router.post('/updateProfile', fromidableMiddleware, jwtPassport, this.usersController.updateProfile);
   }
 }
 

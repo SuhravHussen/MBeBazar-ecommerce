@@ -16,7 +16,9 @@ export interface RequestWithUser extends Request {
     token: string;
     refreshToken: string;
   };
+  tokenChanged?: boolean;
   file?: any;
+  isFormData?: boolean;
 }
 
 export interface updatePassword {

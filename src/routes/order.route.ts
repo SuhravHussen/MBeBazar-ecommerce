@@ -17,7 +17,7 @@ class orderRoute implements Routes {
 
   private initializeRoutes() {
     this.router.post('/', jwtPassport, validate(orderDto, 'body'), this.controller.addOrder);
-    this.router.get('/:id', jwtPassport, this.controller.getOrderById);
+    this.router.post('/:id', jwtPassport, this.controller.getOrderById);
   }
 }
 
