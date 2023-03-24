@@ -37,7 +37,7 @@ I have used many technology to build this backend
 
 ## DOCS 📗
 
-**Read documentation in [api documentation](https://api.mbebazar.live/api-docs/ 'api documentation')**
+**Read documentation in [api documentation](https://mbebazarbackend.onrender.com/api-docs/ 'api documentation')**
 
 ## ENV FILE STRUCTURE
 
@@ -93,7 +93,7 @@ Install dependecies
 
 > your node js version must be **>=16** to run the app without any issues
 
-Create the .env files and give all the informations correctly to run. The start the server by command
+Create the .env files and give all the information correctly to run. The start the server by command
 
     yarn start
 

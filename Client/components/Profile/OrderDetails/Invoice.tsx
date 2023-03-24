@@ -5,6 +5,7 @@ import { iProduct } from '../../../models/product.interface';
 import OrderInfoSk from '../../../skeletons/Order/OrderInfoSk';
 import styles from '../../../styles/components/common/invoice/invoice.module.scss';
 import { Image, useEffect, useState } from '../../../utils/commonImports';
+import localStorageManager from '../../../utils/localstorageManager';
 import OrderItems from './OrderItems';
 
 export default function Invoice() {
@@ -19,14 +20,27 @@ export default function Invoice() {
             return;
         }
         const fetchOrderInfo = async () => {
+            const jwt = localStorageManager('jwt-token');
+            const refreshToken = localStorageManager('refresh-token');
             try {
                 const resData = await fetch(`${process.env.BASE_URL}/order/${id}`, {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body: JSON.stringify({
+                        tokens: {
+                            'jwt-token': jwt,
+                            'refresh-token': refreshToken,
+                        },
+                    }),
                     credentials: 'include',
                 }).then((res) => res.json());
+
+                if (resData.tokenChanged) {
+                    localStorageManager('jwt-token', resData?.tokens.token);
+                    localStorageManager('refresh-token', resData?.tokens.refreshToken);
+                }
 
                 if (resData.error) setError(true);
                 else {
