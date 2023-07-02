@@ -3,8 +3,6 @@ import { getSession, signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../../../Redux/Slices/userSlice';
 import styles from '../../../../styles/components/common/login-signUp/login.module.scss';
 import PrimaryButton from '../../Button/PrimaryButton';
 import InputBox from '../../Inputs/InputBox';
@@ -29,7 +27,6 @@ export default function Login({
     } = useForm<IFormInputs>();
     const [showSpinner, setSpinner] = useState(false);
     const [authError, setError] = useState('');
-    const dispatch = useDispatch();
 
     const onSubmit = async (data: any) => {
         setSpinner(true);
@@ -43,14 +40,7 @@ export default function Login({
             if (response?.ok) {
                 const session: any = await getSession();
                 if (session?.user) {
-                    localStorage.setItem('user', JSON.stringify(session.user));
-
-                    localStorage.setItem('jwt-token', JSON.stringify(session.tokens.token));
-                    localStorage.setItem(
-                        'refresh-token',
-                        JSON.stringify(session.tokens.refreshToken)
-                    );
-                    dispatch(addUser(session.user));
+                    // saving data in layout js
                     handleModalClose();
                 } else {
                     setError('Invalid Credentials or something went wrong!');

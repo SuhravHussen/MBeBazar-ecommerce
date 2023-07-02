@@ -74,17 +74,20 @@ const getOptions = (req: any, res: any) => ({
                         }),
                     });
 
-                    const cookies = resD.headers.raw()['set-cookie'];
+                    const cookies = resD.headers.getSetCookie();
+
                     res.setHeader('Set-Cookie', cookies);
                     const data = await resD.json();
+
                     user.name = {
-                        name: data?.data?.name,
-                        email: data?.data?.email,
-                        avatar: data?.data?.avatar,
-                        _id: data?.data?._id,
-                        phone: data?.data?.phone,
-                        address: data?.data?.address,
-                        toReview: data?.data?.toReview,
+                        name: data?.data?.user?.name,
+                        email: data?.data?.user?.email,
+                        avatar: data?.data?.user?.avatar,
+                        _id: data?.data?.user?._id,
+                        phone: data?.data?.user?.phone,
+                        address: data?.data?.user?.address,
+                        toReview: data?.data?.user?.toReview,
+                        tokens: data?.data?.tokens,
                     };
                 } else {
                     user.name = {
@@ -99,6 +102,7 @@ const getOptions = (req: any, res: any) => ({
                 }
                 return true;
             } catch (e) {
+                console.log(e, 'THis error is from catch');
                 return false;
             }
         },
@@ -110,6 +114,7 @@ const getOptions = (req: any, res: any) => ({
                 session.tokens = {
                     ...session.user.tokens,
                 };
+
                 return session;
             } catch (e) {
                 return false;

@@ -18,13 +18,13 @@ const Home = ({
 );
 export default Home;
 
-export const getStaticProps = wrapper.getStaticProps((store)=> async ()=>{
-    const {dispatch} = store;
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
+    const { dispatch } = store;
 
-      const popularProducts = await dispatch(productApi.endpoints.getPopularProducts.initiate())
-      const mostSellProducts = await dispatch(productApi.endpoints.getMostSellProducts.initiate())
-      const dealsOfTheDayProducts = await dispatch(productApi.endpoints.getDealsOfTheDay.initiate())
-  
+    const popularProducts = await dispatch(productApi.endpoints.getPopularProducts.initiate());
+    const mostSellProducts = await dispatch(productApi.endpoints.getMostSellProducts.initiate());
+    const dealsOfTheDayProducts = await dispatch(productApi.endpoints.getDealsOfTheDay.initiate());
+
     return {
         props: {
             popular: popularProducts.data?.data || [],
@@ -33,4 +33,4 @@ export const getStaticProps = wrapper.getStaticProps((store)=> async ()=>{
         },
         revalidate: 300,
     };
-})
+});
